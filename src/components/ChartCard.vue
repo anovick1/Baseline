@@ -31,7 +31,7 @@ export default {
     for (let i = 0; i < this.players.length; i++) {
       let stats = []
       for (let j = 0; j < this.players[i].stats.length; j++) {
-        stats.push(this.players[i].stats[j]['pts_per_game'])
+        stats.push(this.players[i].stats[j][this.x])
       }
       let data = {
         label: this.players[i].player,

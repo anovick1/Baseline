@@ -6,7 +6,7 @@
         :title="c.title"
         :players="c.player"
         :year="c.y_year"
-        :x="x"
+        :x="c.x"
         :likes="c.likes"
         :comments="c.comments"
         :author="c.author.name"
