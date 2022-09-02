@@ -27,6 +27,8 @@ For a full stack application using PostgreSQL, Django, Vue, Node.js.
 Once you fork and clone the repo:
 
     1.   npm i
+    2. npm install
+    3. npm run serve
 
 ---
 
