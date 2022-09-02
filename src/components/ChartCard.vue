@@ -2,6 +2,7 @@
   <div class="chart_border">
     <div class="chart_container">
       <canvas id="myChart" width="1vw" height="5vw"></canvas>
+      <h1>{{ title }}</h1>
     </div>
   </div>
 </template>
@@ -23,20 +24,38 @@ export default {
   },
   mounted() {
     const ctx = document.getElementById('myChart')
-
-    const labels = ['red', 'yellow', 'green']
+    console.log(this.players[0].stats[8]['pts_per_game'])
+    const labels = ['red', 'yellow', 'green', '2', '4', '4']
+    const datasets = []
+    // let len =
+    for (let i = 0; i < this.players.length; i++) {
+      let stats = []
+      for (let j = 0; j < this.players[i].stats.length; j++) {
+        stats.push(this.players[i].stats[j]['pts_per_game'])
+      }
+      let data = {
+        label: this.players[i].player,
+        data: stats.reverse(),
+        fill: false,
+        borderColor: 'black',
+        tension: 0
+      }
+      datasets.push(data)
+    }
+    console.log(this.x)
     const data = {
       labels: labels,
-      datasets: [
-        {
-          label: 'My First Dataset',
-          data: [65, 59, 80],
-          fill: false,
-          borderColor: 'black',
-          tension: 0
-          // backgroundColor: 'rgb(0,0,0)'
-        }
-      ]
+      datasets: datasets
+      // datasets: [
+      //   {
+      //     label: 'My First Dataset',
+      //     data: [65, 59, 80],
+      //     fill: false,
+      //     borderColor: 'black',
+      //     tension: 0
+      //     // backgroundColor: 'rgb(0,0,0)'
+      //   }
+      // ]
     }
     const plugin = {
       beforeDraw: (chart) => {
@@ -61,7 +80,7 @@ export default {
           },
           title: {
             display: true,
-            text: 'Chart.js Line Chart'
+            text: this.title
           }
         }
       },

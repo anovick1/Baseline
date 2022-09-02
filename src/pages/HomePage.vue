@@ -4,7 +4,7 @@
     <section class="charts" v-for="(c, index) in charts" :key="index">
       <ChartCardVue
         :title="c.title"
-        :players="c.players"
+        :players="c.player"
         :year="c.y_year"
         :x="x"
         :likes="c.likes"
