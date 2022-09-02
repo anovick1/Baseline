@@ -13,7 +13,6 @@ export const GetChartsById = async (id) => {
   // eslint-disable-next-line no-useless-catch
   try {
     const res = await Client.get('/charts/' + id)
-    console.log(res)
     return res.data
   } catch (error) {
     throw error

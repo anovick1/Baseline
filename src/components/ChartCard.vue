@@ -12,7 +12,15 @@ import Chart from 'chart.js/auto'
 export default {
   name: 'ChardCard',
   components: {},
-  props: {},
+  props: {
+    title: String,
+    players: Array,
+    year: String,
+    x: String,
+    likes: Array,
+    comments: Array,
+    author: String
+  },
   mounted() {
     const ctx = document.getElementById('myChart')
 

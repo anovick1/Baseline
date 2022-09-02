@@ -1,6 +1,18 @@
 <template>
-  <div>home</div>
-  <ChartCardVue />
+  <div class="chart-wrapper" v-if="searched">
+    <h2>Charts</h2>
+    <section class="charts" v-for="(c, index) in charts" :key="index">
+      <ChartCardVue
+        :title="c.title"
+        :players="c.players"
+        :year="c.y_year"
+        :x="x"
+        :likes="c.likes"
+        :comments="c.comments"
+        :author="c.author.name"
+      />
+    </section>
+  </div>
 </template>
 
 <script>
@@ -12,7 +24,8 @@ export default {
   components: { ChartCardVue },
   data: () => ({
     players: data,
-    charts: []
+    charts: [],
+    searched: false
   }),
   mounted: async function () {
     await this.getCharts()
@@ -22,6 +35,7 @@ export default {
       const res = await GetCharts()
       console.log(res)
       this.charts = res
+      this.searched = true
     }
   }
 }
