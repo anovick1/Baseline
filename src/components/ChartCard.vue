@@ -1,6 +1,8 @@
 <template>
-  <div class="chart_container">
-    <canvas id="myChart" width="1vw" height="5vw"></canvas>
+  <div class="chart_border">
+    <div class="chart_container">
+      <canvas id="myChart" width="1vw" height="5vw"></canvas>
+    </div>
   </div>
 </template>
 
