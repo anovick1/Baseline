@@ -123,3 +123,7 @@ html {
   border: 1px solid black;
   background-color: white;
 }
+.chart_container {
+  height: 30vh;
+  width: 60vh;
+}

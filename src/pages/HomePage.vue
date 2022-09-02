@@ -1,20 +1,29 @@
 <template>
   <div>home</div>
-  <h1>{{ players[5000].player }}</h1>
-  <img :src="players[3001].img_url" />
+  <ChartCardVue />
 </template>
 
 <script>
 import data from '../../data/players.json'
+import { GetCharts } from '../Services/ChartServices'
+import ChartCardVue from '../components/ChartCard.vue'
 export default {
   name: 'HomePage',
+  components: { ChartCardVue },
   data: () => ({
-    players: data
+    players: data,
+    charts: []
   }),
   mounted: async function () {
-    // await this.setPlayers()
+    await this.getCharts()
   },
-  methods: {}
+  methods: {
+    async getCharts() {
+      const res = await GetCharts()
+      console.log(res)
+      this.charts = res
+    }
+  }
 }
 </script>
 
