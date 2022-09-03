@@ -10,6 +10,7 @@
         :likes="c.likes"
         :comments="c.comments"
         :author="c.author.name"
+        :count="index.toString()"
       />
     </section>
   </div>

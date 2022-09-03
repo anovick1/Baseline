@@ -1,7 +1,7 @@
 <template>
   <div class="chart_border">
     <div class="chart_container">
-      <canvas id="myChart" width="1vw" height="5vw"></canvas>
+      <canvas :id="count" width="1vw" height="5vw"></canvas>
       <h1>{{ title }}</h1>
     </div>
   </div>
@@ -20,10 +20,11 @@ export default {
     x: String,
     likes: Array,
     comments: Array,
-    author: String
+    author: String,
+    count: String
   },
   mounted() {
-    const ctx = document.getElementById('myChart')
+    const ctx = document.getElementById(this.count)
     console.log(this.players[1].stats)
     const labels = []
     const datasets = []
