@@ -1,18 +1,20 @@
 <template>
-  <div class="chart-wrapper" v-if="searched">
+  <div class="home_section">
     <h2>Charts</h2>
-    <section class="charts" v-for="(c, index) in charts" :key="index">
-      <ChartCardVue
-        :title="c.title"
-        :players="c.player"
-        :year="c.y_year"
-        :x="c.x"
-        :likes="c.likes"
-        :comments="c.comments"
-        :author="c.author.name"
-        :count="index.toString()"
-      />
-    </section>
+    <div class="chart-wrapper" v-if="searched">
+      <section class="charts" v-for="(c, index) in charts" :key="index">
+        <ChartCardVue
+          :title="c.title"
+          :players="c.player"
+          :year="c.y_year"
+          :x="c.x"
+          :likes="c.likes"
+          :comments="c.comments"
+          :author="c.author.name"
+          :count="index.toString()"
+        />
+      </section>
+    </div>
   </div>
 </template>
 

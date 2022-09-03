@@ -2,7 +2,6 @@
   <div class="chart_border">
     <div class="chart_container">
       <canvas :id="count" width="1vw" height="5vw"></canvas>
-      <h1>{{ title }}</h1>
     </div>
   </div>
 </template>
@@ -28,11 +27,8 @@ export default {
     console.log(this.players[1].stats)
     const labels = []
     const datasets = []
-    let len = this.players[0].stats.length
+    let len = 0
     for (let i = 0; i < this.players.length; i++) {
-      if (this.players[i].stats.length > len) {
-        len = this.players[i].stats.length
-      }
       let stats = []
       /// STATS ARRAY
       for (let j = 0; j < this.players[i].stats.length; j++) {
@@ -58,7 +54,9 @@ export default {
           }
         }
       }
-
+      if (stats.length > len) {
+        len = stats.length
+      }
       let colors = ['black', 'red', 'blue', 'green', 'orange']
       let data = {
         label: this.players[i].player,

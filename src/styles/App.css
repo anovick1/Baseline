@@ -138,3 +138,16 @@ html {
   /* height: 28vh;
   width: 50vh; */
 }
+
+.home_section {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  align-items: center;
+}
+.chart-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 80vw;
+  justify-content: space-evenly;
+}
