@@ -24,25 +24,54 @@ export default {
   },
   mounted() {
     const ctx = document.getElementById('myChart')
-    console.log(this.players[0].stats[8]['pts_per_game'])
-    const labels = ['red', 'yellow', 'green', '2', '4', '4']
+    console.log(this.players[1].stats)
+    const labels = []
     const datasets = []
-    // let len =
+    let len = this.players[0].stats.length
     for (let i = 0; i < this.players.length; i++) {
-      let stats = []
-      for (let j = 0; j < this.players[i].stats.length; j++) {
-        stats.push(this.players[i].stats[j][this.x])
+      if (this.players[i].stats.length > len) {
+        len = this.players[i].stats.length
       }
+      let stats = []
+      /// STATS ARRAY
+      for (let j = 0; j < this.players[i].stats.length; j++) {
+        let season = this.players[i].stats[j].season
+        let dup = []
+        if (j < this.players[i].stats.length - 1) {
+          if (season === this.players[i].stats[j + 1].season) {
+            dup.push(this.players[i].stats[j][this.x])
+          } else if (dup.length > 0) {
+            const average = (array) =>
+              array.reduce((a, b) => a + b) / array.length
+            stats.push(average(dup))
+          } else {
+            stats.push(this.players[i].stats[j][this.x])
+          }
+        } else {
+          if (dup.length > 0) {
+            const average = (array) =>
+              array.reduce((a, b) => a + b) / array.length
+            stats.push(average(dup))
+          } else {
+            stats.push(this.players[i].stats[j][this.x])
+          }
+        }
+      }
+
+      let colors = ['black', 'red', 'blue', 'green', 'orange']
       let data = {
         label: this.players[i].player,
         data: stats.reverse(),
         fill: false,
-        borderColor: 'black',
+        borderColor: colors[i],
         tension: 0
       }
       datasets.push(data)
     }
-    console.log(this.x)
+    for (let i = 1; i <= len; i++) {
+      labels.push(i)
+    }
+    // console.log(len)
     const data = {
       labels: labels,
       datasets: datasets
