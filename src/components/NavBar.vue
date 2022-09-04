@@ -2,7 +2,9 @@
   <header>
     <nav>
       <div to="/home" className="home-nav">
-        <img src="https://cdn-icons-png.flaticon.com/512/3771/3771451.png" />
+        <img
+          src="https://st3.depositphotos.com/10544526/15154/v/600/depositphotos_151545494-stock-illustration-vector-image-basketball-on-fire.jpg"
+        />
       </div>
       <div className="user-nav-dropdown">
         <button className="dropbtn">
