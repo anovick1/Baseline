@@ -168,3 +168,9 @@ a {
 .home img {
   height: 50vh;
 }
+
+.right_nav {
+  display: flex;
+  width: 30vw;
+  justify-content: space-between;
+}

@@ -7,41 +7,43 @@
           src="https://st3.depositphotos.com/10544526/15154/v/600/depositphotos_151545494-stock-illustration-vector-image-basketball-on-fire.jpg"
         />
       </router-link>
-      <router-link class="view_charts" to="/charts">
-        <h2>View Charts</h2>
-      </router-link>
-      <div className="user-nav-dropdown">
-        <button className="dropbtn">
-          <!-- <div id="pfp">
-                <img src={currentUser.pfp_link} alt="pfp" />
-              </div> -->
-          <div id="username">
-            <h2>
-              <span id="nav">{currentUser.firstName}</span>
-            </h2>
-          </div>
-        </button>
-        <!-- <div className="dropdown-content">
-              <Link
-                to={'/profile'}
-                className="user-profile"
-                onClick={() => setProfile(true)}
-              >
-                <h4>Profile</h4>
-              </Link>
-  
-              <Link
-                to={'/profile'}
-                className="user-profile"
-                onClick={() => setProfile(false)}
-              >
-                <h4>Matches</h4>
-              </Link> -->
-        <!-- 
-              <Link to="/">
-                <h4>Logout</h4>
-              </Link> -->
-        <!-- </div> -->
+      <div class="right_nav">
+        <router-link class="view_charts" to="/charts">
+          <h3>View Charts</h3>
+        </router-link>
+        <div className="user-nav-dropdown">
+          <button className="dropbtn">
+            <!-- <div id="pfp">
+                  <img src={currentUser.pfp_link} alt="pfp" />
+                </div> -->
+            <div id="username">
+              <h3>
+                <span id="nav">{currentUser.firstName}</span>
+              </h3>
+            </div>
+          </button>
+          <!-- <div className="dropdown-content">
+                <Link
+                  to={'/profile'}
+                  className="user-profile"
+                  onClick={() => setProfile(true)}
+                >
+                  <h4>Profile</h4>
+                </Link>
+    
+                <Link
+                  to={'/profile'}
+                  className="user-profile"
+                  onClick={() => setProfile(false)}
+                >
+                  <h4>Matches</h4>
+                </Link> -->
+          <!-- 
+                <Link to="/">
+                  <h4>Logout</h4>
+                </Link> -->
+          <!-- </div> -->
+        </div>
       </div>
     </nav>
   </header>
