@@ -1,11 +1,15 @@
 <template>
   <header>
     <nav>
-      <div to="/home" className="home-nav">
+      <router-link to="/" className="home-nav">
         <img
+          id="nav-logo"
           src="https://st3.depositphotos.com/10544526/15154/v/600/depositphotos_151545494-stock-illustration-vector-image-basketball-on-fire.jpg"
         />
-      </div>
+      </router-link>
+      <router-link class="view_charts" to="/charts">
+        <h2>View Charts</h2>
+      </router-link>
       <div className="user-nav-dropdown">
         <button className="dropbtn">
           <!-- <div id="pfp">
