@@ -24,7 +24,7 @@ export default {
   },
   mounted() {
     const ctx = document.getElementById(this.count)
-    console.log(this.players[1].stats)
+    // console.log(this.players[1].stats)
     const labels = []
     const datasets = []
     let len = 0

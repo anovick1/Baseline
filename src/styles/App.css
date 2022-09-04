@@ -68,8 +68,10 @@ nav {
   display: block;
 }
 html {
-  background-image: url(https://cdn.staticcrate.com/stock-hd/effects/footagecrate-4k-looping-tech-background-clean-red-1-prev-full.png);
-  background-size: cover;
+  /* background-color: rgba(0, 0, 255, 0.361); */
+  /* background: url('https://media.istockphoto.com/photos/basketball-pattern-background-picture-id172776030?k=20&m=172776030&s=612x612&w=0&h=DeDmYjG3tS48MmwJVM3qJpI6Y1pFo6trW5y9CUlSeqE='),
+    #6db3f2;
+  background-size: cover; */
 }
 .logout-nav,
 .home-nav {
@@ -131,6 +133,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0px 0px 154px 5px rgba(0, 0, 0, 0.2);
 }
 .chart_container {
   height: 28vh;
@@ -150,4 +153,8 @@ html {
   flex-direction: row;
   width: 80vw;
   justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.charts {
+  margin: 5vh 0;
 }

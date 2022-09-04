@@ -1,47 +1,9 @@
 <template>
-  <div class="home_section">
-    <h2>Charts</h2>
-    <div class="chart-wrapper" v-if="searched">
-      <section class="charts" v-for="(c, index) in charts" :key="index">
-        <ChartCardVue
-          :title="c.title"
-          :players="c.player"
-          :year="c.y_year"
-          :x="c.x"
-          :likes="c.likes"
-          :comments="c.comments"
-          :author="c.author.name"
-          :count="index.toString()"
-        />
-      </section>
-    </div>
-  </div>
+  <h1>BaseLine</h1>
 </template>
 
 <script>
-import data from '../../data/players.json'
-import { GetCharts } from '../Services/ChartServices'
-import ChartCardVue from '../components/ChartCard.vue'
-export default {
-  name: 'HomePage',
-  components: { ChartCardVue },
-  data: () => ({
-    players: data,
-    charts: [],
-    searched: false
-  }),
-  mounted: async function () {
-    await this.getCharts()
-  },
-  methods: {
-    async getCharts() {
-      const res = await GetCharts()
-      console.log(res)
-      this.charts = res
-      this.searched = true
-    }
-  }
-}
+export default {}
 </script>
 
 <style></style>

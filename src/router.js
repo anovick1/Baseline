@@ -1,10 +1,12 @@
 import { createWebHistory, createRouter } from 'vue-router'
+import ViewCharts from './pages/ViewCharts'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import CreateChart from './pages/CreateChart'
 
 const routes = [
   { path: '/', component: HomePage, name: 'HomePage' },
+  { path: '/charts', component: ViewCharts, name: 'ViewCharts' },
   { path: '/login', component: LoginPage, name: 'LoginPage' },
   { path: '/newchart', component: CreateChart, name: 'NewChart' }
   // { path: '/games/:genre_id', component: ViewGames, name: 'ViewGames' },
