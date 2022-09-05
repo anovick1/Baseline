@@ -72,16 +72,6 @@ export default {
     const data = {
       labels: labels,
       datasets: datasets
-      // datasets: [
-      //   {
-      //     label: 'My First Dataset',
-      //     data: [65, 59, 80],
-      //     fill: false,
-      //     borderColor: 'black',
-      //     tension: 0
-      //     // backgroundColor: 'rgb(0,0,0)'
-      //   }
-      // ]
     }
     const plugin = {
       beforeDraw: (chart) => {

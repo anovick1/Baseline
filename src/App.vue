@@ -1,7 +1,7 @@
 <template>
   <NavBarVue />
   <main>
-    <router-view header="Nba"></router-view>
+    <router-view header="NBA-APP"></router-view>
   </main>
 </template>
 
