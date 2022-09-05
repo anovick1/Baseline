@@ -15,7 +15,7 @@ export default {
   props: {
     title: String,
     players: Array,
-    year: String,
+    year: Boolean,
     x: String,
     likes: Array,
     comments: Array,
@@ -24,7 +24,6 @@ export default {
   },
   mounted() {
     const ctx = document.getElementById(this.count)
-    // console.log(this.players[1].stats)
     const labels = []
     const datasets = []
     let len = 0
@@ -70,7 +69,6 @@ export default {
     for (let i = 1; i <= len; i++) {
       labels.push(i)
     }
-    // console.log(len)
     const data = {
       labels: labels,
       datasets: datasets

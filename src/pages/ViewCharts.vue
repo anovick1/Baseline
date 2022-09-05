@@ -23,7 +23,7 @@ import data from '../../data/players.json'
 import { GetCharts } from '../Services/ChartServices'
 import ChartCardVue from '../components/ChartCard.vue'
 export default {
-  name: 'HomePage',
+  name: 'ViewCharts',
   components: { ChartCardVue },
   data: () => ({
     players: data,
@@ -36,7 +36,6 @@ export default {
   methods: {
     async getCharts() {
       const res = await GetCharts()
-      console.log(res)
       this.charts = res
       this.searched = true
     }
