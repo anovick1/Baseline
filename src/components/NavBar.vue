@@ -16,7 +16,7 @@
           <h3>View Charts</h3>
         </router-link>
         <router-link class="view_charts" to="/newchart" v-if="isSignedIn">
-          <h3>View Charts</h3>
+          <h3>Create Chart</h3>
         </router-link>
         <div className="user-nav-dropdown" v-if="isSignedIn">
           <div className="dropbtn">
