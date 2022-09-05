@@ -105,7 +105,7 @@ html {
 }
 #nav-logo {
   height: 8vh;
-  width: 8vh;
+  width: 12vh;
   /* margin: -2vh -2vh -4vh -2vh; */
   padding: 5px 0;
   /* background-color: red; */
@@ -217,11 +217,18 @@ a {
   padding: 0 1vw;
   margin-top: 1vh;
 }
-.signout_nav:hover {
+.signout_nav:hover,
+#nav-logo:hover,
+.view_charts:hover {
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   border-radius: 15px;
 }
-.signout_nav:active {
+.signout_nav:active,
+#nav-logo:active,
+.view_charts:hover {
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+}
+.view_charts {
+  padding: 0 1vw;
 }

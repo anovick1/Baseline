@@ -4,8 +4,12 @@
       <router-link to="/" className="home-nav">
         <img
           id="nav-logo"
-          src="https://st3.depositphotos.com/10544526/15154/v/600/depositphotos_151545494-stock-illustration-vector-image-basketball-on-fire.jpg"
+          src="https://cdn.dribbble.com/users/613796/screenshots/4916110/basket_ball_spin.gif"
         />
+        <!-- <img
+          id="nav-logo"
+          src="https://st3.depositphotos.com/10544526/15154/v/600/depositphotos_151545494-stock-illustration-vector-image-basketball-on-fire.jpg"
+        /> -->
       </router-link>
       <div class="right_nav">
         <router-link class="view_charts" to="/charts">
