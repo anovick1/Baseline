@@ -1,5 +1,5 @@
 <template>
-  <NavBarVue :currentUser="currentUser" :isSignedIn="isSignedIn" />
+  <NavBarVue />
   <main>
     <router-view header="Nba"></router-view>
   </main>
@@ -11,12 +11,6 @@ export default {
   name: 'App',
   components: {
     NavBarVue
-  },
-  data() {
-    return {
-      currentUser: null,
-      isSignedIn: false
-    }
   }
 }
 </script>

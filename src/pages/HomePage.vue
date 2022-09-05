@@ -17,6 +17,7 @@
         Sign in With Google
       </div>
     </div>
+    <!-- <img :src="localStorage.pfp" /> -->
     <img
       src="https://i.etsystatic.com/24759709/r/il/2decdd/2605299704/il_fullxfull.2605299704_9ss2.jpg"
     />
@@ -31,7 +32,7 @@ import {
   GoogleAuthProvider,
   TwitterAuthProvider
 } from 'firebase/auth'
-import { GetUsers, updateUser } from '../Services/UserServices'
+import { GetUsers, updateUser, createUser } from '../Services/UserServices'
 
 const googleProvider = new GoogleAuthProvider()
 const twitterProvider = new TwitterAuthProvider()
@@ -45,24 +46,58 @@ export default {
   name: 'HomePage',
   data() {
     return {
-      user: '',
-      isSignedIn: false,
+      currentUser: '',
+      isSignedIn: null,
       users: []
     }
   },
   mounted: async function () {
     this.users = await GetUsers()
+    if (localStorage.email === 'null') {
+      this.isSignedIn = false
+    } else {
+      this.isSignedIn = true
+    }
   },
   methods: {
-    handleSignInGoogle() {
+    handleSignInGoogle: async function () {
       signInWithPopup(auth, googleProvider)
-        .then((result) => {
-          this.user = result.user.displayName
+        .then(async (result) => {
+          this.users = await GetUsers()
+          this.currentUser = {
+            name: result.user.displayName,
+            email: result.user.email,
+            pfp: result.user.photoURL
+          }
           localStorage.name = result.user.displayName
           localStorage.email = result.user.email
           localStorage.pfp = result.user.photoURL
-
           this.isSignedIn = true
+          let newUser = true
+          let id = 0
+          for (let i = 0; i < this.users.length; i++) {
+            if (this.users[i].email === result.user.email) {
+              newUser = false
+              id = this.users[i].id
+            }
+          }
+          if (newUser === true) {
+            let body = {
+              name: result.user.displayName,
+              email: result.user.email,
+              pfp_url: result.user.photoURL
+            }
+            await createUser(body)
+          } else {
+            let body = {
+              name: result.user.displayName,
+              email: result.user.email,
+              pfp_url: result.user.photoURL
+            }
+            await updateUser(id, body)
+            location.reload()
+            this.isSignedIn = true
+          }
         })
         .catch((error) => {
           console.log(error)
@@ -87,9 +122,11 @@ export default {
       signOut(auth)
         .then(() => {
           this.user = ''
+          localStorage.name = null
+          localStorage.email = null
+          localStorage.pfp = null
+          location.reload()
           this.isSignedIn = false
-          localStorage.name = ''
-          localStorage.email = ''
         })
         .catch((error) => {
           console.log(error)

@@ -11,15 +11,13 @@
         <router-link class="view_charts" to="/charts">
           <h3>View Charts</h3>
         </router-link>
-        <div className="user-nav-dropdown">
+        <div className="user-nav-dropdown" v-if="currentUser">
           <button className="dropbtn">
             <!-- <div id="pfp">
                   <img src={currentUser.pfp_link} alt="pfp" />
                 </div> -->
-            <div id="username" v-if="currentUser">
-              <h3>
-                <span id="nav">{{ currentUser.name }}</span>
-              </h3>
+            <div id="user">
+              <h3>{{ currentUser.name }}</h3>
             </div>
           </button>
           <!-- <div className="dropdown-content">
@@ -50,11 +48,15 @@
 </template>
 
 <script>
+console.log(localStorage.pfp)
 export default {
   name: 'NavBar',
-  props: {
-    isSignedIn: Boolean,
-    currentUser: Object
-  }
+  data: () => ({
+    currentUser: {
+      name: localStorage.name,
+      email: localStorage.email,
+      pfp: localStorage.pfp
+    }
+  })
 }
 </script>
