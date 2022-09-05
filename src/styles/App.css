@@ -8,10 +8,9 @@ nav {
 }
 .user-profile img,
 .dropbtn img {
-  height: 25px;
-  width: 25px;
+  height: 5vh;
+  width: 5vh;
   border-radius: 50%;
-  border: 1px solid black;
 }
 #pfp {
   margin-right: 0.2vw;
@@ -25,14 +24,13 @@ nav {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 0.5vh;
   justify-content: center;
 }
 .dropbtn {
   border: none;
   background: none;
-  padding: 0 1vw 0;
-  min-width: 10vw;
+  /* padding: 0 1vw 0; */
+  /* min-width: 10vw; */
   text-align: center;
 }
 .dropbtn:hover {
@@ -172,7 +170,8 @@ a {
 .right_nav {
   display: flex;
   width: 30vw;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  align-items: center;
 }
 .google-sign-btn {
   display: flex;
@@ -193,5 +192,17 @@ a {
 #GoogleSignIn {
   display: flex;
   justify-content: center;
-  margin: -5vh 0 5vh 0;
+  margin: 2vh 0 5vh 0;
+}
+#google-nav {
+  box-shadow: none;
+  margin: 0;
+}
+#google-nav:hover {
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  transform: scale(1);
+}
+#google-nav:active {
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+  transform: scale(1);
 }

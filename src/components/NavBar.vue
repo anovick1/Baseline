@@ -11,30 +11,33 @@
         <router-link class="view_charts" to="/charts">
           <h3>View Charts</h3>
         </router-link>
+        <router-link class="view_charts" to="/newchart" v-if="isSignedIn">
+          <h3>View Charts</h3>
+        </router-link>
         <div className="user-nav-dropdown" v-if="isSignedIn">
-          <button className="dropbtn">
-            <div id="pfp">
-              <img :src="currentUser.pfp" alt="pfp" />
-            </div>
-            <div id="user">
-              <h3>{{ currentUser.name }}</h3>
-            </div>
-          </button>
+          <div className="dropbtn">
+            <img :src="currentUser.pfp" alt="pfp" />
+            <!-- <h3>{{ currentUser.name }}</h3> -->
+          </div>
           <div className="dropdown-content">
             <!-- <Link
-                  to={'/profile'}
-                  className="user-profile"
-                  onClick={() => setProfile(true)}
-                >
-                  <h4>Profile</h4>
-                </Link> -->
+                    to={'/profile'}
+                    className="user-profile"
+                    onClick={() => setProfile(true)}
+                  >
+                    <h4>Profile</h4>
+                  </Link> -->
             <div @click="handleSignOut">
               <h4>Logout</h4>
             </div>
           </div>
         </div>
         <div id="GoogleSignIn-nav" v-if="!isSignedIn">
-          <div class="google-sign-btn" @click="handleSignInGoogle">
+          <div
+            class="google-sign-btn"
+            id="google-nav"
+            @click="handleSignInGoogle"
+          >
             <img
               src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
             />
