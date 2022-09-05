@@ -31,6 +31,8 @@ import {
   GoogleAuthProvider,
   TwitterAuthProvider
 } from 'firebase/auth'
+import { GetUsers, updateUser } from '../Services/UserServices'
+
 const googleProvider = new GoogleAuthProvider()
 const twitterProvider = new TwitterAuthProvider()
 
@@ -44,8 +46,12 @@ export default {
   data() {
     return {
       user: '',
-      isSignedIn: false
+      isSignedIn: false,
+      users: []
     }
+  },
+  mounted: async function () {
+    this.users = await GetUsers()
   },
   methods: {
     handleSignInGoogle() {
@@ -54,9 +60,9 @@ export default {
           this.user = result.user.displayName
           localStorage.name = result.user.displayName
           localStorage.email = result.user.email
-          console.log(localStorage)
+          localStorage.pfp = result.user.photoURL
+
           this.isSignedIn = true
-          console.log(auth.currentUser)
         })
         .catch((error) => {
           console.log(error)
