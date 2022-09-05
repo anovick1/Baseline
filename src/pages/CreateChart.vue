@@ -3,7 +3,7 @@
     <h1>Create Chart</h1>
     <div class="chart_border" id="chart_border_create">
       <div class="chart_container" id="chart_container_create">
-        <canvas :id="count" width="1vw" height="5vw"></canvas>
+        <canvas id="chart" width="1vw" height="5vw"></canvas>
       </div>
     </div>
     <div class="create_chart">
@@ -14,6 +14,13 @@
         name="title"
         type="title"
       />
+      <input type="text" v-model="search" />
+      <div class="search_results" v-if="search.length > 1">
+        <div class="search_player" v-for="(player, index) in filterPlayers" :key="index">
+            <img :src="player.img_url" />
+            <p>{{ player.player }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -38,12 +45,18 @@ export default {
     allStats: StatList,
     count: 0,
     loaded: false,
-    myChart: new Chart()
+    myChart: new Chart(),
+    search: ''
   }),
+  computed: {
+    filterPlayers() {
+      return this.allPlayers.filter((player) =>
+        player.player.toLowerCase().includes(this.search.toLowerCase())
+      )
+    }
+  },
   methods: {
     handleChange: async function (e) {
-      console.log(this.title)
-
       this[e.target.name] = e.target.value
       this.makeChart()
     },
@@ -57,9 +70,7 @@ export default {
     updateChart() {},
     makeChart() {
       this.myChart.destroy()
-      // console.log(this.count)
-      // this.count++
-      const ctx = document.getElementById(this.count)
+      const ctx = document.getElementById('chart')
       const labels = []
       const datasets = []
       let len = 0
