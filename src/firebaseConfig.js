@@ -1,8 +1,9 @@
 import { initializeApp } from 'firebase/app'
 
 // TODO: Replace the following with your app's Firebase project configuration
+const API_KEY = process.env.VUE_APP_firebase_apiKey
 const firebaseConfig = {
-  apiKey: 'AIzaSyA7clPnORisNy-_ovqlpLAVQ4d_xIyz1Is',
+  apiKey: API_KEY,
   authDomain: 'baselinenovick.firebaseapp.com',
   projectId: 'baselinenovick',
   storageBucket: 'baselinenovick.appspot.com',
