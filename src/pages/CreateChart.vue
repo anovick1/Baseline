@@ -27,14 +27,14 @@
           </div>
           <div
             class="search_action"
-            v-if="!players.includes(player)"
+            v-if="!pRender.includes(player)"
             @click="addPlayer(player)"
           >
             <img src="https://cdn-icons-png.flaticon.com/512/148/148764.png" />
           </div>
           <div
             class="search_action"
-            v-if="players.includes(player)"
+            v-if="pRender.includes(player)"
             @click="subPlayer(player)"
           >
             <img src="https://cdn-icons-png.flaticon.com/512/929/929430.png" />
@@ -49,13 +49,15 @@
 import Chart from 'chart.js/auto'
 import PlayerList from '../../data/players.json'
 import StatList from '../../data/players.json'
+import { getPlayersById } from '../Services/PlayerServices.js'
 export default {
   name: 'CreateChart',
   data: () => ({
     title: 'Title',
     players: [],
+    pRender: [],
     year: true,
-    x: '',
+    x: 'x3p_per_game',
     author: {
       name: localStorage.name,
       email: localStorage.email,
@@ -86,16 +88,24 @@ export default {
       this.title = 'Title'
       this.players = []
       this.year = true
-      this.x = ''
+      this.x = 'pts_per_game'
     },
-    addPlayer(player) {
-      this.players.push(player)
+    addPlayer: async function (player) {
+      this.pRender.push(player)
+      let p = await getPlayersById(player.player_id)
+      this.players.push(p)
+      this.makeChart()
     },
     subPlayer(player) {
-      const filteredItems = this.players.filter(
-        (p) => p.player_id !== player.player_id
+      let filteredItems = this.players.filter(
+        (p) => p.player_id !== player.player_number
       )
       this.players = filteredItems
+      filteredItems = this.pRender.filter(
+        (p) => p.player_id !== player.player_id
+      )
+      this.pRender = filteredItems
+      this.makeChart()
     },
     makeChart() {
       this.myChart.destroy()
