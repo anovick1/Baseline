@@ -46,7 +46,8 @@ nav {
 .dropdown-content {
   display: none;
   position: absolute;
-  min-width: 10vw;
+  right: -2vw;
+  /* min-width: 10vw; */
   background-color: rgba(255, 255, 255, 0.8);
   z-index: 1;
 }
@@ -205,4 +206,22 @@ a {
 #google-nav:active {
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
   transform: scale(1);
+}
+.signout_nav img {
+  height: 2vh;
+  margin-right: 1vw;
+}
+.signout_nav {
+  display: flex;
+  align-items: center;
+  padding: 0 1vw;
+  margin-top: 1vh;
+}
+.signout_nav:hover {
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border-radius: 15px;
+}
+.signout_nav:active {
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
 }

@@ -17,7 +17,6 @@
         <div className="user-nav-dropdown" v-if="isSignedIn">
           <div className="dropbtn">
             <img :src="currentUser.pfp" alt="pfp" />
-            <!-- <h3>{{ currentUser.name }}</h3> -->
           </div>
           <div className="dropdown-content">
             <!-- <Link
@@ -27,7 +26,10 @@
                   >
                     <h4>Profile</h4>
                   </Link> -->
-            <div @click="handleSignOut">
+            <div class="signout_nav" @click="handleSignOut">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
+              />
               <h4>Logout</h4>
             </div>
           </div>

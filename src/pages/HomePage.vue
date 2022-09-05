@@ -2,9 +2,9 @@
   <div class="home">
     <h1>Baseline</h1>
     <h2 v-if="user">Signed in User: {{ user }}</h2>
-    <div id="logout" v-if="isSignedIn">
+    <!-- <div id="logout" v-if="isSignedIn">
       <button @click="handleSignOut">Logout</button>
-    </div>
+    </div> -->
     <!-- <div id="TwitterSignIn" v-if="!isSignedIn">
       <h3>Twitter Sign In</h3>
       <button @click="handleSignInTwitter">Login</button>
