@@ -20,27 +20,26 @@
               <h3>{{ currentUser.name }}</h3>
             </div>
           </button>
-          <!-- <div className="dropdown-content">
-                <Link
+          <div className="dropdown-content">
+            <!-- <Link
                   to={'/profile'}
                   className="user-profile"
                   onClick={() => setProfile(true)}
                 >
                   <h4>Profile</h4>
-                </Link>
-    
-                <Link
-                  to={'/profile'}
-                  className="user-profile"
-                  onClick={() => setProfile(false)}
-                >
-                  <h4>Matches</h4>
                 </Link> -->
-          <!-- 
-                <Link to="/">
-                  <h4>Logout</h4>
-                </Link> -->
-          <!-- </div> -->
+            <div @click="handleSignOut">
+              <h4>Logout</h4>
+            </div>
+          </div>
+        </div>
+        <div id="GoogleSignIn-nav" v-if="!isSignedIn">
+          <div class="google-sign-btn" @click="handleSignInGoogle">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
+            />
+            <p>Sign in with Google</p>
+          </div>
         </div>
       </div>
     </nav>
@@ -48,7 +47,23 @@
 </template>
 
 <script>
-console.log(localStorage.pfp)
+import {
+  getAuth,
+  signInWithPopup,
+  signOut,
+  GoogleAuthProvider,
+  TwitterAuthProvider
+} from 'firebase/auth'
+import { GetUsers, updateUser, createUser } from '../Services/UserServices'
+
+const googleProvider = new GoogleAuthProvider()
+const twitterProvider = new TwitterAuthProvider()
+
+const auth = getAuth()
+import firebaseConfig from '../firebaseConfig'
+twitterProvider
+firebaseConfig
+
 export default {
   name: 'NavBar',
   data: () => ({
@@ -57,13 +72,72 @@ export default {
       email: localStorage.email,
       pfp: localStorage.pfp
     },
-    isSignedIn: false
+    isSignedIn: false,
+    users: []
   }),
   mounted: async function () {
     if (localStorage.email === 'null') {
       this.isSignedIn = false
     } else {
       this.isSignedIn = true
+    }
+  },
+  methods: {
+    handleSignInGoogle: async function () {
+      signInWithPopup(auth, googleProvider)
+        .then(async (result) => {
+          this.users = await GetUsers()
+          this.currentUser = {
+            name: result.user.displayName,
+            email: result.user.email,
+            pfp: result.user.photoURL
+          }
+          localStorage.name = result.user.displayName
+          localStorage.email = result.user.email
+          localStorage.pfp = result.user.photoURL
+          this.isSignedIn = true
+          let newUser = true
+          let id = 0
+          for (let i = 0; i < this.users.length; i++) {
+            if (this.users[i].email === result.user.email) {
+              newUser = false
+              id = this.users[i].id
+            }
+          }
+          if (newUser === true) {
+            let body = {
+              name: result.user.displayName,
+              email: result.user.email,
+              pfp_url: result.user.photoURL
+            }
+            await createUser(body)
+          } else {
+            let body = {
+              name: result.user.displayName,
+              email: result.user.email,
+              pfp_url: result.user.photoURL
+            }
+            await updateUser(id, body)
+            location.reload()
+            this.isSignedIn = true
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    handleSignOut() {
+      signOut(auth)
+        .then(() => {
+          localStorage.name = null
+          localStorage.email = null
+          localStorage.pfp = null
+          location.reload()
+          this.isSignedIn = false
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }
