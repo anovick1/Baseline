@@ -14,11 +14,31 @@
         name="title"
         type="title"
       />
-      <input type="text" v-model="search" />
+      <input type="text" v-model="search" placeholder="Search Player by Name" />
       <div class="search_results" v-if="search.length > 1">
-        <div class="search_player" v-for="(player, index) in filterPlayers" :key="index">
+        <div
+          class="search_player"
+          v-for="(player, index) in filterPlayers"
+          :key="index"
+        >
+          <div class="search_player_name">
             <img :src="player.img_url" />
             <p>{{ player.player }}</p>
+          </div>
+          <div
+            class="search_action"
+            v-if="!players.includes(player)"
+            @click="addPlayer(player)"
+          >
+            <img src="https://cdn-icons-png.flaticon.com/512/148/148764.png" />
+          </div>
+          <div
+            class="search_action"
+            v-if="players.includes(player)"
+            @click="subPlayer(player)"
+          >
+            <img src="https://cdn-icons-png.flaticon.com/512/929/929430.png" />
+          </div>
         </div>
       </div>
     </div>
@@ -46,7 +66,8 @@ export default {
     count: 0,
     loaded: false,
     myChart: new Chart(),
-    search: ''
+    search: '',
+    playerAdded: null
   }),
   computed: {
     filterPlayers() {
@@ -67,7 +88,15 @@ export default {
       this.year = true
       this.x = ''
     },
-    updateChart() {},
+    addPlayer(player) {
+      this.players.push(player)
+    },
+    subPlayer(player) {
+      const filteredItems = this.players.filter(
+        (p) => p.player_id !== player.player_id
+      )
+      this.players = filteredItems
+    },
     makeChart() {
       this.myChart.destroy()
       const ctx = document.getElementById('chart')
