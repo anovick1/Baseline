@@ -16,9 +16,9 @@
             <!-- <div id="pfp">
                   <img src={currentUser.pfp_link} alt="pfp" />
                 </div> -->
-            <div id="username">
+            <div id="username" v-if="currentUser">
               <h3>
-                <span id="nav">{currentUser.firstName}</span>
+                <span id="nav">{{ currentUser.name }}</span>
               </h3>
             </div>
           </button>
@@ -51,6 +51,10 @@
 
 <script>
 export default {
-  name: 'NavBar'
+  name: 'NavBar',
+  props: {
+    isSignedIn: Boolean,
+    currentUser: Object
+  }
 }
 </script>
