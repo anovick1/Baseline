@@ -1,6 +1,6 @@
 <template>
   <div class="home_section">
-    <h2>Charts</h2>
+    <h1>Charts</h1>
     <div class="chart-wrapper" v-if="searched">
       <section class="charts" v-for="(c, index) in charts" :key="index">
         <ChartCardVue
@@ -15,6 +15,11 @@
         />
       </section>
     </div>
+    <img
+      v-if="!searched"
+      src="https://thumbs.gfycat.com/ArtisticLastingColt-max-1mb.gif"
+    />
+    <h2>Loading . . . .</h2>
   </div>
 </template>
 
