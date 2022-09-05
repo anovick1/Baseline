@@ -9,15 +9,16 @@
       <h3>Twitter Sign In</h3>
       <button @click="handleSignInTwitter">Login</button>
     </div> -->
-    <h3>
-      Sign in to charts and compare any NBA player statistics throughout history
-    </h3>
     <div id="GoogleSignIn" v-if="!isSignedIn">
       <div class="google-sign-btn" @click="handleSignInGoogle">
-        Sign in With Google
+        <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" />
+        <p>Sign in with Google</p>
       </div>
     </div>
-    <!-- <img :src="localStorage.pfp" /> -->
+    <h3>
+      Sign in to create charts and compare any NBA player statistics throughout
+      history
+    </h3>
     <img
       src="https://i.etsystatic.com/24759709/r/il/2decdd/2605299704/il_fullxfull.2605299704_9ss2.jpg"
     />
@@ -25,6 +26,7 @@
 </template>
 
 <script>
+// console.log(this.currentUser)
 import {
   getAuth,
   signInWithPopup,
@@ -46,7 +48,11 @@ export default {
   name: 'HomePage',
   data() {
     return {
-      currentUser: '',
+      currentUser: {
+        name: localStorage.name,
+        email: localStorage.email,
+        pfp: localStorage.pfp
+      },
       isSignedIn: null,
       users: []
     }

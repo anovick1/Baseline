@@ -11,11 +11,11 @@
         <router-link class="view_charts" to="/charts">
           <h3>View Charts</h3>
         </router-link>
-        <div className="user-nav-dropdown" v-if="currentUser">
+        <div className="user-nav-dropdown" v-if="isSignedIn">
           <button className="dropbtn">
-            <!-- <div id="pfp">
-                  <img src={currentUser.pfp_link} alt="pfp" />
-                </div> -->
+            <div id="pfp">
+              <img :src="currentUser.pfp" alt="pfp" />
+            </div>
             <div id="user">
               <h3>{{ currentUser.name }}</h3>
             </div>
@@ -56,7 +56,15 @@ export default {
       name: localStorage.name,
       email: localStorage.email,
       pfp: localStorage.pfp
+    },
+    isSignedIn: false
+  }),
+  mounted: async function () {
+    if (localStorage.email === 'null') {
+      this.isSignedIn = false
+    } else {
+      this.isSignedIn = true
     }
-  })
+  }
 }
 </script>
