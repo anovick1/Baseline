@@ -13,6 +13,7 @@
 
 <script>
 import Chart from 'chart.js/auto'
+// console.log(this.currentUser.id)
 export default {
   name: 'ChardCard',
   components: {},

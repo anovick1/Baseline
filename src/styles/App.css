@@ -256,6 +256,9 @@ a {
   overflow-y: scroll;
   max-height: 20vh;
 }
+.search_placeholder {
+  min-height: 20vh;
+}
 
 .search_player img {
   height: 5vh;
@@ -326,7 +329,6 @@ a {
 
 .create_chart {
   display: flex;
-  margin-top: 5vh;
   width: 75vh;
   justify-content: space-evenly;
   flex-direction: column;
@@ -345,7 +347,7 @@ select {
   padding: 1vh 0;
   text-align: center;
   border-radius: 15px;
-  margin: 0 0 3vh 0;
+  margin: 3vh 0 3vh 0;
 }
 .input_create {
   display: flex;

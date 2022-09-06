@@ -145,6 +145,7 @@ export default {
           localStorage.name = null
           localStorage.email = null
           localStorage.pfp = null
+          localStorage.id = null
           location.reload()
           this.isSignedIn = false
         })

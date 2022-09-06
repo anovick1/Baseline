@@ -1,7 +1,7 @@
 <template>
   <div class="home_section">
     <h1>Create Chart</h1>
-    <div class="chart_border" id="chart_border_create">
+    <!-- <div class="chart_border" id="chart_border_create">
       <div class="chart_container" id="chart_container_create">
         <canvas id="chart" width="1vw" height="5vw"></canvas>
       </div>
@@ -20,9 +20,8 @@
           <img :src="p.img_url" />
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="create_chart">
-      <div class="post_chart" @click="postChart">Publish Chart</div>
       <div class="input_create">
         <input
           @input="handleChange"
@@ -45,14 +44,38 @@
           </option>
         </select>
       </div>
+    </div>
+    <div class="chart_border" id="chart_border_create">
+      <div class="chart_container" id="chart_container_create">
+        <canvas id="chart" width="1vw" height="5vw"></canvas>
+      </div>
+      <div class="player_img" v-if="players.length > 0">
+        <div
+          class="chart_player_img"
+          v-for="(p, index) in players"
+          :key="index"
+        >
+          <div class="chart_action">
+            <img
+              @click="subPlayer(p)"
+              src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+            />
+          </div>
+          <img :src="p.img_url" />
+        </div>
+      </div>
+    </div>
+    <div class="create_chart">
+      <div class="post_chart" @click="postChart">Publish Chart</div>
       <div class="input_create" id="search">
         <input
           type="text"
           v-model="search"
           placeholder="Search Player by Name"
           @input="handleChange"
+          name="p"
         />
-        <div class="search_results" v-if="search.length > 1">
+        <div class="search_results" v-if="search.length > 2">
           <div
             class="search_player"
             v-for="(player, index) in filterPlayers"
@@ -82,6 +105,7 @@
             </div>
           </div>
         </div>
+        <div class="search_placeholder" v-if="search.length <= 2"></div>
       </div>
     </div>
   </div>
@@ -139,8 +163,9 @@ export default {
     },
     handleChange: async function (e) {
       this[e.target.name] = e.target.value
-      console.log(document.body.scrollHeight)
-      window.scrollTo(0, document.body.scrollHeight)
+      if (e.target.name === 'p') {
+        window.scrollTo(0, document.body.scrollHeight)
+      }
       this.makeChart()
     },
     handleSubmit(e) {
