@@ -97,14 +97,19 @@ export default {
       this.makeChart()
     },
     subPlayer(player) {
-      let filteredItems = this.players.filter(
-        (p) => p.player_id !== player.player_number
-      )
-      this.players = filteredItems
-      filteredItems = this.pRender.filter(
+      let filterPlayers = []
+      for (let i = 0; i < this.players.length; i++) {
+        if (this.players[i].player_number !== parseInt(player.player_id)) {
+          console.log(this.players[i].player_number)
+          console.log(player.player_id)
+          filterPlayers.push(this.players[i])
+        }
+      }
+      this.players = filterPlayers
+      let filterPredner = this.pRender.filter(
         (p) => p.player_id !== player.player_id
       )
-      this.pRender = filteredItems
+      this.pRender = filterPredner
       this.makeChart()
     },
     makeChart() {

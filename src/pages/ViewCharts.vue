@@ -19,7 +19,7 @@
       v-if="!searched"
       src="https://thumbs.gfycat.com/ArtisticLastingColt-max-1mb.gif"
     />
-    <h2>Loading . . . .</h2>
+    <h2 v-if="!searched">Loading . . . .</h2>
   </div>
 </template>
 
