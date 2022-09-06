@@ -11,6 +11,12 @@
           v-for="(p, index) in players"
           :key="index"
         >
+          <div class="chart_action">
+            <img
+              @click="subPlayer(p)"
+              src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+            />
+          </div>
           <img :src="p.img_url" />
         </div>
       </div>
@@ -124,16 +130,27 @@ export default {
       this.makeChart()
     },
     subPlayer(player) {
+      console.log(player)
       let filterPlayers = []
       for (let i = 0; i < this.players.length; i++) {
-        if (this.players[i].player_number !== parseInt(player.player_id)) {
+        if (
+          this.players[i].player_number !== parseInt(player.player_id) &&
+          this.players[i].player_number !== parseInt(player.player_number)
+        ) {
           filterPlayers.push(this.players[i])
         }
       }
       this.players = filterPlayers
-      let filterPredner = this.pRender.filter(
-        (p) => p.player_id !== player.player_id
-      )
+      let filterPredner = []
+      for (let i = 0; i < this.players.length; i++) {
+        if (
+          this.players[i].player_number !== parseInt(player.player_id) &&
+          this.players[i].player_number !== parseInt(player.player_number)
+        ) {
+          filterPredner.push(this.players[i])
+        }
+      }
+
       this.pRender = filterPredner
       this.makeChart()
     },

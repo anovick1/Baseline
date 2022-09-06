@@ -136,7 +136,7 @@ a {
   width: 50vh; */
 }
 #chart_border_create {
-  height: 50vh;
+  height: 52vh;
   width: 80vh;
   /* align-items: stretch; */
 }
@@ -274,4 +274,15 @@ a {
   justify-content: space-evenly;
   width: 80vh;
   flex-wrap: wrap;
+  margin-bottom: 2vh;
+}
+.chart_action img {
+  border-radius: 50%;
+  height: 3vh;
+  position: relative;
+  left: -5vh;
+}
+.chart_player_img {
+  display: flex;
+  flex-direction: row-reverse;
 }
