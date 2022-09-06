@@ -124,9 +124,10 @@ a {
   background-color: white;
   border-radius: 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  box-shadow: 0px 0px 15px 5px rgb(0 0 0 / 20%);
+  flex-direction: column;
   align-items: center;
-  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.2);
 }
 .chart_container {
   height: 28vh;
@@ -135,8 +136,9 @@ a {
   width: 50vh; */
 }
 #chart_border_create {
-  height: 40vh;
+  height: 50vh;
   width: 80vh;
+  /* align-items: stretch; */
 }
 #chart_container_create {
   height: 35vh;
@@ -259,4 +261,17 @@ a {
 .search_action img {
   height: 3vh;
   width: 3vh;
+}
+.chart_player_img img {
+  height: 10vh;
+  border-radius: 15px;
+  margin-right: 1vw;
+  object-fit: cover;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.3);
+}
+.player_img {
+  display: flex;
+  justify-content: space-evenly;
+  width: 80vh;
+  flex-wrap: wrap;
 }

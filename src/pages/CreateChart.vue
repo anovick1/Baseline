@@ -5,6 +5,15 @@
       <div class="chart_container" id="chart_container_create">
         <canvas id="chart" width="1vw" height="5vw"></canvas>
       </div>
+      <div class="player_img" v-if="players.length > 0">
+        <div
+          class="chart_player_img"
+          v-for="(p, index) in players"
+          :key="index"
+        >
+          <img :src="p.img_url" />
+        </div>
+      </div>
     </div>
     <div class="create_chart">
       <input
@@ -100,8 +109,6 @@ export default {
       let filterPlayers = []
       for (let i = 0; i < this.players.length; i++) {
         if (this.players[i].player_number !== parseInt(player.player_id)) {
-          console.log(this.players[i].player_number)
-          console.log(player.player_id)
           filterPlayers.push(this.players[i])
         }
       }
