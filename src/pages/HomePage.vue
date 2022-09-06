@@ -10,8 +10,8 @@
       <button @click="handleSignInTwitter">Login</button>
     </div> -->
     <h3>
-      Sign in to create charts and compare any NBA player statistics throughout
-      history
+      Sign in to create charts and compare any NBA player's season statistics
+      throughout history
     </h3>
     <img
       src="https://i.etsystatic.com/24759709/r/il/2decdd/2605299704/il_fullxfull.2605299704_9ss2.jpg"
