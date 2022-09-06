@@ -50,6 +50,21 @@
           </div>
         </div>
       </div>
+      <select
+        v-model="select"
+        :value="x"
+        name="x"
+        @change="handleChange($event)"
+      >
+        <!-- <div v-for="(s, index) in allStats" :key="index"></div> -->
+        <option v-for="(s, index) in allStats" :key="index">
+          {{ s }}
+        </option>
+      </select>
+
+      <!-- <div v-for="(stat, index) in allStats" :key="index">
+      <select :options="options" :value="x" />
+       </div> -->
     </div>
   </div>
 </template>
@@ -57,8 +72,9 @@
 <script>
 import Chart from 'chart.js/auto'
 import PlayerList from '../../data/players.json'
-import StatList from '../../data/players.json'
+const StatList = require('../../data/stats.json')
 import { getPlayersById } from '../Services/PlayerServices.js'
+
 export default {
   name: 'CreateChart',
   data: () => ({
@@ -89,6 +105,9 @@ export default {
   },
   methods: {
     handleChange: async function (e) {
+      // console.log(e.target.name)
+      // console.log(e.target.value)
+      console.log(e)
       this[e.target.name] = e.target.value
       this.makeChart()
     },
