@@ -225,14 +225,18 @@ a {
 }
 .signout_nav:hover,
 #nav-logo:hover,
-.view_charts:hover {
+.view_charts:hover,
+.search_action img:hover,
+.chart_action img:hover {
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   border-radius: 15px;
 }
 .signout_nav:active,
 #nav-logo:active,
-.view_charts:active {
+.view_charts:active,
+.search_action img:active,
+.chart_action img:active {
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
 }
 .view_charts {
@@ -265,6 +269,9 @@ a {
   height: 3vh;
   width: 3vh;
 }
+/* .search_action img {
+  border: 1px solid black; */
+/* } */
 .chart_player_img img {
   height: 10vh;
   border-radius: 15px;
