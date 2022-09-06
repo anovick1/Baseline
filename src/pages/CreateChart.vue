@@ -51,10 +51,11 @@
         </div>
       </div>
       <select
-        v-model="select"
+        v-model="x"
         :value="x"
         name="x"
         @change="handleChange($event)"
+        placeholder="Stat"
       >
         <!-- <div v-for="(s, index) in allStats" :key="index"></div> -->
         <option v-for="(s, index) in allStats" :key="index">
@@ -62,9 +63,7 @@
         </option>
       </select>
 
-      <!-- <div v-for="(stat, index) in allStats" :key="index">
-      <select :options="options" :value="x" />
-       </div> -->
+      <button>Publish Chart</button>
     </div>
   </div>
 </template>
@@ -82,7 +81,6 @@ export default {
     players: [],
     pRender: [],
     year: true,
-    x: 'x3p_per_game',
     author: {
       name: localStorage.name,
       email: localStorage.email,
@@ -90,6 +88,7 @@ export default {
     },
     allPlayers: PlayerList,
     allStats: StatList,
+    x: 'x3p_per_game',
     count: 0,
     loaded: false,
     myChart: new Chart(),
