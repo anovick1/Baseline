@@ -1,5 +1,11 @@
 <template>
   <div class="chart_border">
+    <div
+      class="delete_chart"
+      v-if="parseInt(author.id) === parseInt(currentUser.id)"
+    >
+      <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" />
+    </div>
     <div class="chart_container">
       <canvas :id="count" width="1vw" height="5vw"></canvas>
     </div>
@@ -8,7 +14,6 @@
 
 <script>
 import Chart from 'chart.js/auto'
-
 export default {
   name: 'ChardCard',
   components: {},
@@ -19,14 +24,23 @@ export default {
     x: String,
     likes: Array,
     comments: Array,
-    author: String,
+    author: Object,
     count: String
   },
+  data: () => ({
+    currentUser: {
+      id: localStorage.id,
+      name: localStorage.name,
+      email: localStorage.email,
+      pfp: localStorage.pfp
+    }
+  }),
   mounted() {
     const ctx = document.getElementById(this.count)
     const labels = []
     const datasets = []
     let len = 0
+
     for (let i = 0; i < this.players.length; i++) {
       let stats = []
       /// STATS ARRAY

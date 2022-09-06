@@ -29,24 +29,18 @@ export const DeleteChart = async (id) => {
   }
 }
 
-// export const updateUser = async (user_id, body) => {
-//   try {
-//     const user = await Client.put('/users/' + user_id, {
-//       firstName: body.firstName,
-//       lastName: body.lastName,
-//       city: body.city,
-//       state: body.state,
-//       age: body.age,
-//       gender: body.gender,
-//       orientation: body.orientation,
-//       ig_link: body.ig_link,
-//       fb_link: body.fb_link,
-//       li_link: body.li_link,
-//       pfp_link: body.pfp_link,
-//       bio: body.bio
-//     })
-//     return user.data
-//   } catch (error) {
-//     throw error
-//   }
-// }
+export const createChart = async (body) => {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    const chart = await Client.post('/charts/', {
+      title: body.title,
+      author: body.author,
+      player: body.player,
+      y_year: body.y_year,
+      x: body.x
+    })
+    return chart.data
+  } catch (error) {
+    throw error
+  }
+}

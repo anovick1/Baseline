@@ -10,7 +10,7 @@
           :x="c.x"
           :likes="c.likes"
           :comments="c.comments"
-          :author="c.author.name"
+          :author="c.author"
           :count="index.toString()"
         />
       </section>

@@ -286,3 +286,12 @@ a {
   display: flex;
   flex-direction: row-reverse;
 }
+.delete_chart img {
+  height: 3vh;
+}
+.delete_chart {
+  position: relative;
+  left: 15vw;
+  top: 1vh;
+  margin-bottom: -5vh;
+}

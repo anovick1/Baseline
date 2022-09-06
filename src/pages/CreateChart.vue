@@ -69,7 +69,7 @@
         </option>
       </select>
 
-      <button>Publish Chart</button>
+      <button @click="postChart">Publish Chart</button>
     </div>
   </div>
 </template>
@@ -79,15 +79,15 @@ import Chart from 'chart.js/auto'
 import PlayerList from '../../data/players.json'
 const StatList = require('../../data/stats.json')
 import { getPlayersById } from '../Services/PlayerServices.js'
-
+import { createChart } from '../Services/ChartServices.js'
 export default {
   name: 'CreateChart',
   data: () => ({
     title: 'Title',
     players: [],
     pRender: [],
-    year: true,
     author: {
+      id: localStorage.id,
       name: localStorage.name,
       email: localStorage.email,
       pfp: localStorage.pfp
@@ -95,6 +95,7 @@ export default {
     allPlayers: PlayerList,
     allStats: StatList,
     x: 'x3p_per_game',
+    y_year: true,
     count: 0,
     loaded: false,
     myChart: new Chart(),
@@ -109,10 +110,21 @@ export default {
     }
   },
   methods: {
+    postChart: async function () {
+      let body = {
+        title: this.title,
+        author: this.author.id,
+        player: this.players,
+        y_year: this.y_year,
+        x: this.x
+      }
+      await createChart(body)
+      this.title = 'title'
+      this.players = []
+      this.x = 'x3p_per_game'
+      this.y_year = true
+    },
     handleChange: async function (e) {
-      // console.log(e.target.name)
-      // console.log(e.target.value)
-      console.log(e)
       this[e.target.name] = e.target.value
       this.makeChart()
     },
@@ -130,7 +142,6 @@ export default {
       this.makeChart()
     },
     subPlayer(player) {
-      console.log(player)
       let filterPlayers = []
       for (let i = 0; i < this.players.length; i++) {
         if (

@@ -77,6 +77,7 @@ export default {
   name: 'NavBar',
   data: () => ({
     currentUser: {
+      id: localStorage.id,
       name: localStorage.name,
       email: localStorage.email,
       pfp: localStorage.pfp
@@ -119,14 +120,18 @@ export default {
               email: result.user.email,
               pfp_url: result.user.photoURL
             }
-            await createUser(body)
+            let user_id = await createUser(body)
+            localStorage.id = user_id.id
+            location.reload()
+            this.isSignedIn = true
           } else {
             let body = {
               name: result.user.displayName,
               email: result.user.email,
               pfp_url: result.user.photoURL
             }
-            await updateUser(id, body)
+            let user_id = await updateUser(id, body)
+            localStorage.id = user_id.id
             location.reload()
             this.isSignedIn = true
           }
