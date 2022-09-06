@@ -6,9 +6,8 @@
     <div
       class="delete_chart"
       v-if="parseInt(author.id) === parseInt(currentUser.id)"
-    >
-      <!-- <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" /> -->
-    </div>
+      @click="deleteChart(id)"
+    ></div>
   </div>
 </template>
 
@@ -25,7 +24,8 @@ export default {
     likes: Array,
     comments: Array,
     author: Object,
-    count: String
+    count: String,
+    id: Number
   },
   data: () => ({
     currentUser: {
@@ -35,6 +35,11 @@ export default {
       pfp: localStorage.pfp
     }
   }),
+  methods: {
+    async deleteChart(id) {
+      this.$emit('deleteChart', id)
+    }
+  },
   mounted() {
     const ctx = document.getElementById(this.count)
     const labels = []

@@ -12,6 +12,8 @@
           :comments="c.comments"
           :author="c.author"
           :count="index.toString()"
+          :id="c.id"
+          @deleteChart="deleteChart"
         />
       </section>
     </div>
@@ -25,7 +27,7 @@
 
 <script>
 import data from '../../data/players.json'
-import { GetCharts } from '../Services/ChartServices'
+import { GetCharts, DeleteChart } from '../Services/ChartServices'
 import ChartCardVue from '../components/ChartCard.vue'
 export default {
   name: 'ViewCharts',
@@ -41,8 +43,13 @@ export default {
   methods: {
     async getCharts() {
       const res = await GetCharts()
-      this.charts = res
       this.searched = true
+      this.charts = res
+    },
+    async deleteChart(id) {
+      await DeleteChart(id)
+      // this.searched = false
+      await this.getCharts()
     }
   }
 }
