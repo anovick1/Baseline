@@ -1,13 +1,13 @@
 <template>
   <div class="chart_border">
+    <div class="chart_container">
+      <canvas :id="count" width="1vw" height="5vw"></canvas>
+    </div>
     <div
       class="delete_chart"
       v-if="parseInt(author.id) === parseInt(currentUser.id)"
     >
-      <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" />
-    </div>
-    <div class="chart_container">
-      <canvas :id="count" width="1vw" height="5vw"></canvas>
+      <!-- <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" /> -->
     </div>
   </div>
 </template>

@@ -292,6 +292,24 @@ a {
 .delete_chart {
   position: relative;
   left: 15vw;
-  top: 1vh;
+  bottom: 31vh;
   margin-bottom: -5vh;
+  background-image: url(https://cdn-icons-png.flaticon.com/512/2891/2891491.png);
+  background-repeat: no-repeat;
+  height: 3vh;
+  width: 2vw;
+  background-size: contain;
+}
+.delete_chart:hover {
+  /* opacity: 0; */
+  background: url(https://cdn-icons-png.flaticon.com/512/13/13514.png);
+  background-repeat: no-repeat;
+  height: 3vh;
+  width: 2vw;
+  background-size: contain;
+  cursor: pointer;
+  /* box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  border-radius: 5px; */
+  transform: scale(1.5);
 }
