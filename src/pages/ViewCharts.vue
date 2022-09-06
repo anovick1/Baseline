@@ -48,7 +48,7 @@ export default {
     },
     async deleteChart(id) {
       await DeleteChart(id)
-      // this.searched = false
+      this.searched = false
       await this.getCharts()
     }
   }

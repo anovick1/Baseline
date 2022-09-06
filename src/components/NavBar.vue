@@ -65,7 +65,6 @@ import {
   TwitterAuthProvider
 } from 'firebase/auth'
 import { GetUsers, updateUser, createUser } from '../Services/UserServices'
-
 const googleProvider = new GoogleAuthProvider()
 const twitterProvider = new TwitterAuthProvider()
 
@@ -73,7 +72,6 @@ const auth = getAuth()
 import firebaseConfig from '../firebaseConfig'
 twitterProvider
 firebaseConfig
-
 export default {
   name: 'NavBar',
   data: () => ({

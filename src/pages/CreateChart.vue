@@ -22,54 +22,67 @@
       </div>
     </div>
     <div class="create_chart">
-      <input
-        @input="handleChange"
-        placeholder="Title"
-        :value="title"
-        name="title"
-        type="title"
-      />
-      <input type="text" v-model="search" placeholder="Search Player by Name" />
-      <div class="search_results" v-if="search.length > 1">
-        <div
-          class="search_player"
-          v-for="(player, index) in filterPlayers"
-          :key="index"
+      <div class="post_chart" @click="postChart">Publish Chart</div>
+      <div class="input_create">
+        <input
+          @input="handleChange"
+          placeholder="Title"
+          :value="title"
+          name="title"
+          type="title"
+          id="title_input"
+        />
+
+        <select
+          v-model="x"
+          :value="x"
+          name="x"
+          @change="handleChange($event)"
+          placeholder="Stat"
         >
-          <div class="search_player_name">
-            <img :src="player.img_url" />
-            <p>{{ player.player }}</p>
-          </div>
+          <option v-for="(s, index) in allStats" :key="index">
+            {{ s }}
+          </option>
+        </select>
+      </div>
+      <div class="input_create" id="search">
+        <input
+          type="text"
+          v-model="search"
+          placeholder="Search Player by Name"
+          @input="handleChange"
+        />
+        <div class="search_results" v-if="search.length > 1">
           <div
-            class="search_action"
-            v-if="!pRender.includes(player)"
-            @click="addPlayer(player)"
+            class="search_player"
+            v-for="(player, index) in filterPlayers"
+            :key="index"
           >
-            <img src="https://cdn-icons-png.flaticon.com/512/148/148764.png" />
-          </div>
-          <div
-            class="search_action"
-            v-if="pRender.includes(player)"
-            @click="subPlayer(player)"
-          >
-            <img src="https://cdn-icons-png.flaticon.com/512/929/929430.png" />
+            <div class="search_player_name">
+              <img :src="player.img_url" />
+              <p>{{ player.player }}</p>
+            </div>
+            <div
+              class="search_action"
+              v-if="!pRender.includes(player)"
+              @click="addPlayer(player)"
+            >
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
+              />
+            </div>
+            <div
+              class="search_action"
+              v-if="pRender.includes(player)"
+              @click="subPlayer(player)"
+            >
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+              />
+            </div>
           </div>
         </div>
       </div>
-      <select
-        v-model="x"
-        :value="x"
-        name="x"
-        @change="handleChange($event)"
-        placeholder="Stat"
-      >
-        <!-- <div v-for="(s, index) in allStats" :key="index"></div> -->
-        <option v-for="(s, index) in allStats" :key="index">
-          {{ s }}
-        </option>
-      </select>
-
-      <button @click="postChart">Publish Chart</button>
     </div>
   </div>
 </template>
@@ -126,6 +139,8 @@ export default {
     },
     handleChange: async function (e) {
       this[e.target.name] = e.target.value
+      console.log(document.body.scrollHeight)
+      window.scrollTo(0, document.body.scrollHeight)
       this.makeChart()
     },
     handleSubmit(e) {
