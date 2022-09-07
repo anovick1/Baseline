@@ -1,16 +1,19 @@
 <template>
   <div class="chart_border" id="full_chart_border">
-    <img
-      src="https://cdn-icons-png.flaticon.com/512/5038/5038256.png"
-      @click="toggleChart"
-      id="exit"
-    />
+    <div class="exit">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/5038/5038256.png"
+        @click="toggleChart"
+        id="exit"
+      />
+    </div>
     <div class="chart_container" id="full_chart_container">
       <canvas :id="count" width="1vw" height="5vw"></canvas>
     </div>
     <div class="chart_info">
-      <h2>Description:</h2>
+      <div class="view_title"><h2>Description</h2></div>
       <p>{{ description }}</p>
+      <div class="view_title"><h2>Players</h2></div>
 
       <div class="preview_players">
         <div class="preview_player" v-for="(c, index) in players" :key="index">

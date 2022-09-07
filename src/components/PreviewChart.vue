@@ -76,8 +76,11 @@ export default {
     toggleChart() {
       if (this.view) {
         this.view = false
+        document.body.style.overflow = 'scroll'
       } else {
         this.view = true
+        document.body.style.overflow = 'hidden'
+        // document.getElementById('your_iframes_id').scrolling = 'no'
       }
     }
   }
