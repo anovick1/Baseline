@@ -41,12 +41,13 @@ export default {
   }),
   mounted: async function () {
     await this.getCharts()
-    this.formatDate()
   },
   methods: {
     async getCharts() {
       const res = await GetCharts()
       this.charts = await res
+      await this.formatDate()
+      this.searched = true
     },
     async deleteChart(id) {
       await DeleteChart(id)
