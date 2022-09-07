@@ -27,6 +27,7 @@
           :id="c.id"
           :description="c.description"
           @deleteChart="deleteChart"
+          :date="c.date"
         />
       </section>
     </div>

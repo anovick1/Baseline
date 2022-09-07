@@ -1,10 +1,15 @@
 <template>
   <div class="chart_border">
     <div class="chart_container">
-      <div class=""></div>
-      <div class="left_title">
-        <h1>{{ title }}</h1>
-        <p>{{ x }}</p>
+      <div class="preview_title">
+        <div class="left_title">
+          <h1>{{ title }}</h1>
+          <p>{{ x }}</p>
+        </div>
+        <div class="right_title">
+          <p>{{ author.name }}</p>
+          <p>{{ date }}</p>
+        </div>
       </div>
       <p>{{ description }}</p>
 
@@ -17,11 +22,6 @@
         </div>
       </div>
     </div>
-    <!-- <div
-      class="delete_chart"
-      v-if="parseInt(author.id) === parseInt(currentUser.id)"
-      @click="deleteChart(id)"
-    ></div> -->
   </div>
 </template>
 
@@ -38,7 +38,8 @@ export default {
     author: Object,
     count: String,
     id: Number,
-    description: String
+    description: String,
+    date: String
   },
   data: () => ({
     currentUser: {
