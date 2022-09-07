@@ -15,6 +15,19 @@
           :id="c.id"
           @deleteChart="deleteChart"
         />
+        <PreviewChart
+          :title="c.title"
+          :players="c.player"
+          :year="c.y_year"
+          :x="c.x"
+          :likes="c.likes"
+          :comments="c.comments"
+          :author="c.author"
+          :count="index.toString()"
+          :id="c.id"
+          :description="c.description"
+          @deleteChart="deleteChart"
+        />
       </section>
     </div>
     <img
@@ -29,9 +42,10 @@
 import data from '../../data/players.json'
 import { GetCharts, DeleteChart } from '../Services/ChartServices'
 import ChartCardVue from '../components/ChartCard.vue'
+import PreviewChart from '../components/PreviewChart.vue'
 export default {
   name: 'ViewCharts',
-  components: { ChartCardVue },
+  components: { ChartCardVue, PreviewChart },
   data: () => ({
     players: data,
     charts: [],
@@ -51,7 +65,8 @@ export default {
       this.searched = false
       await this.getCharts()
     }
-  }
+  },
+  viewChart() {}
 }
 </script>
 

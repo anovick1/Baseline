@@ -119,7 +119,7 @@ a {
   margin-left: 1vh;
 }
 .chart_border {
-  height: 30vh;
+  min-height: 30vh;
   width: 60vh;
   background-color: white;
   border-radius: 20px;
@@ -129,8 +129,13 @@ a {
   flex-direction: column;
   align-items: center;
 }
+.chart_border:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
 .chart_container {
-  height: 28vh;
+  min-height: 28vh;
   width: 50vh;
   /* height: 28vh;
   width: 50vh; */
@@ -392,5 +397,34 @@ select {
 }
 
 .searchbar_delete input {
-  width: 100vw;
+  width: 100%;
+}
+
+#preview_img {
+  border-radius: 10px;
+  height: 8vh;
+}
+.preview_player {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  align-items: center;
+  margin: 1vh;
+}
+
+.preview_players {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 2vh;
+}
+.chart_container h1 {
+  margin: 2vh 0 -3vh 0;
+}
+.chart_container p {
+  margin: 3vh 0;
+}
+.preview_players p {
+  margin: 0 1vh 1vh 1vh;
 }

@@ -189,6 +189,30 @@ export default {
         this.makeChart()
       }
     },
+    subPlayer(player) {
+      let filterPlayers = []
+      for (let i = 0; i < this.players.length; i++) {
+        if (
+          this.players[i].player_number !== parseInt(player.player_id) &&
+          this.players[i].player_number !== parseInt(player.player_number)
+        ) {
+          filterPlayers.push(this.players[i])
+        }
+      }
+      this.players = filterPlayers
+      let filterPredner = []
+      for (let i = 0; i < this.players.length; i++) {
+        if (
+          this.players[i].player_number !== parseInt(player.player_id) &&
+          this.players[i].player_number !== parseInt(player.player_number)
+        ) {
+          filterPredner.push(this.players[i])
+        }
+      }
+
+      this.pRender = filterPredner
+      this.makeChart()
+    },
 
     makeChart() {
       this.myChart.destroy()
