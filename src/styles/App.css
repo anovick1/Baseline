@@ -374,3 +374,23 @@ select {
 #title_input {
   width: 10vw;
 }
+
+#search_delete {
+  height: 2vh;
+  width: 2vh;
+  position: relative;
+  right: 0.5vh;
+  top: 0.4vh;
+  margin-left: -1vw;
+}
+#search_delete:hover {
+  cursor: pointer;
+}
+.searchbar_delete {
+  width: 75vh;
+  display: flex;
+}
+
+.searchbar_delete input {
+  width: 100vw;
+}
