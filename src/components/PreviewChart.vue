@@ -48,25 +48,24 @@
     </div>
   </div>
 
-  <div v-if="view">
-    <transition-group name="chart" appear>
-      <ChartCardVue
-        :title="title"
-        :players="players"
-        :year="y_year"
-        :x="x"
-        :likes="likes"
-        :comments="comments"
-        :author="author"
-        :id="id"
-        :description="description"
-        @deleteChart="deleteChart"
-        :date="date"
-        :count="count"
-        @toggleChart="toggleChart"
-      />
-    </transition-group>
-  </div>
+  <transition name="fade">
+    <ChartCardVue
+      v-if="view"
+      :title="title"
+      :players="players"
+      :year="y_year"
+      :x="x"
+      :likes="likes"
+      :comments="comments"
+      :author="author"
+      :id="id"
+      :description="description"
+      @deleteChart="deleteChart"
+      :date="date"
+      :count="count"
+      @toggleChart="toggleChart"
+    />
+  </transition>
 </template>
 
 <script>
@@ -122,18 +121,11 @@ export default {
 </script>
 
 <style>
-.chart-enter-from {
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.8s;
+}
+.fade-enter-from, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
-  transform: scale(0.2);
-  position: 'fixed';
-}
-.chart-enter-to {
-  opacity: 1;
-  transform: scale(0.5);
-  position: 'fixed';
-}
-.chart-enter-active {
-  transition: all 0.4s ease;
-  position: 'fixed';
 }
 </style>

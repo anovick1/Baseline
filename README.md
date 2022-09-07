@@ -80,3 +80,5 @@ Once you fork and clone the repo:
 ### **_Resources_**
 
 ##### [Trello Link](https://trello.com/b/8MOoe2VG/baseline)
+
+##### [Transition Groups Link](https://vuejs.org/guide/built-ins/transition-group.html)
