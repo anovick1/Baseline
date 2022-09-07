@@ -63,27 +63,29 @@
           />
         </div>
         <div class="search_results" v-if="search.length > 2">
-          <div
-            class="search_player"
-            v-for="(player, index) in filterPlayers"
-            :key="index"
-            @click="togglePlayer(player)"
-          >
-            <div class="search_player_name">
-              <img :src="player.img_url" />
-              <p>{{ player.player }}</p>
+          <transition-group tag="div" name="list" appear>
+            <div
+              class="search_player"
+              v-for="(player, index) in filterPlayers"
+              :key="index"
+              @click="togglePlayer(player)"
+            >
+              <div class="search_player_name">
+                <img :src="player.img_url" />
+                <p>{{ player.player }}</p>
+              </div>
+              <div class="search_action" v-if="!pRender.includes(player)">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
+                />
+              </div>
+              <div class="search_action" v-if="pRender.includes(player)">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+                />
+              </div>
             </div>
-            <div class="search_action" v-if="!pRender.includes(player)">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
-              />
-            </div>
-            <div class="search_action" v-if="pRender.includes(player)">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
-              />
-            </div>
-          </div>
+          </transition-group>
         </div>
         <div class="search_placeholder" v-if="search.length <= 2"></div>
       </div>
@@ -146,8 +148,8 @@ export default {
     },
     handleChange: async function (e) {
       this[e.target.name] = e.target.value
-      if (e.target.name === 'p') {
-        window.scrollTo(0, document.body.scrollHeight)
+      if (e.target.name === 'p' && e.target.value.length > 0) {
+        // window.scrollTo(0, document.body.scrollHeight)
       }
       this.makeChart()
     },
@@ -305,4 +307,23 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.list-enter-from {
+  opacity: 0;
+  transform: scale(0.8);
+}
+.list-enter-active {
+  transition: all 0.4s ease;
+}
+.list-leave-to {
+  opacity: 0;
+  transform: scale(0.6);
+}
+.list-leave-active {
+  transition: all 0.4s ease;
+  position: absolute; /* for move transition after item leaves */
+}
+.list-move {
+  transition: all 0.3s ease;
+}
+</style>

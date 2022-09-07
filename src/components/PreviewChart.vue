@@ -49,21 +49,23 @@
   </div>
 
   <div v-if="view">
-    <ChartCardVue
-      :title="title"
-      :players="players"
-      :year="y_year"
-      :x="x"
-      :likes="likes"
-      :comments="comments"
-      :author="author"
-      :id="id"
-      :description="description"
-      @deleteChart="deleteChart"
-      :date="date"
-      :count="count"
-      @toggleChart="toggleChart"
-    />
+    <transition-group tag="div" name="chart" appear>
+      <ChartCardVue
+        :title="title"
+        :players="players"
+        :year="y_year"
+        :x="x"
+        :likes="likes"
+        :comments="comments"
+        :author="author"
+        :id="id"
+        :description="description"
+        @deleteChart="deleteChart"
+        :date="date"
+        :count="count"
+        @toggleChart="toggleChart"
+      />
+    </transition-group>
   </div>
 </template>
 
@@ -119,4 +121,19 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.chart-enter-from {
+  opacity: 0;
+  transform: scale(0.2);
+  position: 'fixed';
+}
+.chart-enter-to {
+  opacity: 1;
+  transform: scale(0.5);
+  position: 'fixed';
+}
+.chart-enter-active {
+  transition: all 0.4s ease;
+  position: 'fixed';
+}
+</style>
