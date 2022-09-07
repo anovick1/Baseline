@@ -1,5 +1,5 @@
 <template>
-  <div class="chart_border" @click="viewChart">
+  <div class="chart_border" @click="toggleChart">
     <div class="chart_container">
       <div class="preview_title">
         <div class="left_title">
@@ -37,6 +37,7 @@
       @deleteChart="deleteChart"
       :date="date"
       :count="count"
+      @toggleChart="toggleChart"
     />
   </div>
 </template>
@@ -72,9 +73,12 @@ export default {
     async deleteChart(id) {
       this.$emit('deleteChart', id)
     },
-    viewChart() {
-      console.log('title')
-      this.view = true
+    toggleChart() {
+      if (this.view) {
+        this.view = false
+      } else {
+        this.view = true
+      }
     }
   }
 }

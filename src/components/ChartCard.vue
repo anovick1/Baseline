@@ -1,5 +1,10 @@
 <template>
   <div class="chart_border" id="full_chart_border">
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/5038/5038256.png"
+      @click="toggleChart"
+      id="exit"
+    />
     <div class="chart_container" id="full_chart_container">
       <canvas :id="count" width="1vw" height="5vw"></canvas>
     </div>
@@ -51,6 +56,9 @@ export default {
   methods: {
     async deleteChart(id) {
       this.$emit('deleteChart', id)
+    },
+    toggleChart() {
+      this.$emit('toggleChart')
     }
   },
   mounted() {

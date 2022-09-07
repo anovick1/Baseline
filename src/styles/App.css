@@ -453,11 +453,14 @@ select {
 }
 
 #full_chart_container {
-  width: 70vw;
-  height: 75vh;
+  width: 75vw;
+  height: 80vh;
 }
 .chart_info {
   /* display: flex; */
   text-align: start;
   width: 65vw;
+}
+#exit {
+  height: 3vh;
 }
