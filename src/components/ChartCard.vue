@@ -11,6 +11,7 @@
     <div class="chart_info">
       <h2>Description:</h2>
       <p>{{ description }}</p>
+
       <div class="preview_players">
         <div class="preview_player" v-for="(c, index) in players" :key="index">
           <div>
@@ -18,6 +19,10 @@
           </div>
           <p>{{ c.player }}</p>
         </div>
+      </div>
+      <div class="author_date">
+        <p>{{ author.name }}</p>
+        <p>{{ date }}</p>
       </div>
     </div>
     <div
@@ -43,7 +48,8 @@ export default {
     author: Object,
     count: String,
     id: Number,
-    description: String
+    description: String,
+    date: String
   },
   data: () => ({
     currentUser: {

@@ -41,20 +41,28 @@ export default {
   }),
   mounted: async function () {
     await this.getCharts()
+    this.formatDate()
   },
   methods: {
     async getCharts() {
       const res = await GetCharts()
-      this.searched = true
-      this.charts = res
+      this.charts = await res
     },
     async deleteChart(id) {
       await DeleteChart(id)
       this.searched = false
       await this.getCharts()
+    },
+    formatDate() {
+      console.log(this.charts)
+      for (let i = 0; i < this.charts.length; i++) {
+        let newDate = this.charts[i].date.replaceAll('-', '/').slice(0, 10)
+        let arr = newDate.split('/').reverse()
+        this.charts[i].date = arr.join('/')
+      }
+      this.searched = true
     }
-  },
-  viewChart() {}
+  }
 }
 </script>
 

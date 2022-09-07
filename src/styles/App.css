@@ -456,7 +456,7 @@ select {
 
 #full_chart_container {
   width: 75vw;
-  height: 80vh;
+  height: 100vh;
 }
 .chart_info {
   /* display: flex; */
@@ -468,4 +468,14 @@ select {
   margin: 1vh 0 -2vh 75vw;
   z-index: 1;
   padding: 1vh;
+}
+
+.author_date {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.author_date p {
+  font-style: italic;
 }
