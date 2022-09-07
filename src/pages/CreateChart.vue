@@ -63,7 +63,13 @@
           />
         </div>
         <div class="search_results" v-if="search.length > 2">
-          <transition-group tag="div" name="list" appear>
+          <transition-group
+            tag="div"
+            :css="false"
+            @before-enter="onBeforeEnter"
+            @enter="onEnter"
+            @leave="onLeave"
+          >
             <div
               class="search_player"
               v-for="(player, index) in filterPlayers"
@@ -99,6 +105,8 @@ import PlayerList from '../../data/players.json'
 const StatList = require('../../data/stats.json')
 import { getPlayersById } from '../Services/PlayerServices.js'
 import { createChart } from '../Services/ChartServices.js'
+import gsap from 'gsap'
+
 export default {
   name: 'CreateChart',
   data: () => ({
@@ -129,6 +137,26 @@ export default {
     }
   },
   methods: {
+    onBeforeEnter(el) {
+      el.style.opacity = 0
+      el.style.height = 0
+    },
+    onEnter(el, done) {
+      gsap.to(el, {
+        opacity: 1,
+        height: '1.6em',
+        delay: el.dataset.index * 0.15,
+        onComplete: done
+      })
+    },
+    onLeave(el, done) {
+      gsap.to(el, {
+        opacity: 0,
+        height: 0,
+        delay: el.dataset.index * 0.15,
+        onComplete: done
+      })
+    },
     deleteSearch() {
       this.search = ''
     },

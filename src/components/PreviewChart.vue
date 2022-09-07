@@ -49,7 +49,7 @@
   </div>
 
   <div v-if="view">
-    <transition-group tag="div" name="chart" appear>
+    <transition-group name="chart" appear>
       <ChartCardVue
         :title="title"
         :players="players"
