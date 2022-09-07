@@ -1,6 +1,6 @@
 <template>
-  <div class="chart_border">
-    <div class="chart_container">
+  <div class="chart_border" id="full_chart_border">
+    <div class="chart_container" id="full_chart_container">
       <canvas :id="count" width="1vw" height="5vw"></canvas>
     </div>
     <div

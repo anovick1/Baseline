@@ -440,3 +440,13 @@ select {
 .right_title {
   text-align: end;
 }
+#full_chart_border {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 80vw;
+  height: 80vh;
+  transform: translate(-50%, -50%);
+  /* margin-top: -80vw;
+  margin-left: -80vh; */
+}
