@@ -3,6 +3,18 @@
     <div class="chart_container" id="full_chart_container">
       <canvas :id="count" width="1vw" height="5vw"></canvas>
     </div>
+    <div class="chart_info">
+      <h2>Description:</h2>
+      <p>{{ description }}</p>
+      <div class="preview_players">
+        <div class="preview_player" v-for="(c, index) in players" :key="index">
+          <div>
+            <img id="preview_img" :src="c.img_url" />
+          </div>
+          <p>{{ c.player }}</p>
+        </div>
+      </div>
+    </div>
     <div
       class="delete_chart"
       v-if="parseInt(author.id) === parseInt(currentUser.id)"
@@ -25,7 +37,8 @@ export default {
     comments: Array,
     author: Object,
     count: String,
-    id: Number
+    id: Number,
+    description: String
   },
   data: () => ({
     currentUser: {
@@ -114,7 +127,11 @@ export default {
           },
           title: {
             display: true,
-            text: this.title
+            text: this.title,
+            font: {
+              size: 30
+            },
+            color: 'black'
           }
         }
       },
