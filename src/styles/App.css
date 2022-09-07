@@ -232,7 +232,8 @@ a {
 #nav-logo:hover,
 .view_charts:hover,
 .search_action img:hover,
-.chart_action img:hover {
+.chart_action img:hover,
+#exit:hover {
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   border-radius: 15px;
@@ -247,7 +248,8 @@ a {
 .view_charts:active,
 .search_action img:active,
 .chart_action img:active,
-.search_player:active {
+.search_player:active,
+#exit:active {
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
 }
 .view_charts {
@@ -463,4 +465,7 @@ select {
 }
 #exit {
   height: 3vh;
+  margin: 1vh 0 -2vh 75vw;
+  z-index: 1;
+  padding: 1vh;
 }
