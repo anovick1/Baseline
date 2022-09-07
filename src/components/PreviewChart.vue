@@ -83,6 +83,9 @@ export default {
         // document.getElementById('your_iframes_id').scrolling = 'no'
       }
     }
+  },
+  mounted() {
+    document.body.style.overflow = 'scroll'
   }
 }
 </script>

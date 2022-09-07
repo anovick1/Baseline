@@ -2,7 +2,7 @@
   <div class="home_section">
     <h1>Charts</h1>
     <div class="chart-wrapper" v-if="searched">
-      <section class="charts" v-for="(c, index) in charts" :key="index">
+      <div class="chart" v-for="(c, index) in charts" :key="index">
         <PreviewChart
           :title="c.title"
           :players="c.player"
@@ -17,7 +17,7 @@
           @deleteChart="deleteChart"
           :date="c.date"
         />
-      </section>
+      </div>
     </div>
     <img
       v-if="!searched"
