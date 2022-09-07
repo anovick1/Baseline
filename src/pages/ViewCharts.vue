@@ -1,7 +1,13 @@
 <template>
   <div class="home_section">
     <h1>Charts</h1>
-    <div class="chart-wrapper" v-if="searched">
+    <transition-group
+      tag="div"
+      name="list"
+      appear
+      class="chart-wrapper"
+      v-if="searched"
+    >
       <div class="chart" v-for="(c, index) in charts" :key="index">
         <PreviewChart
           :title="c.title"
@@ -16,9 +22,11 @@
           :description="c.description"
           @deleteChart="deleteChart"
           :date="c.date"
+          :clickable="clickable"
+          @disableClick="disableClick"
         />
       </div>
-    </div>
+    </transition-group>
     <img
       v-if="!searched"
       src="https://thumbs.gfycat.com/ArtisticLastingColt-max-1mb.gif"
@@ -37,12 +45,21 @@ export default {
   data: () => ({
     players: data,
     charts: [],
-    searched: false
+    searched: false,
+    clickable: true
   }),
   mounted: async function () {
     await this.getCharts()
   },
+
   methods: {
+    disableClick() {
+      if (this.clickable) {
+        this.clickable = false
+      } else {
+        this.clickable = true
+      }
+    },
     async getCharts() {
       const res = await GetCharts()
       this.charts = await res
@@ -55,7 +72,6 @@ export default {
       await this.getCharts()
     },
     formatDate() {
-      console.log(this.charts)
       for (let i = 0; i < this.charts.length; i++) {
         let newDate = this.charts[i].date.replaceAll('-', '/').slice(0, 10)
         let arr = newDate.split('/').reverse()
@@ -67,4 +83,16 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.list-enter-from {
+  opacity: 0;
+  transform: scale(0.6);
+}
+.list-enter-to {
+  opacity: 1;
+  transform: scale(1);
+}
+.list-enter-active {
+  transition: all 0.4s ease;
+}
+</style>

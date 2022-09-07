@@ -158,16 +158,11 @@ a {
   align-items: center;
 }
 .chart-wrapper {
-  /* display: flex;
-  flex-direction: row; */
-  display: inline-block;
-  width: 90vw;
-  /* justify-content: space-evenly;
-  flex-flow: wrap; */
+  /* width: 90vw; */
+  column-gap: 5vw;
   column-count: 3;
-  /* column-rule: 1px dotted #ccc; */
-  /* align-items: center; */
-  /* row-gap: -10vh; */
+  /* display: flex; */
+  align-items: center;
 }
 .chart {
   break-inside: avoid;
@@ -498,4 +493,8 @@ select {
 .view_title {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin: 5vh 0;
+}
+#behind:hover {
+  cursor: default;
+  transform: scale(1);
 }
