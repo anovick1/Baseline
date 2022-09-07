@@ -1,5 +1,5 @@
 <template>
-  <div class="chart_border">
+  <div class="chart_border" @click="viewChart">
     <div class="chart_container">
       <div class="preview_title">
         <div class="left_title">
@@ -23,11 +23,30 @@
       </div>
     </div>
   </div>
+  <div v-if="view">
+    <ChartCardVue
+      :title="title"
+      :players="players"
+      :year="y_year"
+      :x="x"
+      :likes="likes"
+      :comments="comments"
+      :author="author"
+      :id="id"
+      :description="description"
+      @deleteChart="deleteChart"
+      :date="date"
+      :count="count"
+    />
+  </div>
 </template>
 
 <script>
+import ChartCardVue from '../components/ChartCard.vue'
+
 export default {
   name: 'PreviewChart',
+  components: { ChartCardVue },
   props: {
     title: String,
     players: Array,
@@ -46,11 +65,16 @@ export default {
       id: localStorage.id,
       name: localStorage.name,
       email: localStorage.email
-    }
+    },
+    view: false
   }),
   methods: {
     async deleteChart(id) {
       this.$emit('deleteChart', id)
+    },
+    viewChart() {
+      console.log('title')
+      this.view = true
     }
   }
 }

@@ -13,7 +13,6 @@
 
 <script>
 import Chart from 'chart.js/auto'
-// console.log(this.currentUser.id)
 export default {
   name: 'ChardCard',
   components: {},
@@ -46,7 +45,6 @@ export default {
     const labels = []
     const datasets = []
     let len = 0
-
     for (let i = 0; i < this.players.length; i++) {
       let stats = []
       /// STATS ARRAY
