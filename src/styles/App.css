@@ -451,6 +451,7 @@ select {
   width: 80vw;
   height: 80vh;
   transform: translate(-50%, -50%);
+  z-index: 1;
   overflow: auto;
   /* margin-top: -80vw;
   margin-left: -80vh; */
@@ -467,10 +468,13 @@ select {
   width: 65vw;
 }
 #exit {
+  position: fixed;
   height: 3vh;
-  margin: 1vh 0 -4vh 75vw;
-  z-index: 1;
+  top: 10vh;
+  right: 11vw;
+  z-index: 10;
   padding: 1vh;
+  /* background-color: white; */
 }
 
 .author_date {
