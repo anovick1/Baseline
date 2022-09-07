@@ -80,25 +80,18 @@
             class="search_player"
             v-for="(player, index) in filterPlayers"
             :key="index"
+            @click="togglePlayer(player)"
           >
             <div class="search_player_name">
               <img :src="player.img_url" />
               <p>{{ player.player }}</p>
             </div>
-            <div
-              class="search_action"
-              v-if="!pRender.includes(player)"
-              @click="addPlayer(player)"
-            >
+            <div class="search_action" v-if="!pRender.includes(player)">
               <img
                 src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
               />
             </div>
-            <div
-              class="search_action"
-              v-if="pRender.includes(player)"
-              @click="subPlayer(player)"
-            >
+            <div class="search_action" v-if="pRender.includes(player)">
               <img
                 src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
               />
@@ -175,36 +168,38 @@ export default {
       this.year = true
       this.x = 'pts_per_game'
     },
-    addPlayer: async function (player) {
-      this.pRender.push(player)
-      let p = await getPlayersById(player.player_id)
-      this.players.push(p)
-      this.makeChart()
-    },
-    subPlayer(player) {
-      let filterPlayers = []
-      for (let i = 0; i < this.players.length; i++) {
-        if (
-          this.players[i].player_number !== parseInt(player.player_id) &&
-          this.players[i].player_number !== parseInt(player.player_number)
-        ) {
-          filterPlayers.push(this.players[i])
+    togglePlayer: async function (player) {
+      if (!this.pRender.includes(player)) {
+        this.pRender.push(player)
+        let p = await getPlayersById(player.player_id)
+        this.players.push(p)
+        this.makeChart()
+      } else {
+        let filterPlayers = []
+        for (let i = 0; i < this.players.length; i++) {
+          if (
+            this.players[i].player_number !== parseInt(player.player_id) &&
+            this.players[i].player_number !== parseInt(player.player_number)
+          ) {
+            filterPlayers.push(this.players[i])
+          }
         }
-      }
-      this.players = filterPlayers
-      let filterPredner = []
-      for (let i = 0; i < this.players.length; i++) {
-        if (
-          this.players[i].player_number !== parseInt(player.player_id) &&
-          this.players[i].player_number !== parseInt(player.player_number)
-        ) {
-          filterPredner.push(this.players[i])
+        this.players = filterPlayers
+        let filterPredner = []
+        for (let i = 0; i < this.players.length; i++) {
+          if (
+            this.players[i].player_number !== parseInt(player.player_id) &&
+            this.players[i].player_number !== parseInt(player.player_number)
+          ) {
+            filterPredner.push(this.players[i])
+          }
         }
-      }
 
-      this.pRender = filterPredner
-      this.makeChart()
+        this.pRender = filterPredner
+        this.makeChart()
+      }
     },
+
     makeChart() {
       this.myChart.destroy()
       const ctx = document.getElementById('chart')

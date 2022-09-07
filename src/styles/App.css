@@ -232,11 +232,17 @@ a {
   cursor: pointer;
   border-radius: 15px;
 }
+
+.search_player:hover {
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
 .signout_nav:active,
 #nav-logo:active,
 .view_charts:active,
 .search_action img:active,
-.chart_action img:active {
+.chart_action img:active,
+.search_player:active {
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
 }
 .view_charts {
@@ -249,8 +255,15 @@ a {
   justify-content: space-between;
   border: solid 0.5px rgba(0, 0, 0, 0.069);
 }
+.search_player:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
 .search_player_name {
   display: flex;
+  align-items: center;
+}
+#selected_player {
+  background-color: black;
 }
 .search_results {
   overflow-y: scroll;
