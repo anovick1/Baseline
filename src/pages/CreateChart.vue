@@ -320,7 +320,19 @@ export default {
             },
             title: {
               display: true,
-              text: this.title
+              text: this.title,
+              font: {
+                size: 20
+              },
+              color: 'black'
+            },
+            subtitle: {
+              display: true,
+              text: this.x,
+              font: {
+                size: 14
+              },
+              color: 'black'
             }
           }
         },
