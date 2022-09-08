@@ -14,6 +14,15 @@
         >
           Edit Chart
         </div>
+        <input
+          @input="handleChange"
+          placeholder="Title"
+          :value="title"
+          name="title"
+          type="title"
+          v-if="edit"
+          id="title_input_edit"
+        />
         <div
           class="edit_chart_true"
           v-if="parseInt(author.id) === parseInt(currentUser.id) && edit"

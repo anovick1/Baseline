@@ -546,3 +546,13 @@ textarea {
   width: 10vw;
   justify-content: space-between;
 }
+
+#title_input_edit {
+  z-index: 10;
+  position: fixed;
+  left: 30vw;
+  top: 2vh;
+  font-size: 30px;
+  width: 25vw;
+  text-align: center;
+}
