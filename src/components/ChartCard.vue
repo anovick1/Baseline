@@ -62,7 +62,7 @@
           maxLength="255"
         ></textarea>
         <div class="view_title"><h2>Players</h2></div>
-        <div class="input_create" id="search">
+        <div class="input_create" id="search" v-if="edit">
           <div class="searchbar_delete">
             <input
               type="text"
@@ -95,12 +95,26 @@
                   <img :src="player.img_url" />
                   <p>{{ player.player }}</p>
                 </div>
-                <div class="search_action" v-if="!pRender.includes(player)">
+                <div
+                  class="search_action"
+                  v-if="
+                    !players.some(
+                      (p) => p.player_number === parseInt(player.player_id)
+                    )
+                  "
+                >
                   <img
                     src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
                   />
                 </div>
-                <div class="search_action" v-if="pRender.includes(player)">
+                <div
+                  class="search_action"
+                  v-if="
+                    players.some(
+                      (p) => p.player_number === parseInt(player.player_id)
+                    )
+                  "
+                >
                   <img
                     src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
                   />
@@ -112,15 +126,21 @@
         </div>
 
         <div class="preview_players">
-          <div
-            class="preview_player"
-            v-for="(c, index) in players"
-            :key="index"
-          >
-            <div>
-              <img id="preview_img" :src="c.img_url" />
+          <div v-for="(c, index) in players" :key="index">
+            <div class="chart_action_view">
+              <div class="chart_action" id="chart_action_view" v-if="edit">
+                <img
+                  @click="subPlayer(c)"
+                  src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+                />
+              </div>
+              <div class="preview_player">
+                <div>
+                  <img id="preview_img" :src="c.img_url" />
+                </div>
+                <p>{{ c.player }}</p>
+              </div>
             </div>
-            <p>{{ c.player }}</p>
           </div>
         </div>
         <div class="author_date">
@@ -392,8 +412,7 @@ export default {
 
     togglePlayer: async function (player) {
       let usePlayers = this.players
-      if (!this.pRender.includes(player)) {
-        this.pRender.push(player)
+      if (!this.usePlayers.includes(player)) {
         let p = await getPlayersById(player.player_id)
         usePlayers.push(p)
         this.handleChangePlayer(usePlayers)
@@ -449,6 +468,8 @@ export default {
       }
 
       this.pRender = filterPredner
+      this.handleChangePlayer(usePlayers)
+
       this.makeChart(true)
     }
   },
