@@ -10,7 +10,7 @@
         <div
           class="edit_chart"
           v-if="parseInt(author.id) === parseInt(currentUser.id) && !edit"
-          @click="toggleEdit(false)"
+          @click="toggleEdit()"
         >
           Edit Chart
         </div>
@@ -20,16 +20,27 @@
           :value="title"
           name="title"
           type="title"
-          v-if="edit"
           id="title_input_edit"
+          v-if="edit"
         />
+        <select
+          :value="x"
+          name="x"
+          @change="handleChange($event)"
+          placeholder="Stat"
+          v-if="edit"
+        >
+          <option v-for="(s, index) in allStats" :key="index">
+            {{ s }}
+          </option>
+        </select>
         <div
           class="edit_chart_true"
           v-if="parseInt(author.id) === parseInt(currentUser.id) && edit"
         >
           <img
             src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
-            @click="toggleEdit(false)"
+            @click="toggleEdit()"
           />
           <img
             @click="updateChart(parseInt(id))"
@@ -51,6 +62,54 @@
           maxLength="255"
         ></textarea>
         <div class="view_title"><h2>Players</h2></div>
+        <div class="input_create" id="search">
+          <div class="searchbar_delete">
+            <input
+              type="text"
+              v-model="search"
+              placeholder="Search Player by Name"
+              @input="handleChange"
+              name="p"
+            />
+            <img
+              id="search_delete"
+              @click="deleteSearch"
+              src="https://cdn-icons-png.flaticon.com/512/167/167055.png"
+            />
+          </div>
+          <div class="search_results" v-if="search.length > 2">
+            <transition-group
+              tag="div"
+              :css="false"
+              @before-enter="onBeforeEnter"
+              @enter="onEnter"
+              @leave="onLeave"
+            >
+              <div
+                class="search_player"
+                v-for="(player, index) in filterPlayers"
+                :key="index"
+                @click="togglePlayer(player)"
+              >
+                <div class="search_player_name">
+                  <img :src="player.img_url" />
+                  <p>{{ player.player }}</p>
+                </div>
+                <div class="search_action" v-if="!pRender.includes(player)">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
+                  />
+                </div>
+                <div class="search_action" v-if="pRender.includes(player)">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+                  />
+                </div>
+              </div>
+            </transition-group>
+          </div>
+          <div class="search_placeholder" v-if="search.length <= 2"></div>
+        </div>
 
         <div class="preview_players">
           <div
@@ -80,7 +139,11 @@
 
 <script>
 import Chart from 'chart.js/auto'
+import PlayerList from '../../data/players.json'
+const StatList = require('../../data/stats.json')
 import { updateChart } from '../Services/ChartServices'
+import { getPlayersById } from '../Services/PlayerServices.js'
+
 export default {
   name: 'ChardCard',
   components: {},
@@ -90,6 +153,7 @@ export default {
     year: Boolean,
     x: String,
     likes: Array,
+
     comments: Array,
     author: Object,
     count: String,
@@ -104,17 +168,20 @@ export default {
       email: localStorage.email,
       pfp: localStorage.pfp
     },
-    // nTitle: this.title,
-    // nPlayers: this.nPlayers,
-    // nYear: this.year,
-    // nX: this.x,
-    // nLikes: this.likes,
-    // nAuthor: this.author,
-    // nDescription: this.description,
-    // nDate:
-
-    edit: false
+    myChart: null,
+    allStats: StatList,
+    edit: false,
+    allPlayers: PlayerList,
+    search: '',
+    pRender: []
   }),
+  computed: {
+    filterPlayers() {
+      return this.allPlayers.filter((player) =>
+        player.player.toLowerCase().includes(this.search.toLowerCase())
+      )
+    }
+  },
   methods: {
     async deleteChart(id) {
       this.$emit('deleteChart', id)
@@ -123,22 +190,19 @@ export default {
       this.$emit('toggleChart')
     },
     toggleEdit() {
+      console.log('why')
+
       if (this.edit) {
         this.edit = false
-        this.makeChart()
       } else {
         this.edit = true
-        this.makeChart()
       }
     },
     makeChart(edit) {
-      let ctx
-      if (edit) {
-        console.log(this.count.toString() + '100')
-        ctx = document.getElementById(this.count.toString() + '100')
-      } else {
-        ctx = document.getElementById(this.count)
+      if (this.myChart !== null) {
+        this.myChart.destroy()
       }
+      const ctx = document.getElementById(this.count)
       const labels = []
       const datasets = []
       let len = 0
@@ -172,17 +236,29 @@ export default {
           len = stats.length
         }
         let colors = ['black', 'red', 'blue', 'green', 'orange']
-        let data = {
-          label: this.players[i].player,
-          data: stats.reverse(),
-          fill: false,
-          borderColor: colors[i],
-          pointBackgroundColor: colors[i],
-          tension: 0.1,
-          animations: {
-            y: {
-              duration: 2000,
-              delay: i * 400
+        let data
+        if (edit) {
+          data = {
+            label: this.players[i].player,
+            data: stats.reverse(),
+            fill: false,
+            borderColor: colors[i],
+            pointBackgroundColor: colors[i],
+            tension: 0.1
+          }
+        } else {
+          data = {
+            label: this.players[i].player,
+            data: stats.reverse(),
+            fill: false,
+            borderColor: colors[i],
+            pointBackgroundColor: colors[i],
+            tension: 0.1,
+            animations: {
+              y: {
+                duration: 2000,
+                delay: i * 400
+              }
             }
           }
         }
@@ -206,53 +282,88 @@ export default {
         }
       }
       // let delayed
-      const myChart = new Chart(ctx, {
-        type: 'line',
-        data: data,
-        options: {
-          radius: 4,
-          hoverRadius: 8,
-          responsive: true,
-          maintainAspectRatio: true,
-          animations: {
-            y: {
-              easing: 'easeInOutElastic',
-              from: (ctx) => {
-                if (ctx.type === 'data') {
-                  if (ctx.mode === 'default' && !ctx.dropped) {
-                    ctx.dropped = true
-                    return 0
+      if (!edit) {
+        this.myChart = new Chart(ctx, {
+          type: 'line',
+          data: data,
+          options: {
+            radius: 4,
+            hoverRadius: 8,
+            responsive: true,
+            maintainAspectRatio: true,
+            animations: {
+              y: {
+                easing: 'easeInOutElastic',
+                from: (ctx) => {
+                  if (ctx.type === 'data') {
+                    if (ctx.mode === 'default' && !ctx.dropped) {
+                      ctx.dropped = true
+                      return 0
+                    }
                   }
                 }
               }
+            },
+
+            plugins: {
+              legend: {
+                position: 'top'
+              },
+              title: {
+                display: true,
+                text: this.title,
+                font: {
+                  size: 30
+                },
+                color: 'black'
+              },
+              subtitle: {
+                display: true,
+                text: this.x,
+                font: {
+                  size: 20
+                },
+                color: 'black'
+              }
             }
           },
+          plugins: [plugin]
+        })
+      } else {
+        this.myChart = new Chart(ctx, {
+          type: 'line',
+          data: data,
+          options: {
+            radius: 4,
+            hoverRadius: 8,
+            responsive: true,
+            maintainAspectRatio: true,
 
-          plugins: {
-            legend: {
-              position: 'top'
-            },
-            title: {
-              display: true,
-              text: this.title,
-              font: {
-                size: 30
+            plugins: {
+              legend: {
+                position: 'top'
               },
-              color: 'black'
-            },
-            subtitle: {
-              display: true,
-              text: this.x,
-              font: {
-                size: 20
+              title: {
+                display: true,
+                text: this.title,
+                font: {
+                  size: 30
+                },
+                color: 'black'
               },
-              color: 'black'
+              subtitle: {
+                display: true,
+                text: this.x,
+                font: {
+                  size: 20
+                },
+                color: 'black'
+              }
             }
-          }
-        },
-        plugins: [plugin]
-      })
-      myChart
+          },
+          plugins: [plugin]
+        })
+      }
     },
     deleteSearch() {
       this.search = ''
@@ -267,20 +378,82 @@ export default {
         description: this.description
       }
       await updateChart(body, id)
-      // this.title = 'title'
-      // this.players = []
-      // this.x = 'pts_per_game'
-      // this.y_year = true
-      // this.description = ' '
-      this.makeChart()
+      this.makeChart(true)
+      this.edit = false
     },
-    handleChange(e) {
-      this.$emit('handleChange', e, parseInt(this.count))
-      this.makeChart()
+    async handleChange(e) {
+      await this.$emit('handleChange', e, parseInt(this.count))
+      this.makeChart(true)
+    },
+    async handleChangePlayer(players) {
+      await this.$emit('handleChangePlayer', players, parseInt(this.count))
+      this.makeChart(true)
+    },
+
+    togglePlayer: async function (player) {
+      let usePlayers = this.players
+      if (!this.pRender.includes(player)) {
+        this.pRender.push(player)
+        let p = await getPlayersById(player.player_id)
+        usePlayers.push(p)
+        this.handleChangePlayer(usePlayers)
+        this.makeChart(true)
+      } else {
+        let filterPlayers = []
+        for (let i = 0; i < this.players.length; i++) {
+          if (
+            this.players[i].player_number !== parseInt(player.player_id) &&
+            this.players[i].player_number !== parseInt(player.player_number)
+          ) {
+            filterPlayers.push(this.players[i])
+          }
+        }
+        usePlayers = filterPlayers
+        this.handleChangePlayer(usePlayers)
+
+        let filterPredner = []
+        for (let i = 0; i < this.players.length; i++) {
+          if (
+            this.players[i].player_number !== parseInt(player.player_id) &&
+            this.players[i].player_number !== parseInt(player.player_number)
+          ) {
+            filterPredner.push(this.players[i])
+          }
+        }
+
+        this.pRender = filterPredner
+        this.makeChart(true)
+      }
+    },
+    subPlayer(player) {
+      let usePlayers = this.players
+      let filterPlayers = []
+      for (let i = 0; i < this.players.length; i++) {
+        if (
+          this.players[i].player_number !== parseInt(player.player_id) &&
+          this.players[i].player_number !== parseInt(player.player_number)
+        ) {
+          filterPlayers.push(this.players[i])
+        }
+      }
+      usePlayers = filterPlayers
+      this.handleChangePlayer(usePlayers)
+      let filterPredner = []
+      for (let i = 0; i < this.players.length; i++) {
+        if (
+          this.players[i].player_number !== parseInt(player.player_id) &&
+          this.players[i].player_number !== parseInt(player.player_number)
+        ) {
+          filterPredner.push(this.players[i])
+        }
+      }
+
+      this.pRender = filterPredner
+      this.makeChart(true)
     }
   },
   mounted() {
-    this.makeChart()
+    this.makeChart(false)
   }
 }
 </script>

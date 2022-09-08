@@ -65,6 +65,7 @@
       :count="count"
       @toggleChart="toggleChart"
       @handleChange="handleChange"
+      @handleChangePlayer="handleChangePlayer"
     />
   </transition>
 </template>
@@ -107,6 +108,9 @@ export default {
     },
     handleChange(e, count) {
       this.$emit('handleChange', e, count)
+    },
+    handleChangePlayer(players, count) {
+      this.$emit('handleChangePlayer', players, count)
     },
     toggleChart() {
       this.$emit('disableClick')

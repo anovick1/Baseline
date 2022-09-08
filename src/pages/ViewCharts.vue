@@ -25,6 +25,7 @@
           :clickable="clickable"
           @disableClick="disableClick"
           @handleChange="handleChange"
+          @handleChangePlayer="handleChangePlayer"
         />
       </div>
     </transition-group>
@@ -85,6 +86,9 @@ export default {
       if (e.target.name === 'p' && e.target.value.length > 0) {
         // window.scrollTo(0, document.body.scrollHeight)
       }
+    },
+    async handleChangePlayer(players, count) {
+      this.charts[count]['players'] = players
     }
   }
 }
