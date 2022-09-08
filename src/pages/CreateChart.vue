@@ -168,6 +168,7 @@ export default {
       this.x = 'pts_per_game'
       this.y_year = true
       this.description = ' '
+      this.makeChart()
     },
     handleChange: async function (e) {
       this[e.target.name] = e.target.value
