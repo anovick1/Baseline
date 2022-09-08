@@ -14,6 +14,19 @@
         >
           Edit Chart
         </div>
+        <div
+          class="edit_chart_true"
+          v-if="parseInt(author.id) === parseInt(currentUser.id) && edit"
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+            @click="toggleEdit(false)"
+          />
+          <img
+            @click="updateChart(parseInt(id))"
+            src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
+          />
+        </div>
         <canvas :id="count" width="1vw" height="5vw"></canvas>
       </div>
       <div class="chart_info">
@@ -54,58 +67,11 @@
       ></div>
     </div>
   </div>
-  <!-- EDIT CHART VIEW
-  <div v-if="!edit">
-    <img
-      src="https://cdn-icons-png.flaticon.com/512/5038/5038256.png"
-      @click="toggleChart"
-      id="exit"
-    />
-    <div class="chart_border" id="full_chart_border">
-      <div class="chart_container" id="full_chart_container">
-        <div
-          class="edit_chart"
-          v-if="parseInt(author.id) === parseInt(currentUser.id)"
-          @click="toggleEdit(true)"
-        >
-          Edit Chart
-        </div>
-        <canvas :id="count + 100" width="1vw" height="5vw"></canvas>
-      </div>
-      <div class="chart_info">
-        <div class="view_title"><h2>Description</h2></div>
-        <p>{{ description }}</p>
-        <div class="view_title"><h2>Players</h2></div>
-
-        <div class="preview_players">
-          <div
-            class="preview_player"
-            v-for="(c, index) in players"
-            :key="index"
-          >
-            <div>
-              <img id="preview_img" :src="c.img_url" />
-            </div>
-            <p>{{ c.player }}</p>
-          </div>
-        </div>
-        <div class="author_date">
-          <p>{{ author.name }}</p>
-          <p>{{ date }}</p>
-        </div>
-      </div>
-      <div
-        class="delete_chart"
-        v-if="parseInt(author.id) === parseInt(currentUser.id)"
-        @click="deleteChart(id)"
-      ></div>
-    </div>
-    <p>cocks</p>
-  </div> -->
 </template>
 
 <script>
 import Chart from 'chart.js/auto'
+import { updateChart } from '../Services/ChartServices'
 export default {
   name: 'ChardCard',
   components: {},
@@ -129,6 +95,15 @@ export default {
       email: localStorage.email,
       pfp: localStorage.pfp
     },
+    // nTitle: this.title,
+    // nPlayers: this.nPlayers,
+    // nYear: this.year,
+    // nX: this.x,
+    // nLikes: this.likes,
+    // nAuthor: this.author,
+    // nDescription: this.description,
+    // nDate:
+
     edit: false
   }),
   methods: {
@@ -269,6 +244,30 @@ export default {
         plugins: [plugin]
       })
       myChart
+    },
+    deleteSearch() {
+      this.search = ''
+    },
+    updateChart: async function (id) {
+      let body = {
+        title: this.title,
+        author: this.author.id,
+        player: this.players,
+        y_year: true,
+        x: this.x,
+        description: this.description
+      }
+      await updateChart(body, id)
+      // this.title = 'title'
+      // this.players = []
+      // this.x = 'pts_per_game'
+      // this.y_year = true
+      // this.description = ' '
+      this.makeChart()
+    },
+    handleChange(e) {
+      this.$emit('handleChange', e, parseInt(this.count))
+      this.makeChart()
     }
   },
   mounted() {

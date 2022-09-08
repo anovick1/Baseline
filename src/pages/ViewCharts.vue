@@ -24,6 +24,7 @@
           :date="c.date"
           :clickable="clickable"
           @disableClick="disableClick"
+          @handleChange="handleChange"
         />
       </div>
     </transition-group>
@@ -78,6 +79,12 @@ export default {
         this.charts[i].date = arr.join('/')
       }
       this.searched = true
+    },
+    handleChange: async function (e, count) {
+      this.charts[count][e.target.name] = e.target.value
+      if (e.target.name === 'p' && e.target.value.length > 0) {
+        // window.scrollTo(0, document.body.scrollHeight)
+      }
     }
   }
 }

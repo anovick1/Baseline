@@ -64,6 +64,7 @@
       :date="date"
       :count="count"
       @toggleChart="toggleChart"
+      @handleChange="handleChange"
     />
   </transition>
 </template>
@@ -103,6 +104,9 @@ export default {
     },
     disableClick() {
       this.$emit('disableClick')
+    },
+    handleChange(e, count) {
+      this.$emit('handleChange', e, count)
     },
     toggleChart() {
       this.$emit('disableClick')

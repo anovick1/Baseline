@@ -45,3 +45,20 @@ export const createChart = async (body) => {
     throw error
   }
 }
+export const updateChart = async (body, id) => {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    const chart = await Client.put('/charts/' + id, {
+      title: body.title,
+      author: body.author,
+      player: body.player,
+      y_year: body.y_year,
+      x: body.x,
+      description: body.description
+    })
+    console.log(chart.data)
+    return chart.data
+  } catch (error) {
+    throw error
+  }
+}
