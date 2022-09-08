@@ -88,7 +88,8 @@ export default {
       }
     },
     async handleChangePlayer(players, count) {
-      this.charts[count]['players'] = players
+      console.log(players)
+      this.charts[count]['player'] = players
     }
   }
 }

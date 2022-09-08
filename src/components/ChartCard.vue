@@ -210,8 +210,6 @@ export default {
       this.$emit('toggleChart')
     },
     toggleEdit() {
-      console.log('why')
-
       if (this.edit) {
         this.edit = false
       } else {
@@ -406,70 +404,45 @@ export default {
       this.makeChart(true)
     },
     async handleChangePlayer(players) {
+      console.log(players)
       await this.$emit('handleChangePlayer', players, parseInt(this.count))
       this.makeChart(true)
     },
 
     togglePlayer: async function (player) {
       let usePlayers = this.players
-      if (!this.usePlayers.includes(player)) {
+      if (
+        !usePlayers.some((p) => p.player_number === parseInt(player.player_id))
+      ) {
         let p = await getPlayersById(player.player_id)
         usePlayers.push(p)
         this.handleChangePlayer(usePlayers)
         this.makeChart(true)
       } else {
+        console.log('test')
         let filterPlayers = []
-        for (let i = 0; i < this.players.length; i++) {
-          if (
-            this.players[i].player_number !== parseInt(player.player_id) &&
-            this.players[i].player_number !== parseInt(player.player_number)
-          ) {
-            filterPlayers.push(this.players[i])
+        for (let i = 0; i < usePlayers.length; i++) {
+          if (usePlayers[i].player_number !== parseInt(player.player_id)) {
+            filterPlayers.push(usePlayers[i])
           }
         }
         usePlayers = filterPlayers
-        this.handleChangePlayer(usePlayers)
-
-        let filterPredner = []
-        for (let i = 0; i < this.players.length; i++) {
-          if (
-            this.players[i].player_number !== parseInt(player.player_id) &&
-            this.players[i].player_number !== parseInt(player.player_number)
-          ) {
-            filterPredner.push(this.players[i])
-          }
-        }
-
-        this.pRender = filterPredner
+        await this.handleChangePlayer(usePlayers)
         this.makeChart(true)
       }
     },
-    subPlayer(player) {
+    async subPlayer(player) {
       let usePlayers = this.players
       let filterPlayers = []
-      for (let i = 0; i < this.players.length; i++) {
-        if (
-          this.players[i].player_number !== parseInt(player.player_id) &&
-          this.players[i].player_number !== parseInt(player.player_number)
-        ) {
-          filterPlayers.push(this.players[i])
+      for (let i = 0; i < usePlayers.length; i++) {
+        if (usePlayers[i].player_number !== parseInt(player.player_number)) {
+          console.log(usePlayers[i])
+          console.log(player)
+          filterPlayers.push(usePlayers[i])
         }
       }
       usePlayers = filterPlayers
-      this.handleChangePlayer(usePlayers)
-      let filterPredner = []
-      for (let i = 0; i < this.players.length; i++) {
-        if (
-          this.players[i].player_number !== parseInt(player.player_id) &&
-          this.players[i].player_number !== parseInt(player.player_number)
-        ) {
-          filterPredner.push(this.players[i])
-        }
-      }
-
-      this.pRender = filterPredner
-      this.handleChangePlayer(usePlayers)
-
+      await this.handleChangePlayer(usePlayers)
       this.makeChart(true)
     }
   },
