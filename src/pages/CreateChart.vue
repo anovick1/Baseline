@@ -105,7 +105,6 @@ import PlayerList from '../../data/players.json'
 const StatList = require('../../data/stats.json')
 import { getPlayersById } from '../Services/PlayerServices.js'
 import { createChart } from '../Services/ChartServices.js'
-import gsap from 'gsap'
 
 export default {
   name: 'CreateChart',
@@ -137,26 +136,6 @@ export default {
     }
   },
   methods: {
-    onBeforeEnter(el) {
-      el.style.opacity = 0
-      el.style.height = 0
-    },
-    onEnter(el, done) {
-      gsap.to(el, {
-        opacity: 1,
-        height: '1.6em',
-        delay: el.dataset.index * 0.15,
-        onComplete: done
-      })
-    },
-    onLeave(el, done) {
-      gsap.to(el, {
-        opacity: 0,
-        height: 0,
-        delay: el.dataset.index * 0.15,
-        onComplete: done
-      })
-    },
     deleteSearch() {
       this.search = ''
     },
@@ -179,7 +158,9 @@ export default {
       if (e.target.name === 'p' && e.target.value.length > 0) {
         // window.scrollTo(0, document.body.scrollHeight)
       }
-      this.makeChart()
+      if (e.target.name !== 'p') {
+        this.makeChart()
+      }
     },
     handleSubmit(e) {
       e.preventDefault()
@@ -285,7 +266,13 @@ export default {
           data: stats.reverse(),
           fill: false,
           borderColor: colors[i],
-          tension: 0
+          tension: 0.1,
+          animations: {
+            y: {
+              duration: 2000,
+              delay: i * 100
+            }
+          }
         }
         datasets.push(data)
       }
@@ -312,16 +299,19 @@ export default {
         options: {
           responsive: true,
           maintainAspectRatio: true,
-          // animation: {
-          //   x: {
-          //     duration: 5000,
-          //     from: 0
-          //   },
-          //   y: {
-          //     duration: 3000,
-          //     from: 500
-          //   }
-          // },
+          animations: {
+            y: {
+              easing: 'easeInOutElastic',
+              from: (ctx) => {
+                if (ctx.type === 'data') {
+                  if (ctx.mode === 'default' && !ctx.dropped) {
+                    ctx.dropped = true
+                    return 0
+                  }
+                }
+              }
+            }
+          },
 
           plugins: {
             legend: {
