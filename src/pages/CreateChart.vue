@@ -312,6 +312,16 @@ export default {
         options: {
           responsive: true,
           maintainAspectRatio: true,
+          // animation: {
+          //   x: {
+          //     duration: 5000,
+          //     from: 0
+          //   },
+          //   y: {
+          //     duration: 3000,
+          //     from: 500
+          //   }
+          // },
 
           plugins: {
             legend: {

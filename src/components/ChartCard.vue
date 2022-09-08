@@ -116,7 +116,14 @@ export default {
         data: stats.reverse(),
         fill: false,
         borderColor: colors[i],
-        tension: 0
+        pointBackgroundColor: colors[i],
+        tension: 0.1,
+        animations: {
+          y: {
+            duration: 2000,
+            delay: i * 400
+          }
+        }
       }
       datasets.push(data)
     }
@@ -137,12 +144,28 @@ export default {
         ctx.restore()
       }
     }
+    // let delayed
     const myChart = new Chart(ctx, {
       type: 'line',
       data: data,
       options: {
+        radius: 4,
+        hoverRadius: 8,
         responsive: true,
         maintainAspectRatio: true,
+        animations: {
+          y: {
+            easing: 'easeInOutElastic',
+            from: (ctx) => {
+              if (ctx.type === 'data') {
+                if (ctx.mode === 'default' && !ctx.dropped) {
+                  ctx.dropped = true
+                  return 0
+                }
+              }
+            }
+          }
+        },
 
         plugins: {
           legend: {
