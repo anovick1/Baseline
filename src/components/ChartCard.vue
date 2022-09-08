@@ -8,6 +8,12 @@
     />
     <div class="chart_border" id="full_chart_border">
       <div class="chart_container" id="full_chart_container">
+        <div
+          class="edit_chart"
+          v-if="parseInt(author.id) === parseInt(currentUser.id)"
+        >
+          Edit Chart
+        </div>
         <canvas :id="count" width="1vw" height="5vw"></canvas>
       </div>
       <div class="chart_info">

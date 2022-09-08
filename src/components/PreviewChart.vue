@@ -99,6 +99,7 @@ export default {
   methods: {
     async deleteChart(id) {
       this.$emit('deleteChart', id)
+      this.$emit('disableClick')
     },
     disableClick() {
       this.$emit('disableClick')

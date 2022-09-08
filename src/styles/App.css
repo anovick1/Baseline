@@ -194,7 +194,8 @@ a {
   border-radius: 15px;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
 }
-.google-sign-btn:hover {
+.google-sign-btn:hover,
+.edit_chart:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
@@ -217,7 +218,8 @@ a {
   cursor: pointer;
 }
 #google-nav:active,
-.post_chart:active {
+.post_chart:active,
+.edit_chart:active {
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
   transform: scale(1);
 }
@@ -518,4 +520,14 @@ textarea {
   margin: -2vh 1.5vh 0 0;
   color: rgba(0, 0, 0, 0.5);
   font-size: 12px;
+}
+.edit_chart {
+  z-index: 10;
+  position: fixed;
+  left: 2vw;
+  top: 3vh;
+  background-color: white;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  padding: 1vh;
+  border-radius: 15px;
 }
