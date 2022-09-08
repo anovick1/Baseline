@@ -37,7 +37,8 @@ export const createChart = async (body) => {
       author: body.author,
       player: body.player,
       y_year: body.y_year,
-      x: body.x
+      x: body.x,
+      description: body.description
     })
     return chart.data
   } catch (error) {

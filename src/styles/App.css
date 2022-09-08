@@ -277,7 +277,8 @@ a {
 }
 .search_results {
   overflow-y: scroll;
-  max-height: 20vh;
+  height: 20vh;
+  width: 60vh;
 }
 .search_placeholder {
   min-height: 20vh;
@@ -377,8 +378,9 @@ select {
 .input_create {
   display: flex;
   margin: 2vh 0;
-  width: 75vh;
-  justify-content: space-evenly;
+  width: 60vh;
+  justify-content: space-between;
+  align-items: center;
 }
 #search {
   flex-direction: column;
@@ -399,7 +401,7 @@ select {
   cursor: pointer;
 }
 .searchbar_delete {
-  width: 75vh;
+  width: 60vh;
   display: flex;
 }
 
@@ -497,4 +499,23 @@ select {
 #behind:hover {
   cursor: default;
   transform: scale(1);
+}
+.createchart_page {
+  display: flex;
+  justify-content: space-between;
+  width: 90vw;
+}
+textarea {
+  width: 60vh;
+  height: 18vh;
+}
+.description {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.description p {
+  margin: -2vh 1.5vh 0 0;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 12px;
 }

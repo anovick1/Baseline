@@ -1,101 +1,114 @@
 <template>
   <div class="home_section">
     <h1>Create Chart</h1>
-    <div class="create_chart">
-      <div class="input_create">
-        <input
-          @input="handleChange"
-          placeholder="Title"
-          :value="title"
-          name="title"
-          type="title"
-          id="title_input"
-        />
+    <div class="createchart_page">
+      <div class="create_chart">
+        <div class="input_create">
+          <input
+            @input="handleChange"
+            placeholder="Title"
+            :value="title"
+            name="title"
+            type="title"
+            id="title_input"
+          />
 
-        <select
-          v-model="x"
-          :value="x"
-          name="x"
-          @change="handleChange($event)"
-          placeholder="Stat"
-        >
-          <option v-for="(s, index) in allStats" :key="index">
-            {{ s }}
-          </option>
-        </select>
-      </div>
-    </div>
-    <div class="chart_border" id="chart_border_create">
-      <div class="chart_container" id="chart_container_create">
-        <canvas id="chart" width="1vw" height="5vw"></canvas>
-      </div>
-      <div class="player_img" v-if="players.length > 0">
-        <div
-          class="chart_player_img"
-          v-for="(p, index) in players"
-          :key="index"
-        >
-          <div class="chart_action">
+          <select
+            v-model="x"
+            :value="x"
+            name="x"
+            @change="handleChange($event)"
+            placeholder="Stat"
+          >
+            <option v-for="(s, index) in allStats" :key="index">
+              {{ s }}
+            </option>
+          </select>
+        </div>
+        <div class="description">
+          <textarea
+            type="text"
+            :value="description"
+            @input="handleChange"
+            name="description"
+            placeholder="Write description here"
+            maxLength="255"
+          ></textarea>
+          <p id="desc_len">{{ description.length }}/255</p>
+        </div>
+        <div class="input_create" id="search">
+          <div class="searchbar_delete">
+            <input
+              type="text"
+              v-model="search"
+              placeholder="Search Player by Name"
+              @input="handleChange"
+              name="p"
+            />
             <img
-              @click="subPlayer(p)"
-              src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+              id="search_delete"
+              @click="deleteSearch"
+              src="https://cdn-icons-png.flaticon.com/512/167/167055.png"
             />
           </div>
-          <img :src="p.img_url" />
-        </div>
-      </div>
-    </div>
-    <div class="create_chart">
-      <div class="post_chart" @click="postChart">Publish Chart</div>
-      <div class="input_create" id="search">
-        <div class="searchbar_delete">
-          <input
-            type="text"
-            v-model="search"
-            placeholder="Search Player by Name"
-            @input="handleChange"
-            name="p"
-          />
-          <img
-            id="search_delete"
-            @click="deleteSearch"
-            src="https://cdn-icons-png.flaticon.com/512/167/167055.png"
-          />
-        </div>
-        <div class="search_results" v-if="search.length > 2">
-          <transition-group
-            tag="div"
-            :css="false"
-            @before-enter="onBeforeEnter"
-            @enter="onEnter"
-            @leave="onLeave"
-          >
-            <div
-              class="search_player"
-              v-for="(player, index) in filterPlayers"
-              :key="index"
-              @click="togglePlayer(player)"
+          <div class="search_results" v-if="search.length > 2">
+            <transition-group
+              tag="div"
+              :css="false"
+              @before-enter="onBeforeEnter"
+              @enter="onEnter"
+              @leave="onLeave"
             >
-              <div class="search_player_name">
-                <img :src="player.img_url" />
-                <p>{{ player.player }}</p>
+              <div
+                class="search_player"
+                v-for="(player, index) in filterPlayers"
+                :key="index"
+                @click="togglePlayer(player)"
+              >
+                <div class="search_player_name">
+                  <img :src="player.img_url" />
+                  <p>{{ player.player }}</p>
+                </div>
+                <div class="search_action" v-if="!pRender.includes(player)">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
+                  />
+                </div>
+                <div class="search_action" v-if="pRender.includes(player)">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+                  />
+                </div>
               </div>
-              <div class="search_action" v-if="!pRender.includes(player)">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
-                />
-              </div>
-              <div class="search_action" v-if="pRender.includes(player)">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
-                />
-              </div>
-            </div>
-          </transition-group>
+            </transition-group>
+          </div>
+          <div class="search_placeholder" v-if="search.length <= 2"></div>
         </div>
-        <div class="search_placeholder" v-if="search.length <= 2"></div>
+      </div>
+
+      <!-- actual chart -->
+      <div class="chart_border" id="chart_border_create">
+        <div class="chart_container" id="chart_container_create">
+          <canvas id="chart" width="1vw" height="5vw"></canvas>
+        </div>
+        <div class="player_img" v-if="players.length > 0">
+          <div
+            class="chart_player_img"
+            v-for="(p, index) in players"
+            :key="index"
+          >
+            <div class="chart_action">
+              <img
+                @click="subPlayer(p)"
+                src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+              />
+            </div>
+            <img :src="p.img_url" />
+          </div>
+        </div>
       </div>
     </div>
+    <div class="post_chart" @click="postChart">Publish Chart</div>
   </div>
 </template>
 
@@ -126,7 +139,8 @@ export default {
     loaded: false,
     myChart: new Chart(),
     search: '',
-    playerAdded: null
+    playerAdded: null,
+    description: ''
   }),
   computed: {
     filterPlayers() {
@@ -145,13 +159,15 @@ export default {
         author: this.author.id,
         player: this.players,
         y_year: this.y_year,
-        x: this.x
+        x: this.x,
+        description: this.x
       }
       await createChart(body)
       this.title = 'title'
       this.players = []
       this.x = 'pts_per_game'
       this.y_year = true
+      this.description = ' '
     },
     handleChange: async function (e) {
       this[e.target.name] = e.target.value
