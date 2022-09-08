@@ -120,7 +120,7 @@ export default {
     },
     allPlayers: PlayerList,
     allStats: StatList,
-    x: 'x3p_per_game',
+    x: 'pts_per_game',
     y_year: true,
     count: 0,
     loaded: false,
@@ -150,7 +150,7 @@ export default {
       await createChart(body)
       this.title = 'title'
       this.players = []
-      this.x = 'x3p_per_game'
+      this.x = 'pts_per_game'
       this.y_year = true
     },
     handleChange: async function (e) {
@@ -158,9 +158,8 @@ export default {
       if (e.target.name === 'p' && e.target.value.length > 0) {
         // window.scrollTo(0, document.body.scrollHeight)
       }
-      if (e.target.name !== 'p') {
-        this.makeChart()
-      }
+
+      this.makeChart()
     },
     handleSubmit(e) {
       e.preventDefault()
@@ -168,6 +167,7 @@ export default {
       this.players = []
       this.year = true
       this.x = 'pts_per_game'
+      this.makeChart()
     },
     togglePlayer: async function (player) {
       if (!this.pRender.includes(player)) {
@@ -225,7 +225,8 @@ export default {
       this.makeChart()
     },
 
-    makeChart() {
+    async makeChart() {
+      this.loaded = false
       this.myChart.destroy()
       const ctx = document.getElementById('chart')
       const labels = []
@@ -266,13 +267,13 @@ export default {
           data: stats.reverse(),
           fill: false,
           borderColor: colors[i],
-          tension: 0.1,
-          animations: {
-            y: {
-              duration: 2000,
-              delay: i * 100
-            }
-          }
+          tension: 0.1
+          // animations: {
+          //   y: {
+          //     duration: 2000,
+          //     delay: i * 500
+          //   }
+          // }
         }
         datasets.push(data)
       }
