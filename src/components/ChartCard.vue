@@ -178,6 +178,14 @@ export default {
               size: 30
             },
             color: 'black'
+          },
+          subtitle: {
+            display: true,
+            text: this.x,
+            font: {
+              size: 20
+            },
+            color: 'black'
           }
         }
       },
