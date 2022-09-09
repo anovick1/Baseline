@@ -48,7 +48,7 @@
             @change="handleChange($event)"
             placeholder="Stat"
           >
-            <option v-for="(s, index) in allStats" :key="index">
+            <option v-for="(s, index) in updateStats" :key="index">
               {{ s }}
             </option>
           </select>
@@ -138,7 +138,7 @@ export default {
     },
     allPlayers: PlayerList,
     allStats: StatList,
-    x: 'Points_per_game',
+    x: 'Points Per Game',
     y_year: true,
     count: 0,
     loaded: false,
@@ -153,6 +153,22 @@ export default {
       return this.allPlayers.filter((player) =>
         player.player.toLowerCase().includes(this.search.toLowerCase())
       )
+    },
+    subTitle() {
+      let ans = this.x.replaceAll('_', ' ')
+      ans = ans.replaceAll('per game', 'Per Game')
+      ans = ans.replaceAll('percent', '%')
+      return ans
+    },
+    updateStats() {
+      let ans = []
+      for (let i = 0; i < this.allStats.length; i++) {
+        let word = this.allStats[i].replaceAll('_', ' ')
+        word = word.replaceAll('per game', 'Per Game')
+        word = word.replaceAll('percent', '%')
+        ans.push(word)
+      }
+      return ans
     }
   },
   methods: {
@@ -177,11 +193,14 @@ export default {
       this.makeChart()
     },
     handleChange: async function (e) {
-      this[e.target.name] = e.target.value
-      if (e.target.name === 'p' && e.target.value.length > 0) {
-        // window.scrollTo(0, document.body.scrollHeight)
+      if (e.target.name === 'x') {
+        let ans = e.target.value.replaceAll(' ', '_')
+        ans = ans.replaceAll('Per_Game', 'per_game')
+        ans = ans.replaceAll('%', 'percent')
+        this[e.target.name] = ans
+      } else {
+        this[e.target.name] = e.target.value
       }
-
       this.makeChart()
     },
     handleSubmit(e) {
@@ -351,7 +370,7 @@ export default {
             },
             subtitle: {
               display: true,
-              text: this.x,
+              text: this.subTitle,
               font: {
                 size: 14
               },

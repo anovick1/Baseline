@@ -98,7 +98,6 @@ export default {
         let ans = e.target.value.replaceAll(' ', '_')
         ans = ans.replaceAll('Per_Game', 'per_game')
         ans = ans.replaceAll('%', 'percent')
-        console.log(ans)
         this.charts[count][e.target.name] = ans
       } else {
         this.charts[count][e.target.name] = e.target.value
