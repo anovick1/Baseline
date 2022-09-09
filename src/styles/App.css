@@ -582,3 +582,13 @@ textarea {
   width: 65vw;
   align-items: center;
 }
+.edit_chart_true_bottom img {
+  height: 4vh;
+}
+.edit_chart_true_bottom {
+  display: flex;
+  flex-direction: row;
+  width: 35vw;
+  justify-content: space-between;
+  margin: 2vh 0;
+}

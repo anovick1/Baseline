@@ -30,15 +30,20 @@
         </select>
       </div>
       <div class="chart_container" id="full_chart_container">
-        <div
-          class="edit_chart"
-          v-if="
-            parseInt(author.id) === parseInt(currentUser.id) && !edit && loaded
-          "
-          @click="toggleEdit()"
-        >
-          Edit Chart
-        </div>
+        <transition name="edit">
+          <div
+            v-if="
+              parseInt(author.id) === parseInt(currentUser.id) &&
+              !edit &&
+              loaded
+            "
+            appear
+            class="edit_chart"
+            @click="toggleEdit()"
+          >
+            Edit Chart
+          </div>
+        </transition>
 
         <div
           class="edit_chart_true"
@@ -158,6 +163,19 @@
           <p>{{ author.name }}</p>
           <p>{{ date }}</p>
         </div>
+      </div>
+      <div
+        class="edit_chart_true_bottom"
+        v-if="parseInt(author.id) === parseInt(currentUser.id) && edit"
+      >
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+          @click="toggleEdit()"
+        />
+        <img
+          @click="updateChart(parseInt(id))"
+          src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
+        />
       </div>
       <div
         class="delete_chart"
@@ -460,4 +478,16 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.edit-enter-from {
+  opacity: 0;
+  transform: scale(0.6);
+}
+.edit-enter-to {
+  opacity: 1;
+  transform: scale(1);
+}
+.edit-enter-active {
+  transition: all 0.4s ease;
+}
+</style>
