@@ -27,7 +27,7 @@
           v-if="edit"
           id="stat_edit"
         >
-          <option v-for="(s, index) in allStats" :key="index">
+          <option v-for="(s, index) in updateStats" :key="index">
             {{ s }}
           </option>
         </select>
@@ -239,6 +239,22 @@ export default {
       return this.allPlayers.filter((player) =>
         player.player.toLowerCase().includes(this.search.toLowerCase())
       )
+    },
+    subTitle() {
+      let ans = this.x.replaceAll('_', ' ')
+      ans = ans.replaceAll('per game', 'Per Game')
+      ans = ans.replaceAll('percent', '%')
+      return ans
+    },
+    updateStats() {
+      let ans = []
+      for (let i = 0; i < this.allStats.length; i++) {
+        let word = this.allStats[i].replaceAll('_', ' ')
+        word = word.replaceAll('per game', 'Per Game')
+        word = word.replaceAll('percent', '%')
+        ans.push(word)
+      }
+      return ans
     }
   },
   methods: {
@@ -386,7 +402,7 @@ export default {
               },
               subtitle: {
                 display: true,
-                text: this.x,
+                text: this.subTitle,
                 font: {
                   size: 20
                 },

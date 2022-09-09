@@ -4,7 +4,7 @@
       <div class="preview_title">
         <div class="left_title">
           <h1>{{ title }}</h1>
-          <p>{{ x }}</p>
+          <p>{{ subTitle }}</p>
         </div>
         <div class="right_title">
           <p>{{ name }}</p>
@@ -105,6 +105,14 @@ export default {
     show: true,
     name: ''
   }),
+  computed: {
+    subTitle() {
+      let ans = this.x.replaceAll('_', ' ')
+      ans = ans.replaceAll('per game', 'Per Game')
+      ans = ans.replaceAll('percent', '%')
+      return ans
+    }
+  },
   methods: {
     async deleteChart(id) {
       this.$emit('deleteChart', id)
