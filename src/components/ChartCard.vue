@@ -326,17 +326,18 @@ export default {
             animations: {
               y: {
                 easing: 'easeInOutElastic',
+                onComplete: function (context) {
+                  console.log(context.initial)
+                },
                 from: (ctx) => {
                   if (ctx.type === 'data') {
                     if (ctx.mode === 'default' && !ctx.dropped) {
                       ctx.dropped = true
+                      console.log('ding dong')
                       return 0
                     }
                   }
                 }
-              },
-              onComplete: function () {
-                alert('onAnimationComplete')
               }
             },
 
@@ -364,6 +365,9 @@ export default {
           },
           plugins: [plugin]
         })
+        setTimeout(() => {
+          this.loaded = true
+        }, 3000)
       } else {
         this.myChart = await new Chart(ctx, {
           type: 'line',
@@ -382,8 +386,8 @@ export default {
           },
           plugins: [plugin]
         })
+        this.loaded = true
       }
-      this.loaded = true
     },
     deleteSearch() {
       this.search = ''
