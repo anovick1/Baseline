@@ -2,6 +2,34 @@
   <div class="home_section">
     <h1>Create Chart</h1>
     <div class="createchart_page">
+      <!-- actual chart -->
+      <div class="chart_border" id="chart_border_create">
+        <div class="chart_container" id="chart_container_create">
+          <canvas id="chart" width="1vw" height="5vw"></canvas>
+        </div>
+        <transition-group
+          name="prev"
+          tag="div"
+          class="player_img"
+          v-if="mounted"
+        >
+          <div
+            class="chart_player_img"
+            v-for="p in players"
+            :key="p.player_number"
+          >
+            <div class="chart_action">
+              <img
+                @click="subPlayer(p)"
+                src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+              />
+            </div>
+            <img :src="p.img_url" />
+          </div>
+        </transition-group>
+      </div>
+
+      <!-- Create chart -->
       <div class="create_chart">
         <div class="input_create">
           <input
@@ -85,30 +113,6 @@
           <div class="search_placeholder" v-if="search.length <= 2"></div>
         </div>
       </div>
-
-      <!-- actual chart -->
-      <div class="chart_border" id="chart_border_create">
-        <div class="chart_container" id="chart_container_create">
-          <canvas id="chart" width="1vw" height="5vw"></canvas>
-        </div>
-        <div class="player_img" v-if="players.length > 0">
-          <transition-group name="play">
-            <div
-              class="chart_player_img"
-              v-for="(p, index) in players"
-              :key="index"
-            >
-              <div class="chart_action">
-                <img
-                  @click="subPlayer(p)"
-                  src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
-                />
-              </div>
-              <img :src="p.img_url" />
-            </div>
-          </transition-group>
-        </div>
-      </div>
     </div>
     <div class="post_chart" @click="postChart">Publish Chart</div>
   </div>
@@ -142,7 +146,8 @@ export default {
     myChart: new Chart(),
     search: '',
     playerAdded: null,
-    description: ''
+    description: '',
+    mounted: false
   }),
   computed: {
     filterPlayers() {
@@ -319,19 +324,19 @@ export default {
         options: {
           responsive: true,
           maintainAspectRatio: true,
-          animations: {
-            y: {
-              easing: 'easeInOutElastic',
-              from: (ctx) => {
-                if (ctx.type === 'data') {
-                  if (ctx.mode === 'default' && !ctx.dropped) {
-                    ctx.dropped = true
-                    return 0
-                  }
-                }
-              }
-            }
-          },
+          // animations: {
+          //   y: {
+          //     easing: 'easeInOutElastic',
+          //     from: (ctx) => {
+          //       if (ctx.type === 'data') {
+          //         if (ctx.mode === 'default' && !ctx.dropped) {
+          //           ctx.dropped = true
+          //           return 0
+          //         }
+          //       }
+          //     }
+          //   }
+          // },
 
           plugins: {
             legend: {
@@ -363,26 +368,25 @@ export default {
   },
   mounted() {
     this.makeChart()
+    this.mounted = true
   }
 }
 </script>
 
 <style>
-/* .play-enter-from,
-.play-leave-to {
+.prev-enter-from,
+.prev-leave-to {
   opacity: 0;
   transform: scale(0.5);
-  transform: translateY(-5vh);
+  transform: translateX(25vw);
 }
 
-.play-enter-to,
-.play-leave-from {
-  opacity: 1;
-  transform: scale(1);
+.prev-move,
+.prev-enter-active,
+.prev-leave-active {
+  transition: all 1s ease;
 }
-
-.play-enter-active,
-.play-leave-active {
-  transition: all 0.4s ease;
-} */
+.prev-leave-active {
+  position: absolute;
+}
 </style>
