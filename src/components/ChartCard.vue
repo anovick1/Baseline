@@ -142,26 +142,29 @@
           <div class="search_placeholder" v-if="search.length <= 2"></div>
         </div>
 
-        <div class="preview_players">
-          <div v-for="(c, index) in players" :key="index">
-            <transition name="edit">
-              <div class="chart_action_view">
-                <div class="chart_action" id="chart_action_view" v-if="edit">
-                  <img
-                    @click="subPlayer(c)"
-                    src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
-                  />
-                </div>
-                <div class="preview_player">
-                  <div>
-                    <img id="preview_img" :src="c.img_url" />
-                  </div>
-                  <p>{{ c.player }}</p>
-                </div>
+        <transition-group
+          name="play"
+          tag="div"
+          class="preview_players"
+          v-if="mounted"
+        >
+          <div v-for="c in players" :key="c.player_number">
+            <div class="chart_action_view">
+              <div class="chart_action" id="chart_action_view" v-if="edit">
+                <img
+                  @click="subPlayer(c)"
+                  src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+                />
               </div>
-            </transition>
+              <div class="preview_player">
+                <div>
+                  <img id="preview_img" :src="c.img_url" />
+                </div>
+                <p>{{ c.player }}</p>
+              </div>
+            </div>
           </div>
-        </div>
+        </transition-group>
         <div class="author_date">
           <p>{{ author.name }}</p>
           <p>{{ date }}</p>
@@ -225,7 +228,8 @@ export default {
     edit: false,
     allPlayers: PlayerList,
     search: '',
-    loaded: false
+    loaded: false,
+    mounted: false
   }),
   computed: {
     filterPlayers() {
@@ -471,34 +475,42 @@ export default {
   },
   mounted() {
     this.makeChart(false)
+    this.mounted = true
   }
 }
 </script>
 
 <style>
-.edit-enter-from {
-  opacity: 0;
-  transform: scale(0.5);
-}
-
-.edit-enter-to {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.edit-enter-active {
-  transition: all 0.4s ease;
-}
+.edit-enter-from,
 .edit-leave-to {
   opacity: 0;
   transform: scale(0.5);
+  transform: translateY(-5vh);
 }
+
+.edit-enter-to,
 .edit-leave-from {
   opacity: 1;
   transform: scale(1);
 }
 
+.edit-enter-active,
 .edit-leave-active {
   transition: all 0.4s ease;
+}
+.play-enter-from,
+.play-leave-to {
+  opacity: 0;
+  transform: scale(0.5);
+  transform: translateY(-10vh);
+}
+
+.play-move,
+.play-enter-active,
+.play-leave-active {
+  transition: all 0.5s ease;
+}
+.play-leave-active {
+  position: absolute;
 }
 </style>

@@ -92,19 +92,21 @@
           <canvas id="chart" width="1vw" height="5vw"></canvas>
         </div>
         <div class="player_img" v-if="players.length > 0">
-          <div
-            class="chart_player_img"
-            v-for="(p, index) in players"
-            :key="index"
-          >
-            <div class="chart_action">
-              <img
-                @click="subPlayer(p)"
-                src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
-              />
+          <transition-group name="play">
+            <div
+              class="chart_player_img"
+              v-for="(p, index) in players"
+              :key="index"
+            >
+              <div class="chart_action">
+                <img
+                  @click="subPlayer(p)"
+                  src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+                />
+              </div>
+              <img :src="p.img_url" />
             </div>
-            <img :src="p.img_url" />
-          </div>
+          </transition-group>
         </div>
       </div>
     </div>
@@ -365,4 +367,22 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+/* .play-enter-from,
+.play-leave-to {
+  opacity: 0;
+  transform: scale(0.5);
+  transform: translateY(-5vh);
+}
+
+.play-enter-to,
+.play-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.play-enter-active,
+.play-leave-active {
+  transition: all 0.4s ease;
+} */
+</style>
