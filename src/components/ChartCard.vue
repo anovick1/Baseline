@@ -69,7 +69,7 @@
             placeholder="Write description here"
             maxLength="255"
           ></textarea>
-          <p id="desc_len">{{ description.length }}/255</p>
+          <p v-if="edit" id="desc_len">{{ description.length }}/255</p>
         </div>
 
         <div class="view_title"><h2>Players</h2></div>
@@ -225,6 +225,7 @@ export default {
         this.edit = false
         await this.$emit('getCharts')
         await this.$emit('toggleView')
+        this.makeChart(false)
       } else {
         this.edit = true
         this.makeChart(true)
@@ -403,7 +404,7 @@ export default {
         description: this.description
       }
       await updateChart(body, id)
-      this.makeChart(true)
+      this.makeChart(false)
       this.edit = false
     },
     async handleChange(e) {
