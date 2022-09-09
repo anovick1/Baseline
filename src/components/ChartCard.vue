@@ -2,8 +2,9 @@
   <div>
     <img
       src="https://cdn-icons-png.flaticon.com/512/5038/5038256.png"
-      @click="toggleChart"
+      @click="toggleView"
       id="exit"
+      v-if="loaded"
     />
     <div class="chart_border" id="full_chart_border">
       <div class="edit_titles">
@@ -60,7 +61,7 @@
           </div>
         </transition>
 
-        <canvas :id="count" width="1vw" height="5vw"></canvas>
+        <canvas :id="count"></canvas>
       </div>
       <div class="chart_info">
         <div class="view_title"><h2>Description</h2></div>
@@ -85,7 +86,6 @@
               type="text"
               v-model="search"
               placeholder="Search Player by Name"
-              @input="handleChange"
               name="p"
             />
             <img
@@ -223,7 +223,7 @@ export default {
       email: localStorage.email,
       pfp: localStorage.pfp
     },
-    myChart: null,
+    myChart: new Chart(),
     allStats: StatList,
     edit: false,
     allPlayers: PlayerList,
@@ -242,16 +242,18 @@ export default {
     async deleteChart(id) {
       this.$emit('deleteChart', id)
     },
-    toggleChart() {
-      this.$emit('toggleChart')
+    async toggleView() {
+      this.$emit('toggleView')
     },
     async toggleEdit() {
       if (this.edit) {
         this.edit = false
-        // this.myChart.destroy()
-        // await this.$emit('getCharts')
+        await this.$emit('getCharts')
+        // // await this.$emit('toggleView')
+        // await this.$emit('toggleView')
+        // this.$emit('updateChart')
         await this.makeChart(false)
-        await location.reload()
+        // await location.reload()
       } else {
         this.edit = true
         this.makeChart(true)
@@ -259,10 +261,9 @@ export default {
     },
     async makeChart(edit) {
       this.loaded = false
-      if (this.myChart !== null) {
-        this.myChart.destroy()
-      }
-      const ctx = document.getElementById(this.count)
+      // if (this.myChart !== null) {
+      await this.myChart.destroy()
+      let ctx = document.getElementById(this.count)
       const labels = []
       const datasets = []
       let len = 0
@@ -413,6 +414,7 @@ export default {
         })
         this.loaded = true
       }
+      this.myChart
     },
     deleteSearch() {
       this.search = ''
@@ -427,16 +429,17 @@ export default {
         description: this.description
       }
       await updateChart(body, id)
-      this.makeChart(false)
       this.edit = false
+      await this.makeChart(false)
     },
     async handleChange(e) {
+      console.log(e)
       await this.$emit('handleChange', e, parseInt(this.count))
-      this.makeChart(true)
+      await this.makeChart(true)
     },
     async handleChangePlayer(players) {
       await this.$emit('handleChangePlayer', players, parseInt(this.count))
-      this.makeChart(true)
+      await this.makeChart(true)
     },
 
     togglePlayer: async function (player) {
@@ -446,8 +449,7 @@ export default {
       ) {
         let p = await getPlayersById(player.player_id)
         usePlayers.push(p)
-        this.handleChangePlayer(usePlayers)
-        this.makeChart(true)
+        await this.handleChangePlayer(usePlayers)
       } else {
         let filterPlayers = []
         for (let i = 0; i < usePlayers.length; i++) {
@@ -457,7 +459,6 @@ export default {
         }
         usePlayers = filterPlayers
         await this.handleChangePlayer(usePlayers)
-        this.makeChart(true)
       }
     },
     async subPlayer(player) {
@@ -470,7 +471,6 @@ export default {
       }
       usePlayers = filterPlayers
       await this.handleChangePlayer(usePlayers)
-      this.makeChart(true)
     }
   },
   mounted() {

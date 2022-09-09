@@ -27,6 +27,9 @@
           @handleChange="handleChange"
           @handleChangePlayer="handleChangePlayer"
           @getCharts="getCharts"
+          @toggleView="toggleView"
+          :fullChart="fullChart"
+          @updateChart="getCharts"
         />
       </div>
     </transition-group>
@@ -49,10 +52,11 @@ export default {
     players: data,
     charts: [],
     searched: false,
-    clickable: true
+    clickable: true,
+    fullChart: []
   }),
   mounted: async function () {
-    await this.getCharts()
+    await this.getCharts(0, false)
   },
 
   methods: {
@@ -63,11 +67,18 @@ export default {
         this.clickable = true
       }
     },
-    async getCharts() {
+    async getCharts(count, edit) {
       const res = await GetCharts()
       this.charts = await res
       await this.formatDate()
       this.searched = true
+      for (let i = 0; i < this.charts.length; i++) {
+        this.fullChart.push(false)
+      }
+      if (edit) {
+        await this.toggleView(count)
+        await this.toggleView(count)
+      }
     },
     async deleteChart(id) {
       await DeleteChart(id)
@@ -84,13 +95,19 @@ export default {
     },
     handleChange: async function (e, count) {
       this.charts[count][e.target.name] = e.target.value
-      if (e.target.name === 'p' && e.target.value.length > 0) {
-        // window.scrollTo(0, document.body.scrollHeight)
-      }
     },
     async handleChangePlayer(players, count) {
       console.log(players)
       this.charts[count]['player'] = players
+    },
+    toggleView(index) {
+      if (this.fullChart[index]) {
+        this.fullChart[index] = false
+        document.body.style.overflow = 'scroll'
+      } else {
+        this.fullChart[index] = true
+        document.body.style.overflow = 'hidden'
+      }
     }
   }
 }

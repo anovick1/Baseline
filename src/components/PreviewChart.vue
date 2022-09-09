@@ -1,5 +1,5 @@
 <template>
-  <div class="chart_border" v-if="clickable" @click="toggleChart">
+  <div class="chart_border" v-if="clickable" @click="toggleView">
     <div class="chart_container">
       <div class="preview_title">
         <div class="left_title">
@@ -50,7 +50,7 @@
 
   <transition name="fade">
     <ChartCardVue
-      v-if="view"
+      v-if="fullChart[parseInt(count)]"
       :title="title"
       :players="players"
       :year="y_year"
@@ -68,7 +68,9 @@
       @handleChangePlayer="handleChangePlayer"
       @getCharts="getCharts"
       @disableClick="disableClick"
-      @toggleView="toggleChart"
+      @toggleView="toggleView"
+      :fullChart="fullChart"
+      @updateChart="updateChart"
     />
   </transition>
 </template>
@@ -90,7 +92,8 @@ export default {
     id: Number,
     description: String,
     date: String,
-    clickable: Boolean
+    clickable: Boolean,
+    fullChart: Array
   },
   data: () => ({
     currentUser: {
@@ -112,21 +115,18 @@ export default {
     getCharts() {
       this.$emit('getCharts')
     },
+    updateChart() {
+      this.$emit('updateChart', parseInt(this.count), true)
+    },
     handleChange(e, count) {
       this.$emit('handleChange', e, count)
     },
     handleChangePlayer(players, count) {
       this.$emit('handleChangePlayer', players, count)
     },
-    toggleChart() {
+    toggleView() {
       this.$emit('disableClick')
-      if (this.view) {
-        this.view = false
-        document.body.style.overflow = 'scroll'
-      } else {
-        this.view = true
-        document.body.style.overflow = 'hidden'
-      }
+      this.$emit('toggleView', parseInt(this.count))
     }
   },
   mounted() {
