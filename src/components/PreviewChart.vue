@@ -66,6 +66,9 @@
       @toggleChart="toggleChart"
       @handleChange="handleChange"
       @handleChangePlayer="handleChangePlayer"
+      @getCharts="getCharts"
+      @disableClick="disableClick"
+      @toggleView="toggleChart"
     />
   </transition>
 </template>
@@ -105,6 +108,9 @@ export default {
     },
     disableClick() {
       this.$emit('disableClick')
+    },
+    getCharts() {
+      this.$emit('getCharts')
     },
     handleChange(e, count) {
       this.$emit('handleChange', e, count)

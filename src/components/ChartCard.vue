@@ -220,10 +220,11 @@ export default {
     toggleChart() {
       this.$emit('toggleChart')
     },
-    toggleEdit() {
+    async toggleEdit() {
       if (this.edit) {
         this.edit = false
-        this.makeChart(false)
+        await this.$emit('getCharts')
+        await this.$emit('toggleView')
       } else {
         this.edit = true
         this.makeChart(true)

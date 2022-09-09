@@ -26,6 +26,7 @@
           @disableClick="disableClick"
           @handleChange="handleChange"
           @handleChangePlayer="handleChangePlayer"
+          @getCharts="getCharts"
         />
       </div>
     </transition-group>
