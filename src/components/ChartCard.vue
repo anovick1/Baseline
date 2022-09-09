@@ -249,9 +249,9 @@ export default {
       if (this.edit) {
         this.edit = false
         // this.myChart.destroy()
+        // await this.$emit('getCharts')
         await this.makeChart(false)
         await location.reload()
-        this.$emit('toggleView')
       } else {
         this.edit = true
         this.makeChart(true)
