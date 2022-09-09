@@ -243,6 +243,8 @@ export default {
   },
   methods: {
     async deleteChart(id) {
+      this.$emit('toggleView')
+
       this.$emit('deleteChart', id)
     },
     async toggleView() {
@@ -274,10 +276,10 @@ export default {
         let stats = []
         /// STATS ARRAY
         for (let j = 0; j < this.players[i].stats.length; j++) {
-          let season = this.players[i].stats[j].season
+          let Season = this.players[i].stats[j].Season
           let dup = []
           if (j < this.players[i].stats.length - 1) {
-            if (season === this.players[i].stats[j + 1].season) {
+            if (Season === this.players[i].stats[j + 1].Season) {
               dup.push(this.players[i].stats[j][this.x])
             } else if (dup.length > 0) {
               const average = (array) =>
