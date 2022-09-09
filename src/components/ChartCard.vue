@@ -44,20 +44,21 @@
             Edit Chart
           </div>
         </transition>
-
-        <div
-          class="edit_chart_true"
-          v-if="parseInt(author.id) === parseInt(currentUser.id) && edit"
-        >
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
-            @click="toggleEdit()"
-          />
-          <img
-            @click="updateChart(parseInt(id))"
-            src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
-          />
-        </div>
+        <transition name="edit">
+          <div
+            class="edit_chart_true"
+            v-if="parseInt(author.id) === parseInt(currentUser.id) && edit"
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+              @click="toggleEdit()"
+            />
+            <img
+              @click="updateChart(parseInt(id))"
+              src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
+            />
+          </div>
+        </transition>
 
         <canvas :id="count" width="1vw" height="5vw"></canvas>
       </div>
@@ -143,20 +144,22 @@
 
         <div class="preview_players">
           <div v-for="(c, index) in players" :key="index">
-            <div class="chart_action_view">
-              <div class="chart_action" id="chart_action_view" v-if="edit">
-                <img
-                  @click="subPlayer(c)"
-                  src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
-                />
-              </div>
-              <div class="preview_player">
-                <div>
-                  <img id="preview_img" :src="c.img_url" />
+            <transition name="edit">
+              <div class="chart_action_view">
+                <div class="chart_action" id="chart_action_view" v-if="edit">
+                  <img
+                    @click="subPlayer(c)"
+                    src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+                  />
                 </div>
-                <p>{{ c.player }}</p>
+                <div class="preview_player">
+                  <div>
+                    <img id="preview_img" :src="c.img_url" />
+                  </div>
+                  <p>{{ c.player }}</p>
+                </div>
               </div>
-            </div>
+            </transition>
           </div>
         </div>
         <div class="author_date">
@@ -241,9 +244,10 @@ export default {
     async toggleEdit() {
       if (this.edit) {
         this.edit = false
-        await this.$emit('getCharts')
-        await this.$emit('toggleView')
-        this.makeChart(false)
+        // this.myChart.destroy()
+        await this.makeChart(false)
+        await location.reload()
+        this.$emit('toggleView')
       } else {
         this.edit = true
         this.makeChart(true)
@@ -346,14 +350,11 @@ export default {
             animations: {
               y: {
                 easing: 'easeInOutElastic',
-                onComplete: function (context) {
-                  console.log(context.initial)
-                },
+
                 from: (ctx) => {
                   if (ctx.type === 'data') {
                     if (ctx.mode === 'default' && !ctx.dropped) {
                       ctx.dropped = true
-                      console.log('ding dong')
                       return 0
                     }
                   }
@@ -430,7 +431,6 @@ export default {
       this.makeChart(true)
     },
     async handleChangePlayer(players) {
-      console.log(players)
       await this.$emit('handleChangePlayer', players, parseInt(this.count))
       this.makeChart(true)
     },
@@ -445,7 +445,6 @@ export default {
         this.handleChangePlayer(usePlayers)
         this.makeChart(true)
       } else {
-        console.log('test')
         let filterPlayers = []
         for (let i = 0; i < usePlayers.length; i++) {
           if (usePlayers[i].player_number !== parseInt(player.player_id)) {
@@ -462,8 +461,6 @@ export default {
       let filterPlayers = []
       for (let i = 0; i < usePlayers.length; i++) {
         if (usePlayers[i].player_number !== parseInt(player.player_number)) {
-          console.log(usePlayers[i])
-          console.log(player)
           filterPlayers.push(usePlayers[i])
         }
       }
@@ -481,13 +478,27 @@ export default {
 <style>
 .edit-enter-from {
   opacity: 0;
-  transform: scale(0.6);
+  transform: scale(0.5);
 }
+
 .edit-enter-to {
   opacity: 1;
   transform: scale(1);
 }
+
 .edit-enter-active {
+  transition: all 0.4s ease;
+}
+.edit-leave-to {
+  opacity: 0;
+  transform: scale(0.5);
+}
+.edit-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.edit-leave-active {
   transition: all 0.4s ease;
 }
 </style>
