@@ -6,14 +6,7 @@
       id="exit"
     />
     <div class="chart_border" id="full_chart_border">
-      <div class="chart_container" id="full_chart_container">
-        <div
-          class="edit_chart"
-          v-if="parseInt(author.id) === parseInt(currentUser.id) && !edit"
-          @click="toggleEdit()"
-        >
-          Edit Chart
-        </div>
+      <div class="edit_titles">
         <input
           @input="handleChange"
           placeholder="Title"
@@ -29,11 +22,24 @@
           @change="handleChange($event)"
           placeholder="Stat"
           v-if="edit"
+          id="stat_edit"
         >
           <option v-for="(s, index) in allStats" :key="index">
             {{ s }}
           </option>
         </select>
+      </div>
+      <div class="chart_container" id="full_chart_container">
+        <div
+          class="edit_chart"
+          v-if="
+            parseInt(author.id) === parseInt(currentUser.id) && !edit && loaded
+          "
+          @click="toggleEdit()"
+        >
+          Edit Chart
+        </div>
+
         <div
           class="edit_chart_true"
           v-if="parseInt(author.id) === parseInt(currentUser.id) && edit"
@@ -47,22 +53,27 @@
             src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
           />
         </div>
+
         <canvas :id="count" width="1vw" height="5vw"></canvas>
       </div>
       <div class="chart_info">
         <div class="view_title"><h2>Description</h2></div>
         <p v-if="!edit">{{ description }}</p>
-        <textarea
-          v-if="edit"
-          type="text"
-          :value="description"
-          @input="handleChange"
-          name="description"
-          placeholder="Write description here"
-          maxLength="255"
-        ></textarea>
+        <div class="description" id="description_edit">
+          <textarea
+            v-if="edit"
+            type="text"
+            :value="description"
+            @input="handleChange"
+            name="description"
+            placeholder="Write description here"
+            maxLength="255"
+          ></textarea>
+          <p id="desc_len">{{ description.length }}/255</p>
+        </div>
+
         <div class="view_title"><h2>Players</h2></div>
-        <div class="input_create" id="search" v-if="edit">
+        <div class="input_create" id="search_edit" v-if="edit">
           <div class="searchbar_delete">
             <input
               type="text"
@@ -193,7 +204,7 @@ export default {
     edit: false,
     allPlayers: PlayerList,
     search: '',
-    pRender: []
+    loaded: false
   }),
   computed: {
     filterPlayers() {
@@ -212,11 +223,14 @@ export default {
     toggleEdit() {
       if (this.edit) {
         this.edit = false
+        this.makeChart(false)
       } else {
         this.edit = true
+        this.makeChart(true)
       }
     },
-    makeChart(edit) {
+    async makeChart(edit) {
+      this.loaded = false
       if (this.myChart !== null) {
         this.myChart.destroy()
       }
@@ -301,7 +315,7 @@ export default {
       }
       // let delayed
       if (!edit) {
-        this.myChart = new Chart(ctx, {
+        this.myChart = await new Chart(ctx, {
           type: 'line',
           data: data,
           options: {
@@ -320,6 +334,9 @@ export default {
                     }
                   }
                 }
+              },
+              onComplete: function () {
+                alert('onAnimationComplete')
               }
             },
 
@@ -348,7 +365,7 @@ export default {
           plugins: [plugin]
         })
       } else {
-        this.myChart = new Chart(ctx, {
+        this.myChart = await new Chart(ctx, {
           type: 'line',
           data: data,
           options: {
@@ -360,28 +377,13 @@ export default {
             plugins: {
               legend: {
                 position: 'top'
-              },
-              title: {
-                display: true,
-                text: this.title,
-                font: {
-                  size: 30
-                },
-                color: 'black'
-              },
-              subtitle: {
-                display: true,
-                text: this.x,
-                font: {
-                  size: 20
-                },
-                color: 'black'
               }
             }
           },
           plugins: [plugin]
         })
       }
+      this.loaded = true
     },
     deleteSearch() {
       this.search = ''
