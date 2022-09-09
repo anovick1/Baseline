@@ -7,7 +7,7 @@
           <p>{{ x }}</p>
         </div>
         <div class="right_title">
-          <p>{{ author.name }}</p>
+          <p>{{ name }}</p>
           <p>{{ date }}</p>
         </div>
       </div>
@@ -31,7 +31,7 @@
           <p>{{ x }}</p>
         </div>
         <div class="right_title">
-          <p>{{ author.name }}</p>
+          <p>{{ name }}</p>
           <p>{{ date }}</p>
         </div>
       </div>
@@ -102,7 +102,8 @@ export default {
       email: localStorage.email
     },
     view: false,
-    show: true
+    show: true,
+    name: ''
   }),
   methods: {
     async deleteChart(id) {
@@ -131,6 +132,11 @@ export default {
   },
   mounted() {
     document.body.style.overflow = 'scroll'
+    if (this.currentUser.id == this.author.id) {
+      this.name = 'You'
+    } else {
+      this.name = this.author.name
+    }
   }
 }
 </script>

@@ -1,11 +1,13 @@
 <template>
   <div>
-    <img
-      src="https://cdn-icons-png.flaticon.com/512/5038/5038256.png"
-      @click="toggleView"
-      id="exit"
-      v-if="loaded"
-    />
+    <transition name="edit">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/5038/5038256.png"
+        @click="toggleView"
+        id="exit"
+        v-if="loaded"
+      />
+    </transition>
     <div class="chart_border" id="full_chart_border">
       <div class="edit_titles">
         <input
@@ -166,7 +168,7 @@
           </div>
         </transition-group>
         <div class="author_date">
-          <p>{{ author.name }}</p>
+          <p>{{ name }}</p>
           <p>{{ date }}</p>
         </div>
       </div>
@@ -229,7 +231,8 @@ export default {
     allPlayers: PlayerList,
     search: '',
     loaded: false,
-    mounted: false
+    mounted: false,
+    name: ''
   }),
   computed: {
     filterPlayers() {
@@ -476,6 +479,11 @@ export default {
   mounted() {
     this.makeChart(false)
     this.mounted = true
+    if (this.currentUser.id == this.author.id) {
+      this.name = 'You'
+    } else {
+      this.name = this.author.name
+    }
   }
 }
 </script>
