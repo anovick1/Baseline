@@ -1,8 +1,7 @@
 import Axios from 'axios'
 
-// export const BASE_URL =
-// 'postgresql://postgres:0vU7409AsSZ28E4QJ1xd@containers-us-west-36.railway.app:6862/railway/'
-export const BASE_URL = 'http://localhost:8000/'
+export const BASE_URL = process.env.VUE_APP_DB_URL
+// export const BASE_URL = 'http://localhost:8000/'
 
 const Client = Axios.create({ baseURL: BASE_URL })
 
