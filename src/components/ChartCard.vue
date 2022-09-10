@@ -282,6 +282,9 @@ export default {
     },
     async makeChart(edit) {
       this.loaded = false
+      let ans = this.x.replaceAll(' ', '_')
+      ans = ans.replaceAll('Per_Game', 'per_game')
+      ans = ans.replaceAll('%', 'percent')
       // if (this.myChart !== null) {
       await this.myChart.destroy()
       let ctx = document.getElementById(this.count)
@@ -296,13 +299,13 @@ export default {
           let dup = []
           if (j < this.players[i].stats.length - 1) {
             if (Season === this.players[i].stats[j + 1].Season) {
-              dup.push(this.players[i].stats[j][this.x])
+              dup.push(this.players[i].stats[j][ans])
             } else if (dup.length > 0) {
               const average = (array) =>
                 array.reduce((a, b) => a + b) / array.length
               stats.push(average(dup))
             } else {
-              stats.push(this.players[i].stats[j][this.x])
+              stats.push(this.players[i].stats[j][ans])
             }
           } else {
             if (dup.length > 0) {
@@ -310,7 +313,7 @@ export default {
                 array.reduce((a, b) => a + b) / array.length
               stats.push(average(dup))
             } else {
-              stats.push(this.players[i].stats[j][this.x])
+              stats.push(this.players[i].stats[j][ans])
             }
           }
         }

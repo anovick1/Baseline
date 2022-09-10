@@ -45,7 +45,7 @@
             v-model="x"
             :value="x"
             name="x"
-            @change="handleChange()"
+            @change="handleChange"
             placeholder="Stat"
           >
             <option v-for="(s, index) in updateStats" :key="index">
@@ -191,17 +191,18 @@ export default {
       this.x = 'pts_per_game'
       this.y_year = true
       this.description = ' '
+      this.search = ' '
       this.makeChart()
     },
     handleChange: async function (e) {
-      if (e.target.name === 'x') {
-        let ans = e.target.value.replaceAll(' ', '_')
-        ans = ans.replaceAll('Per_Game', 'per_game')
-        ans = ans.replaceAll('%', 'percent')
-        this[e.target.name] = ans
-      } else {
-        this[e.target.name] = e.target.value
-      }
+      // if (e.target.name === 'x') {
+      //   let ans = e.target.value.replaceAll(' ', '_')
+      //   ans = ans.replaceAll('Per_Game', 'per_game')
+      //   ans = ans.replaceAll('%', 'percent')
+      //   this[e.target.name] = ans
+      // } else {
+      //   }
+      this[e.target.name] = e.target.value
       this.makeChart()
     },
     handleSubmit(e) {
