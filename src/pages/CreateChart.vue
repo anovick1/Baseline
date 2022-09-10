@@ -183,8 +183,9 @@ export default {
         player: this.players,
         y_year: this.y_year,
         x: this.x,
-        description: this.x
+        description: this.description
       }
+      console.log(body)
       await createChart(body)
       this.title = 'title'
       this.players = []

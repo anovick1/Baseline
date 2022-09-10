@@ -427,7 +427,7 @@ export default {
             hoverRadius: 8,
             responsive: true,
             maintainAspectRatio: true,
-
+            animations: false,
             plugins: {
               legend: {
                 position: 'top'
@@ -438,7 +438,6 @@ export default {
         })
         this.loaded = true
       }
-      this.myChart
     },
     deleteSearch() {
       this.search = ''
@@ -457,7 +456,6 @@ export default {
       await this.makeChart(false)
     },
     async handleChange(e) {
-      console.log(e)
       await this.$emit('handleChange', e, parseInt(this.count))
       await this.makeChart(true)
     },
