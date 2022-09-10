@@ -45,7 +45,7 @@
             v-model="x"
             :value="x"
             name="x"
-            @change="handleChange($event)"
+            @change="handleChange()"
             placeholder="Stat"
           >
             <option v-for="(s, index) in updateStats" :key="index">
@@ -91,6 +91,7 @@
                 v-for="(player, index) in filterPlayers"
                 :key="index"
                 @click="togglePlayer(player)"
+                @change="handleChange($event)"
               >
                 <div class="search_player_name">
                   <img :src="player.img_url" />
@@ -268,6 +269,9 @@ export default {
     },
 
     async makeChart() {
+      let ans = this.x.replaceAll(' ', '_')
+      ans = ans.replaceAll('Per_Game', 'per_game')
+      ans = ans.replaceAll('%', 'percent')
       this.loaded = false
       this.myChart.destroy()
       const ctx = document.getElementById('chart')
@@ -282,13 +286,13 @@ export default {
           let dup = []
           if (j < this.players[i].stats.length - 1) {
             if (Season === this.players[i].stats[j + 1].Season) {
-              dup.push(this.players[i].stats[j][this.x])
+              dup.push(this.players[i].stats[j][ans])
             } else if (dup.length > 0) {
               const average = (array) =>
                 array.reduce((a, b) => a + b) / array.length
               stats.push(average(dup))
             } else {
-              stats.push(this.players[i].stats[j][this.x])
+              stats.push(this.players[i].stats[j][ans])
             }
           } else {
             if (dup.length > 0) {
@@ -296,7 +300,7 @@ export default {
                 array.reduce((a, b) => a + b) / array.length
               stats.push(average(dup))
             } else {
-              stats.push(this.players[i].stats[j][this.x])
+              stats.push(this.players[i].stats[j][ans])
             }
           }
         }
