@@ -255,7 +255,7 @@ export default {
         let word = this.allStats[i].replaceAll('_', ' ')
         word = word.replaceAll('per game', 'Per Game')
         word = word.replaceAll('percent', '%')
-        if (ans[0] === 'x') {
+        if (word[0] === 'x') {
           word = word.replace('x', '')
         }
         ans.push(word)
