@@ -110,6 +110,9 @@ export default {
       let ans = this.x.replaceAll('_', ' ')
       ans = ans.replaceAll('per game', 'Per Game')
       ans = ans.replaceAll('percent', '%')
+      if (ans[0] === 'x') {
+        ans = ans.replace('x', '')
+      }
       return ans
     }
   },

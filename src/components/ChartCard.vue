@@ -244,6 +244,9 @@ export default {
       let ans = this.x.replaceAll('_', ' ')
       ans = ans.replaceAll('per game', 'Per Game')
       ans = ans.replaceAll('percent', '%')
+      if (ans[0] === 'x') {
+        ans = ans.replace('x', '')
+      }
       return ans
     },
     updateStats() {
@@ -252,6 +255,9 @@ export default {
         let word = this.allStats[i].replaceAll('_', ' ')
         word = word.replaceAll('per game', 'Per Game')
         word = word.replaceAll('percent', '%')
+        if (ans[0] === 'x') {
+          word = word.replace('x', '')
+        }
         ans.push(word)
       }
       return ans
@@ -285,6 +291,9 @@ export default {
       let ans = this.x.replaceAll(' ', '_')
       ans = ans.replaceAll('Per_Game', 'per_game')
       ans = ans.replaceAll('%', 'percent')
+      if (ans[0] === '2' || ans[0] === '3') {
+        ans = 'x' + ans
+      }
       // if (this.myChart !== null) {
       await this.myChart.destroy()
       let ctx = document.getElementById(this.count)
