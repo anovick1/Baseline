@@ -291,6 +291,7 @@ export default {
       let ans = this.x.replaceAll(' ', '_')
       ans = ans.replaceAll('Per_Game', 'per_game')
       ans = ans.replaceAll('%', 'percent')
+
       if (ans[0] === '2' || ans[0] === '3') {
         ans = 'x' + ans
       }
@@ -409,6 +410,14 @@ export default {
                   padding: 8,
 
                   color: 'black'
+                },
+                ticks: {
+                  callback: function (value) {
+                    if (ans.includes('percent')) {
+                      return value * 100 + '%'
+                    }
+                    return value
+                  }
                 }
               }
             },
@@ -425,7 +434,6 @@ export default {
                 }
               }
             },
-
             plugins: {
               legend: {
                 position: 'top'
