@@ -146,6 +146,10 @@ a {
   width: 80vh;
   /* align-items: stretch; */
 }
+#chart_border_create:hover {
+  cursor: default;
+  transform: none;
+}
 #chart_container_create {
   height: 35vh;
   width: 70vh;

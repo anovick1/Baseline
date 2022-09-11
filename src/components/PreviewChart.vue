@@ -11,7 +11,7 @@
           <p>{{ date }}</p>
         </div>
       </div>
-      <p>{{ description }}</p>
+      <!-- <p>{{ description }}</p> -->
 
       <div class="preview_players">
         <div class="preview_player" v-for="(c, index) in players" :key="index">
@@ -35,7 +35,7 @@
           <p>{{ date }}</p>
         </div>
       </div>
-      <p>{{ description }}</p>
+      <!-- <p>{{ description }}</p> -->
 
       <div class="preview_players">
         <div class="preview_player" v-for="(c, index) in players" :key="index">

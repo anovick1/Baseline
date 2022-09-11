@@ -385,10 +385,36 @@ export default {
             hoverRadius: 8,
             responsive: true,
             maintainAspectRatio: true,
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: 'Season in the League',
+                  font: {
+                    size: 16
+                  },
+                  padding: 8,
+
+                  color: 'black'
+                }
+              },
+
+              y: {
+                title: {
+                  display: true,
+                  text: this.x,
+                  font: {
+                    size: 16
+                  },
+                  padding: 8,
+
+                  color: 'black'
+                }
+              }
+            },
             animations: {
               y: {
                 easing: 'easeInOutElastic',
-
                 from: (ctx) => {
                   if (ctx.type === 'data') {
                     if (ctx.mode === 'default' && !ctx.dropped) {
@@ -437,6 +463,29 @@ export default {
             responsive: true,
             maintainAspectRatio: true,
             animations: false,
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: 'Season in the League',
+                  font: {
+                    size: 16
+                  },
+                  color: 'black'
+                }
+              },
+
+              y: {
+                title: {
+                  display: true,
+                  text: this.x,
+                  font: {
+                    size: 16
+                  },
+                  color: 'black'
+                }
+              }
+            },
             plugins: {
               legend: {
                 position: 'top'

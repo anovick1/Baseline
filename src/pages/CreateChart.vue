@@ -357,6 +357,30 @@ export default {
         options: {
           responsive: true,
           maintainAspectRatio: true,
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Season in the League',
+                font: {
+                  size: 12
+                },
+                color: 'black'
+              }
+            },
+
+            y: {
+              title: {
+                display: true,
+                text: this.x,
+                font: {
+                  size: 12
+                },
+                color: 'black'
+              }
+            }
+          },
+
           // animations: {
           //   y: {
           //     easing: 'easeInOutElastic',
