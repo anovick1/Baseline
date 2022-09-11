@@ -221,6 +221,7 @@ export default {
       this.makeChart()
     },
     togglePlayer: async function (player) {
+      this.search = ''
       if (!this.pRender.includes(player)) {
         this.pRender.push(player)
         let p = await getPlayersById(player.player_id)
@@ -318,12 +319,28 @@ export default {
         if (stats.length > len) {
           len = stats.length
         }
-        let colors = ['black', 'red', 'blue', 'green', 'orange']
+        let colors = [
+          'rgb(255, 51, 51)',
+          'rgb(51, 153, 255)',
+          'rgb(0, 204, 102)',
+          'rgb(153, 102, 255)',
+          'rgb(255, 153, 51)',
+          'rgb(0, 204, 204)'
+        ]
+        let bColors = [
+          'rgba(255, 51, 51, .5)',
+          'rgba(51, 153, 255, .5)',
+          'rgba(0, 204, 102, .5)',
+          'rgba(153, 102, 255, .5)',
+          'rgba(255, 153, 51, .5)',
+          'rgba(0, 204, 204, .5)'
+        ]
         let data = {
           label: this.players[i].player,
           data: stats.reverse(),
           fill: false,
           borderColor: colors[i],
+          backgroundColor: bColors[i],
           tension: 0.1
           // animations: {
           //   y: {
