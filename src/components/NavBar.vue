@@ -85,9 +85,13 @@ export default {
     users: []
   }),
   mounted: async function () {
-    if (localStorage.email === 'null') {
+    console.log(localStorage.email)
+    if (localStorage.email.length < 0 || localStorage.email == 'null') {
+      console.log('test')
       this.isSignedIn = false
     } else {
+      console.log('test2')
+
       this.isSignedIn = true
     }
   },
