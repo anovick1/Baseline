@@ -7,11 +7,12 @@
         <div class="chart_container" id="chart_container_create">
           <canvas id="chart" width="1vw" height="5vw"></canvas>
         </div>
+        <!-- WEB VIEW -->
         <transition-group
           name="prev"
           tag="div"
           class="player_img"
-          v-if="mounted"
+          v-if="mounted && !mobile"
         >
           <div
             class="chart_player_img"
@@ -28,7 +29,27 @@
           </div>
         </transition-group>
       </div>
-
+      <!-- Mobile VIEW -->
+      <transition-group
+        name="prev"
+        tag="div"
+        class="player_img"
+        v-if="mounted && mobile"
+      >
+        <div
+          class="chart_player_img"
+          v-for="p in players"
+          :key="p.player_number"
+        >
+          <div class="chart_action">
+            <img
+              @click="subPlayer(p)"
+              src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+            />
+          </div>
+          <img :src="p.img_url" />
+        </div>
+      </transition-group>
       <!-- Create chart -->
       <div class="create_chart">
         <div class="input_create">
@@ -147,7 +168,8 @@ export default {
     search: '',
     playerAdded: null,
     description: '',
-    mounted: false
+    mounted: false,
+    mobile: window.innerWidth < 600
   }),
   computed: {
     filterPlayers() {
@@ -474,5 +496,13 @@ export default {
 }
 .list-enter-active {
   transition: all 0.4s ease;
+}
+@media only screen and (max-width: 600px) {
+  .prev-enter-from,
+  .prev-leave-to {
+    opacity: 0;
+    transform: scale(0.5);
+    transform: translateY(50vh);
+  }
 }
 </style>

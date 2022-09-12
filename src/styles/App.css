@@ -143,7 +143,8 @@ a {
 }
 #chart_border_create {
   height: 52vh;
-  width: 80vh;
+  /* width: 80vh; */
+  width: 45vw;
   /* align-items: stretch; */
 }
 #chart_border_create:hover {
@@ -152,7 +153,7 @@ a {
 }
 #chart_container_create {
   height: 35vh;
-  width: 70vh;
+  width: 40vw;
 }
 
 .home_section {
@@ -286,7 +287,7 @@ a {
 .search_results {
   overflow-y: scroll;
   height: 20vh;
-  width: 60vh;
+  width: 40vw;
 }
 .search_placeholder {
   min-height: 20vh;
@@ -317,7 +318,7 @@ a {
 .player_img {
   display: flex;
   justify-content: space-evenly;
-  width: 80vh;
+  width: 40vw;
   flex-wrap: wrap;
   margin-bottom: 2vh;
 }
@@ -363,7 +364,7 @@ a {
 
 .create_chart {
   display: flex;
-  width: 75vh;
+  width: 45vw;
   justify-content: space-evenly;
   flex-direction: column;
   flex-wrap: wrap;
@@ -386,7 +387,7 @@ select {
 .input_create {
   display: flex;
   margin: 2vh 0;
-  width: 60vh;
+  width: 40vw;
   justify-content: space-between;
   align-items: center;
 }
@@ -409,7 +410,7 @@ select {
   cursor: pointer;
 }
 .searchbar_delete {
-  width: 60vh;
+  width: 40vw;
   display: flex;
 }
 
@@ -514,7 +515,7 @@ select {
   width: 90vw;
 }
 textarea {
-  width: 60vh;
+  width: 40vw;
   height: 18vh;
 }
 .description {
@@ -617,5 +618,63 @@ textarea {
   .chart-wrapper {
     display: flex;
     flex-direction: column;
+  }
+  .createchart_page {
+    flex-direction: column;
+    width: 100vw;
+    align-items: center;
+    justify-content: space-around;
+  }
+  #chart_border_create {
+    width: 85vw;
+    height: 40vh;
+  }
+  #chart_container_create {
+    width: 80vw;
+  }
+  .create_chart,
+  .input_create,
+  .description,
+  .input_create .search_results,
+  select,
+  .player_img {
+    width: 85vw;
+  }
+  .searchbar_delete {
+    width: 85vw;
+  }
+  #search_delete {
+    right: 6vw;
+    top: 0.5vh;
+    height: 3vh;
+    width: 3vh;
+    margin-right: -3vh;
+  }
+  .input_create .search_results,
+  textarea,
+  input,
+  select {
+    padding: 2vw;
+  }
+  .input_create {
+    flex-direction: column;
+    height: 10vh;
+  }
+
+  textarea,
+  #title_input,
+  .searchbar_delete input {
+    width: 80vw;
+  }
+  .player_img {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    width: 80vw;
+    /* box-shadow: 0px 0px 15px 5px rgb(0 0 0 / 20%); */
+    /* padding: 1vh;
+    border-radius: 15px; */
+  }
+  .post_chart {
+    width: 30vw;
   }
 }
