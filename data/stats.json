@@ -1,12 +1,4 @@
 [
-  "id",
-  "player",
-  "Season",
-  "Position",
-  "Age",
-  "Experience",
-  "League",
-  "Team",
   "Games",
   "Games_Started",
   "Minutes_Played_Per_Game",
