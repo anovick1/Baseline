@@ -167,6 +167,7 @@ export default {
             }
             let user_id = await createUser(body)
             localStorage.id = user_id.id
+            // console.log(localStorage.id)
             location.reload()
             this.isSignedIn = true
           } else {
@@ -176,6 +177,7 @@ export default {
               pfp_url: result.user.photoURL
             }
             let user_id = await updateUser(id, body)
+            localStorage.id
             localStorage.id = user_id.id
             location.reload()
             this.isSignedIn = true

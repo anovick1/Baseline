@@ -662,7 +662,7 @@ textarea {
   }
   .input_create {
     flex-direction: column;
-    height: 10vh;
+    min-height: 10vh;
   }
 
   textarea,
@@ -711,5 +711,13 @@ textarea {
     display: flex;
     width: 85vw;
     justify-content: space-between;
+  }
+  .search_results {
+    max-height: 15vh;
+    height: auto;
+  }
+  #search,
+  .search_placeholder {
+    min-height: 0vh;
   }
 }

@@ -108,14 +108,20 @@ export default {
               email: result.user.email,
               pfp_url: result.user.photoURL
             }
-            await createUser(body)
+            let user_id = await createUser(body)
+            localStorage.id = user_id.id
+            // console.log(localStorage.id)
+            location.reload()
+            this.isSignedIn = true
           } else {
             let body = {
               name: result.user.displayName,
               email: result.user.email,
               pfp_url: result.user.photoURL
             }
-            await updateUser(id, body)
+            let user_id = await updateUser(id, body)
+            localStorage.id
+            localStorage.id = user_id.id
             location.reload()
             this.isSignedIn = true
           }
@@ -124,28 +130,13 @@ export default {
           console.log(error)
         })
     },
-    // handleSignInTwitter() {
-    //   signInWithPopup(auth, twitterProvider)
-    //     .then((result) => {
-    //       // const user = result.user
-    //       this.user = result.user.displayedName
-    //       this.isSignedIn = true
-    //       console.log(result)
-    //       console.log(result.user.displayName)
-    //       console.log(result.user.email)
-    //       console.log(result.user.photoURL)
-    //     })
-    //     .catch((error) => {
-    //       console.log(error)
-    //     })
-    // },
     handleSignOut() {
       signOut(auth)
         .then(() => {
-          this.user = ''
           localStorage.name = null
           localStorage.email = null
           localStorage.pfp = null
+          localStorage.id = null
           location.reload()
           this.isSignedIn = false
         })
