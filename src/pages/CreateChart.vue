@@ -217,7 +217,7 @@ export default {
       await createChart(body)
       this.title = 'title'
       this.players = []
-      this.x = 'pts_per_game'
+      this.x = 'Points Per Game'
       this.y_year = true
       this.description = ' '
       this.search = ' '

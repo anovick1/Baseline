@@ -5,10 +5,25 @@
         src="https://cdn-icons-png.flaticon.com/512/5038/5038256.png"
         @click="toggleView"
         id="exit"
-        v-if="loaded"
+        v-if="loaded && !edit"
       />
     </transition>
     <div class="chart_border" id="full_chart_border">
+      <transition name="edit">
+        <div
+          class="edit_chart_true"
+          v-if="parseInt(author.id) === parseInt(currentUser.id) && edit"
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+            @click="toggleEdit()"
+          />
+          <img
+            @click="updateChart(parseInt(id))"
+            src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
+          />
+        </div>
+      </transition>
       <div class="edit_titles">
         <input
           @input="handleChange"
@@ -47,23 +62,8 @@
             Edit Chart
           </div>
         </transition>
-        <transition name="edit">
-          <div
-            class="edit_chart_true"
-            v-if="parseInt(author.id) === parseInt(currentUser.id) && edit"
-          >
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
-              @click="toggleEdit()"
-            />
-            <img
-              @click="updateChart(parseInt(id))"
-              src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
-            />
-          </div>
-        </transition>
 
-        <canvas :id="count"></canvas>
+        <canvas :id="count" width="1vw" height="5vw"></canvas>
       </div>
       <div class="chart_info">
         <div class="view_title"><h2>Description</h2></div>
@@ -148,6 +148,7 @@
           name="play"
           tag="div"
           class="preview_players"
+          id="preview_players_edit"
           v-if="mounted"
         >
           <div v-for="c in players" :key="c.player_number">
@@ -232,7 +233,8 @@ export default {
     search: '',
     loaded: false,
     mounted: false,
-    name: ''
+    name: '',
+    mobile: window.innerWidth < 600
   }),
   computed: {
     filterPlayers() {

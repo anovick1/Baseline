@@ -433,9 +433,16 @@ select {
 
 .preview_players {
   display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
   margin-bottom: 2vh;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  width: 40vh;
+  justify-content: space-between;
+}
+#preview_players_edit {
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  width: 65vw;
 }
 .chart_container h1 {
   margin: 0 0 -3vh 0;
@@ -676,5 +683,36 @@ textarea {
   }
   .post_chart {
     width: 30vw;
+  }
+  #full_chart_container {
+    width: 80%;
+
+    /* height: 100vh; */
+    /* height: 10vh; */
+  }
+  #full_chart_border {
+    width: 100vw;
+  }
+  .chart_info,
+  #description_edit,
+  #search_edit,
+  #title_input_edit,
+  #stat_edit {
+    width: 85vw;
+  }
+  .preview_players,
+  #preview_players_edit {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    width: 80vw;
+    justify-content: space-between;
+  }
+
+  .edit_chart_true {
+    position: static;
+    margin: 1vh 0 0 0;
+    display: flex;
+    width: 85vw;
+    justify-content: space-between;
   }
 }

@@ -116,6 +116,7 @@ const auth = getAuth()
 import firebaseConfig from '../firebaseConfig'
 twitterProvider
 firebaseConfig
+
 export default {
   name: 'NavBar',
   data: () => ({
