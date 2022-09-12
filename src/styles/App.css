@@ -213,10 +213,7 @@ a {
   justify-content: center;
   margin: 2vh 0 5vh 0;
 }
-#google-nav {
-  box-shadow: none;
-  margin: 0;
-}
+
 #google-nav:hover,
 .post_chart:hover {
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
