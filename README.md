@@ -58,16 +58,14 @@ Once you fork and clone the repo:
 
 - Vue.js
 - PostgresQL
-- Sequelize
-- Javascript
-- Node.js
 - Django
-- HTML
 - Python
-- NumPy
-- Pandas
-- Kagle
+- Javascript
 - Chart.js
+- Kagle
+- Pandas
+- NumPy
+- HTML
 
 ---
 
@@ -78,6 +76,8 @@ Once you fork and clone the repo:
 ---
 
 ### **_Resources_**
+
+#### [NBA Stat Dataset](https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats?select=Advanced.csv)
 
 ##### [Trello Link](https://trello.com/b/8MOoe2VG/baseline)
 
