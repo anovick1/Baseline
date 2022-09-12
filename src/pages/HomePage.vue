@@ -9,6 +9,15 @@
       <h3>Twitter Sign In</h3>
       <button @click="handleSignInTwitter">Login</button>
     </div> -->
+    <div id="GoogleSignIn-nav" v-if="!isSignedIn && mobile">
+      <div class="google-sign-btn" @click="handleSignInGoogle">
+        <img
+          referrerpolicy="no-referrer"
+          src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
+        />
+        <p>Sign in with Google</p>
+      </div>
+    </div>
     <h3>
       Sign in to create charts and compare any NBA player's season statistics
       throughout history
@@ -16,12 +25,6 @@
     <img
       src="https://i.etsystatic.com/24759709/r/il/2decdd/2605299704/il_fullxfull.2605299704_9ss2.jpg"
     />
-    <!-- <div id="GoogleSignIn" v-if="!isSignedIn">
-      <div class="google-sign-btn" @click="handleSignInGoogle">
-        <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" />
-        <p>Sign in with Google</p>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -34,7 +37,7 @@ import {
   TwitterAuthProvider
 } from 'firebase/auth'
 import { GetUsers, updateUser, createUser } from '../Services/UserServices'
-
+import { animate, spring } from 'motion'
 const googleProvider = new GoogleAuthProvider()
 const twitterProvider = new TwitterAuthProvider()
 
@@ -53,7 +56,8 @@ export default {
         pfp: localStorage.pfp
       },
       isSignedIn: null,
-      users: []
+      users: [],
+      mobile: window.innerWidth < 600
     }
   },
   mounted: async function () {
@@ -63,6 +67,17 @@ export default {
     } else {
       this.isSignedIn = true
     }
+    const animation = animate(
+      '.google-sign-btn',
+      { scale: 1.05 },
+      {
+        duration: 1,
+        easing: spring(),
+        repeat: Infinity,
+        direction: 'alternate'
+      }
+    )
+    animation
   },
   methods: {
     handleSignInGoogle: async function () {

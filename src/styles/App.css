@@ -596,3 +596,19 @@ textarea {
   justify-content: space-between;
   margin: 2vh 0;
 }
+
+@media only screen and (max-width: 600px) {
+  .google-sign-btn {
+    width: 50vw;
+  }
+  #GoogleSignIn-nav {
+    display: flex;
+    justify-content: center;
+  }
+  .home h1 {
+    margin-bottom: 5vh;
+  }
+  .home h3 {
+    margin: 5vh 0;
+  }
+}

@@ -11,7 +11,7 @@
           src="https://st3.depositphotos.com/10544526/15154/v/600/depositphotos_151545494-stock-illustration-vector-image-basketball-on-fire.jpg"
         /> -->
       </router-link>
-      <div class="right_nav">
+      <div class="right_nav" v-if="!mobile">
         <router-link class="view_charts" to="/charts">
           <h3>View Charts</h3>
         </router-link>
@@ -52,6 +52,50 @@
           </div>
         </div>
       </div>
+
+      <router-link class="view_charts" to="/charts" v-if="mobile">
+        <h3>View Charts</h3>
+      </router-link>
+      <router-link
+        class="view_charts"
+        to="/newchart"
+        v-if="isSignedIn && mobile"
+      >
+        <h3>Create Chart</h3>
+      </router-link>
+      <div className="user-nav-dropdown" v-if="isSignedIn && mobile">
+        <div className="dropbtn">
+          <img :src="currentUser.pfp" alt="pfp" />
+        </div>
+        <div className="dropdown-content" v-if="mobile">
+          <!-- <Link
+                    to={'/profile'}
+                    className="user-profile"
+                    onClick={() => setProfile(true)}
+                  >
+                    <h4>Profile</h4>
+                  </Link> -->
+          <div class="signout_nav" @click="handleSignOut" v-if="mobile">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
+            />
+            <h4>Logout</h4>
+          </div>
+        </div>
+      </div>
+      <!-- <div id="GoogleSignIn-nav" v-if="!isSignedIn && mobile">
+        <div
+          class="google-sign-btn"
+          id="google-nav"
+          @click="handleSignInGoogle"
+        >
+          <img
+            referrerpolicy="no-referrer"
+            src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
+          />
+          <p>Sign in with Google</p>
+        </div>
+      </div> -->
     </nav>
   </header>
 </template>
@@ -82,7 +126,8 @@ export default {
       pfp: localStorage.pfp
     },
     isSignedIn: false,
-    users: []
+    users: [],
+    mobile: window.innerWidth < 600
   }),
   mounted: async function () {
     if (localStorage.email.length < 0 || localStorage.email == 'null') {
