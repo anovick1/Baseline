@@ -103,7 +103,8 @@ export default {
     },
     view: false,
     show: true,
-    name: ''
+    name: '',
+    mobile: window.innerWidth < 600
   }),
   computed: {
     subTitle() {

@@ -611,4 +611,11 @@ textarea {
   .home h3 {
     margin: 5vh 0;
   }
+  .signout_nav {
+    margin-right: 2vw;
+  }
+  .chart-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
 }

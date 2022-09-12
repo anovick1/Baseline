@@ -77,6 +77,7 @@ export default {
         direction: 'alternate'
       }
     )
+
     animation
   },
   methods: {
