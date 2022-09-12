@@ -29,6 +29,7 @@
           </div>
         </transition-group>
       </div>
+
       <!-- Mobile VIEW -->
       <transition-group
         name="prev"
@@ -486,15 +487,15 @@ export default {
   position: absolute;
 }
 
-.list-enter-from {
+.create-enter-from {
   opacity: 0;
   transform: scale(0.6);
 }
-.list-enter-to {
+.create-enter-to {
   opacity: 1;
   transform: scale(1);
 }
-.list-enter-active {
+.create-enter-active {
   transition: all 0.4s ease;
 }
 @media only screen and (max-width: 600px) {
