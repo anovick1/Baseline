@@ -26,7 +26,7 @@ Currently, there is not a public API that exists that can provide NBA Player sta
 
 I combined the [Player Per Game.csv](https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats?select=Player+Per+Game.csv) and [Advanced.csv](https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats?select=Advanced.csv) in my backend to have all the in-depth statistics for users to graph.
 
-I used the [Player Career Info.csv](https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats?select=Player+Career+Info.csv) to match the stats to specific players. I then wrote a python script that found an image for all 5,024 NBA players and added a new column to my dataset. I used this [Google Image Search API] (https://rapidapi.com/Glavier/api/google-image-search1/) to select a picture.
+I used the [Player Career Info.csv](https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats?select=Player+Career+Info.csv) to match the stats to specific players. I then wrote a python script that found an image for all 5,024 NBA players and added a new column to my dataset. I used this [Google Image Search API](https://rapidapi.com/Glavier/api/google-image-search1/) to select a picture.
 
 ## Getting Started
 
