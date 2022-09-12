@@ -62,7 +62,7 @@ npm i
 
 ## Technologies Used
 
-<img style="center" src=""  width="500">
+<img style="center" src="https://camo.githubusercontent.com/89b2f60e16036406d95498e6412adaca1cebdfdd4aba014b5c8d5c4afcc46308/68747470733a2f2f692e696d6775722e636f6d2f534138636a73382e706e67"  width="500">
 
 - Vue.js
 - PostgresQL
