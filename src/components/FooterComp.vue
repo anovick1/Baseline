@@ -1,7 +1,7 @@
 <template>
   <footer>
-    <div><h3>Avery Novick</h3></div>
-    <div class="Socials">
+    <p>Avery Novick</p>
+    <div class="socials">
       <a href="https://www.linkedin.com/in/avery-novick/" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/207/207084.png"
       /></a>
@@ -17,7 +17,7 @@
     </div>
     <div>
       <a id="portfolio" href="https://averynovick.dev" target="_blank">
-        <h3>averynovick.dev</h3>
+        <p>averynovick.dev</p>
       </a>
     </div>
   </footer>

@@ -2,7 +2,7 @@
   <div>
     <transition name="edit">
       <img
-        src="https://cdn-icons-png.flaticon.com/512/5038/5038256.png"
+        src="../../public/images/close.png"
         @click="toggleView"
         id="exit"
         v-if="loaded && !edit"
@@ -49,7 +49,7 @@
       </div>
       <div class="chart_container" id="full_chart_container">
         <transition name="edit">
-          <div
+          <img
             v-if="
               parseInt(author.id) === parseInt(currentUser.id) &&
               !edit &&
@@ -58,9 +58,8 @@
             appear
             class="edit_chart"
             @click="toggleEdit()"
-          >
-            Edit Chart
-          </div>
+            src="../../public/images/edit.png"
+          />
         </transition>
 
         <canvas :id="count" width="1vw" height="5vw"></canvas>

@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Roboto+Slab&family=Source+Code+Pro&family=Titillium+Web&display=swap');
+
+body {
+  font-family: 'Roboto Slab', serif;
+  /* font-family: 'Titillium Web', sans-serif; */
+  /* font-family: 'Source Code Pro', monospace; */
+  /* font-family: 'Exo 2', sans-serif; */
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -486,7 +495,7 @@ select {
 #exit {
   position: fixed;
   height: 3vh;
-  top: 8vh;
+  top: 9vh;
   right: 9vw;
   z-index: 10;
   padding: 1vh;
@@ -533,11 +542,12 @@ textarea {
   z-index: 10;
   position: fixed;
   left: 2vw;
-  top: 3vh;
-  background-color: white;
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  top: 2vh;
+  /* background-color: white; */
+  /* box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2); */
   padding: 1vh;
   border-radius: 15px;
+  height: 3vh;
 }
 
 .edit_chart_true img {
@@ -597,6 +607,35 @@ textarea {
   width: 35vw;
   justify-content: space-between;
   margin: 2vh 0;
+}
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* box-shadow: 0px 0px 50px 1px rgba(0, 0, 0, 0.1); */
+  background-color: rgb(0 0 0 / 0.03);
+}
+
+.socials {
+  display: flex;
+  justify-content: space-around;
+  width: 50vw;
+}
+.socials img {
+  height: 3vh;
+}
+.info {
+  display: flex;
+  width: 30vw;
+  justify-content: space-around;
+}
+.socials img:hover,
+#portfolio:hover {
+  transform: scale(1.5);
+}
+footer p,
+#portfolio p {
+  font-style: italic;
 }
 
 @media only screen and (max-width: 600px) {
