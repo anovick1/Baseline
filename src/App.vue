@@ -7,6 +7,8 @@
       </transition>
     </router-view>
 
+    <!-- <router-view header="NBA-APP" v-if="mobile"> </router-view> -->
+
     <!-- <router-view v-slot="{ Component }">
       <transition name="route" mode="out-in">
         <component :is="Component"></component>
@@ -27,7 +29,10 @@ export default {
   components: {
     NavBarVue,
     FooterComp
-  }
+  },
+  data: () => ({
+    mobile: window.innerWidth < 600
+  })
 }
 </script>
 

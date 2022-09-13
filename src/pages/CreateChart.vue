@@ -79,7 +79,7 @@
           <textarea
             type="text"
             :value="description"
-            @input="handleChange"
+            @input="handleDescription"
             name="description"
             placeholder="Write description here"
             maxLength="255"
@@ -234,6 +234,9 @@ export default {
       //   }
       this[e.target.name] = e.target.value
       this.makeChart()
+    },
+    handleDescription: async function (e) {
+      this[e.target.name] = e.target.value
     },
     handleSubmit(e) {
       e.preventDefault()
@@ -487,17 +490,6 @@ export default {
   position: absolute;
 }
 
-.create-enter-from {
-  opacity: 0;
-  transform: scale(0.6);
-}
-.create-enter-to {
-  opacity: 1;
-  transform: scale(1);
-}
-.create-enter-active {
-  transition: all 0.4s ease;
-}
 @media only screen and (max-width: 600px) {
   .prev-enter-from,
   .prev-leave-to {
