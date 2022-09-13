@@ -22,7 +22,7 @@
             <div class="chart_action">
               <img @click="subPlayer(p)" src="../../public/images/remove.png" />
             </div>
-            <img :src="p.img_url" />
+            <img id="create_prev_player" :src="p.img_url" />
           </div>
         </transition-group>
       </div>
