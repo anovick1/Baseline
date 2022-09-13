@@ -205,7 +205,7 @@
       </div>
       <div
         class="delete_chart"
-        v-if="parseInt(author.id) === parseInt(currentUser.id) && !mobile"
+        v-if="parseInt(author.id) === parseInt(currentUser.id) && !edit"
         @click="deleteChart(id)"
       ></div>
     </div>
@@ -294,12 +294,7 @@ export default {
     async toggleEdit() {
       if (this.edit) {
         this.edit = false
-        await this.$emit('getCharts')
-        // // await this.$emit('toggleView')
-        // await this.$emit('toggleView')
-        // this.$emit('updateChart')
-        await this.makeChart(false)
-        // await location.reload()
+        this.$emit('updateChart')
       } else {
         this.edit = true
         this.makeChart(true)

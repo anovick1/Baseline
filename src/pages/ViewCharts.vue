@@ -69,7 +69,7 @@ export default {
     },
     async getCharts(count, edit) {
       const res = await GetCharts()
-      this.charts = await res
+      this.charts = await res.reverse()
       await this.formatDate()
       this.searched = true
       for (let i = 0; i < this.charts.length; i++) {
@@ -87,20 +87,17 @@ export default {
     },
     formatDate() {
       for (let i = 0; i < this.charts.length; i++) {
+        console.log(this.charts[i].date)
         let newDate = this.charts[i].date.replaceAll('-', '/').slice(0, 10)
-        let arr = newDate.split('/').reverse()
+        console.log(newDate)
+        let arr = newDate.split('/')
+        arr.push(arr[0])
+        arr.shift()
         this.charts[i].date = arr.join('/')
       }
       this.searched = true
     },
     handleChange: async function (e, count) {
-      // if (e.target.name === 'x') {
-      //   let ans = e.target.value.replaceAll(' ', '_')
-      //   ans = ans.replaceAll('Per_Game', 'per_game')
-      //   ans = ans.replaceAll('%', 'percent')
-      //   this.charts[count][e.target.name] = ans
-      // } else {
-      //   }
       this.charts[count][e.target.name] = e.target.value
     },
     async handleChangePlayer(players, count) {

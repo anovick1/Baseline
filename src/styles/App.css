@@ -657,6 +657,11 @@ footer p,
   align-items: center;
   justify-content: space-around;
 }
+.chart-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
 @media only screen and (max-width: 600px) {
   .delete_chart {
     width: 3vh;
