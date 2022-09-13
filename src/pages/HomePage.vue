@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <h1>Baseline</h1>
-    <h2 v-if="user">Signed in User: {{ user }}</h2>
     <!-- <div id="logout" v-if="isSignedIn">
       <button @click="handleSignOut">Logout</button>
     </div> -->
@@ -18,10 +17,14 @@
         <p>Sign in with Google</p>
       </div>
     </div>
-    <h3>
-      Sign in to create charts and compare any NBA player's season statistics
-      throughout history
-    </h3>
+    <div v-if="!isSignedIn">
+      <h3>
+        Sign in to create charts and compare any NBA player's season statistics
+        throughout history
+      </h3>
+    </div>
+    <h3 v-if="isSignedIn">Welcome, {{ currentUser.name }}!</h3>
+    <p v-if="isSignedIn">Go make some charts!</p>
     <img
       src="https://i.etsystatic.com/24759709/r/il/2decdd/2605299704/il_fullxfull.2605299704_9ss2.jpg"
     />
