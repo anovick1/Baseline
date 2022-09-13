@@ -186,6 +186,7 @@ a {
 }
 .home {
   text-align: center;
+  min-height: 75vh;
 }
 .home h1 {
   font-size: 80px;
