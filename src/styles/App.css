@@ -639,8 +639,27 @@ footer p,
 #portfolio p {
   font-style: italic;
 }
-
+.options {
+  display: flex;
+  width: 35vw;
+  justify-content: space-between;
+  margin: 5vh 0;
+}
+.post-success {
+  display: flex;
+  flex-direction: column;
+  min-height: 62vh;
+  align-items: center;
+  justify-content: space-around;
+}
 @media only screen and (max-width: 600px) {
+  .socials {
+    width: 65vw;
+  }
+  .post-success {
+    margin: 5vh;
+    min-height: 53vh;
+  }
   .google-sign-btn {
     width: 50vw;
   }
@@ -679,7 +698,9 @@ footer p,
   .description,
   .input_create .search_results,
   select,
-  .player_img {
+  .player_img,
+  .options,
+  .post-success img {
     width: 85vw;
   }
   .searchbar_delete {
@@ -757,5 +778,11 @@ footer p,
   #search,
   .search_placeholder {
     min-height: 0vh;
+  }
+  .view_charts:hover {
+    box-shadow: none;
+  }
+  .view_charts h3 {
+    font-size: 16px;
   }
 }

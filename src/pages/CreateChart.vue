@@ -1,18 +1,46 @@
 <template>
   <div class="home_section">
-    <h1>Create Chart</h1>
-    <div class="createchart_page">
-      <!-- actual chart -->
-      <div class="chart_border" id="chart_border_create">
-        <div class="chart_container" id="chart_container_create">
-          <canvas id="chart" width="1vw" height="5vw"></canvas>
+    <h1 v-if="create">Create Chart</h1>
+    <h1 v-if="!create">Chart Published!</h1>
+    <transition name="list" appear>
+      <PostSuccess v-if="!create" @toggleCreate="toggleCreate" />
+    </transition>
+    <transition name="list" appear>
+      <div class="createchart_page" v-if="create">
+        <!-- actual chart -->
+        <div class="chart_border" id="chart_border_create">
+          <div class="chart_container" id="chart_container_create">
+            <canvas id="chart" width="1vw" height="5vw"></canvas>
+          </div>
+          <!-- WEB VIEW -->
+          <transition-group
+            name="prev"
+            tag="div"
+            class="player_img"
+            v-if="mounted && !mobile"
+          >
+            <div
+              class="chart_player_img"
+              v-for="p in players"
+              :key="p.player_number"
+            >
+              <div class="chart_action">
+                <img
+                  @click="subPlayer(p)"
+                  src="../../public/images/remove.png"
+                />
+              </div>
+              <img id="create_prev_player" :src="p.img_url" />
+            </div>
+          </transition-group>
         </div>
-        <!-- WEB VIEW -->
+
+        <!-- Mobile VIEW -->
         <transition-group
           name="prev"
           tag="div"
           class="player_img"
-          v-if="mounted && !mobile"
+          v-if="mounted && mobile"
         >
           <div
             class="chart_player_img"
@@ -22,111 +50,92 @@
             <div class="chart_action">
               <img @click="subPlayer(p)" src="../../public/images/remove.png" />
             </div>
-            <img id="create_prev_player" :src="p.img_url" />
+            <img :src="p.img_url" />
           </div>
         </transition-group>
-      </div>
-
-      <!-- Mobile VIEW -->
-      <transition-group
-        name="prev"
-        tag="div"
-        class="player_img"
-        v-if="mounted && mobile"
-      >
-        <div
-          class="chart_player_img"
-          v-for="p in players"
-          :key="p.player_number"
-        >
-          <div class="chart_action">
-            <img @click="subPlayer(p)" src="../../public/images/remove.png" />
-          </div>
-          <img :src="p.img_url" />
-        </div>
-      </transition-group>
-      <!-- Create chart -->
-      <div class="create_chart">
-        <div class="input_create">
-          <input
-            @input="handleChange"
-            placeholder="Title"
-            :value="title"
-            name="title"
-            type="title"
-            id="title_input"
-          />
-
-          <select
-            v-model="x"
-            :value="x"
-            name="x"
-            @change="handleChange"
-            placeholder="Stat"
-          >
-            <option v-for="(s, index) in updateStats" :key="index">
-              {{ s }}
-            </option>
-          </select>
-        </div>
-        <div class="description">
-          <textarea
-            type="text"
-            :value="description"
-            @input="handleDescription"
-            name="description"
-            placeholder="Write description here"
-            maxLength="255"
-          ></textarea>
-          <p id="desc_len">{{ description.length }}/255</p>
-        </div>
-        <div class="input_create" id="search">
-          <div class="searchbar_delete">
+        <!-- Create chart -->
+        <div class="create_chart">
+          <div class="input_create">
             <input
-              type="text"
-              v-model="search"
-              placeholder="Search Player by Name"
-              name="p"
+              @input="handleChange"
+              placeholder="Title"
+              :value="title"
+              name="title"
+              type="title"
+              id="title_input"
             />
-            <img
-              id="search_delete"
-              @click="deleteSearch"
-              src="../../public/images/cancel.png"
-            />
-          </div>
-          <div class="search_results" v-if="search.length > 2">
-            <transition-group
-              tag="div"
-              :css="false"
-              @before-enter="onBeforeEnter"
-              @enter="onEnter"
-              @leave="onLeave"
+
+            <select
+              v-model="x"
+              :value="x"
+              name="x"
+              @change="handleChange"
+              placeholder="Stat"
             >
-              <div
-                class="search_player"
-                v-for="(player, index) in filterPlayers"
-                :key="index"
-                @click="togglePlayer(player)"
-                @change="handleChange($event)"
-              >
-                <div class="search_player_name">
-                  <img :src="player.img_url" />
-                  <p>{{ player.player }}</p>
-                </div>
-                <div class="search_action" v-if="!pRender.includes(player)">
-                  <img src="../../public/images/add.png" />
-                </div>
-                <div class="search_action" v-if="pRender.includes(player)">
-                  <img src="../../public/images/remove.png" />
-                </div>
-              </div>
-            </transition-group>
+              <option v-for="(s, index) in updateStats" :key="index">
+                {{ s }}
+              </option>
+            </select>
           </div>
-          <div class="search_placeholder" v-if="search.length <= 2"></div>
+          <div class="description">
+            <textarea
+              type="text"
+              :value="description"
+              @input="handleDescription"
+              name="description"
+              placeholder="Write description here"
+              maxLength="255"
+            ></textarea>
+            <p id="desc_len">{{ description.length }}/255</p>
+          </div>
+          <div class="input_create" id="search">
+            <div class="searchbar_delete">
+              <input
+                type="text"
+                v-model="search"
+                placeholder="Search Player by Name"
+                name="p"
+              />
+              <img
+                id="search_delete"
+                @click="deleteSearch"
+                src="../../public/images/cancel.png"
+              />
+            </div>
+            <div class="search_results" v-if="search.length > 2">
+              <transition-group
+                tag="div"
+                :css="false"
+                @before-enter="onBeforeEnter"
+                @enter="onEnter"
+                @leave="onLeave"
+              >
+                <div
+                  class="search_player"
+                  v-for="(player, index) in filterPlayers"
+                  :key="index"
+                  @click="togglePlayer(player)"
+                  @change="handleChange($event)"
+                >
+                  <div class="search_player_name">
+                    <img :src="player.img_url" />
+                    <p>{{ player.player }}</p>
+                  </div>
+                  <div class="search_action" v-if="!pRender.includes(player)">
+                    <img src="../../public/images/add.png" />
+                  </div>
+                  <div class="search_action" v-if="pRender.includes(player)">
+                    <img src="../../public/images/remove.png" />
+                  </div>
+                </div>
+              </transition-group>
+            </div>
+            <div class="search_placeholder" v-if="search.length <= 2"></div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="post_chart" @click="postChart">Publish Chart</div>
+    </transition>
+    <div v-if="create" class="post_chart" @click="postChart">Publish Chart</div>
   </div>
 </template>
 
@@ -136,9 +145,10 @@ import PlayerList from '../../data/players.json'
 const StatList = require('../../data/stats.json')
 import { getPlayersById } from '../Services/PlayerServices.js'
 import { createChart } from '../Services/ChartServices.js'
-
+import PostSuccess from '../components/PostSuccess.vue'
 export default {
   name: 'CreateChart',
+  components: { PostSuccess },
   data: () => ({
     title: 'Title',
     players: [],
@@ -160,7 +170,8 @@ export default {
     playerAdded: null,
     description: '',
     mounted: false,
-    mobile: window.innerWidth < 600
+    mobile: window.innerWidth < 600,
+    create: true
   }),
   computed: {
     filterPlayers() {
@@ -195,6 +206,14 @@ export default {
     deleteSearch() {
       this.search = ''
     },
+    toggleCreate() {
+      if (this.create) {
+        this.create = false
+      } else {
+        // this.create = true
+        location.reload()
+      }
+    },
     postChart: async function () {
       let body = {
         title: this.title,
@@ -212,7 +231,8 @@ export default {
       this.y_year = true
       this.description = ' '
       this.search = ' '
-      this.makeChart()
+      await this.makeChart()
+      this.create = false
     },
     handleChange: async function (e) {
       // if (e.target.name === 'x') {
