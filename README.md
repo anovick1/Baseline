@@ -44,19 +44,19 @@ npm i
 
 ## Screenshots
 
-#### Mobile Version
-
-<div style= "center">
-    <pre>
-        <img src="images/mobile_register.png"  height="350">&nbsp;&nbsp;&nbsp;<img src="images/mobile_user_feed.png" height="350">&nbsp;&nbsp;&nbsp;<img src="images/mobile_edit_profile.png" height="350">&nbsp;&nbsp;&nbsp;<img src="images/mobile_matches.png" height="350">&nbsp;&nbsp;&nbsp;
-    </pre>
-</div>
-
 #### Browser Version
 
 <div style= "center">
     <pre>
-        <img src="images/registration.png"  height="350">&nbsp;&nbsp;&nbsp;<img src="images/feed.png" height="350">&nbsp;&nbsp;&nbsp;<img src="images/edit.png" height="350">&nbsp;&nbsp;&nbsp;<img src="images/connections.png" height="350">&nbsp;&nbsp;&nbsp;
+        <img src="./public/images/web_home.png"  height="350">&nbsp;&nbsp;&nbsp;<img src="./public/images/web_view.png" height="350">&nbsp;&nbsp;&nbsp;<img src="./public/images/web_chartdetails.png" height="350">&nbsp;&nbsp;&nbsp;<img src="./public/images/web_create.png" height="350">&nbsp;&nbsp;&nbsp; <img src="./public/images/web_published.png" height="350">&nbsp;&nbsp;&nbsp;
+    </pre>
+</div>
+
+#### Mobile Version
+
+<div style= "center">
+    <pre>
+        <img src="./public/images/mobile-home.png"  height="350">&nbsp;&nbsp;&nbsp;<img src="./public/images/mobile-view.png" height="350">&nbsp;&nbsp;&nbsp;<img src="./public/images/mobile-chart.png" height="350">&nbsp;&nbsp;&nbsp;<img src="./public/images/mobile-create.png" height="350">&nbsp;&nbsp;&nbsp;<img src="./public/images/mobile-published.png" height="350">&nbsp;&nbsp;&nbsp;
     </pre>
 </div>
 
