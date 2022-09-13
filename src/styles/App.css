@@ -185,6 +185,7 @@ a {
 }
 .home {
   text-align: center;
+  min-height: 75vh;
 }
 .home h1 {
   font-size: 80px;
@@ -662,6 +663,7 @@ footer p,
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
+
 @media only screen and (max-width: 600px) {
   .delete_chart {
     width: 3vh;
