@@ -230,9 +230,7 @@ a {
   cursor: pointer;
 }
 #google-nav:active,
-.post_chart:active,
-.edit_chart:active,
-.edit_chart_true img:active {
+.post_chart:active {
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
   transform: scale(1);
 }
@@ -248,13 +246,17 @@ a {
 }
 .signout_nav:hover,
 #nav-logo:hover,
-.view_charts:hover,
-.search_action img:hover,
-.chart_action img:hover,
-#exit:hover {
+.view_charts:hover {
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   border-radius: 15px;
+}
+.search_action img:hover,
+.chart_action img:hover,
+#exit:hover,
+.edit_chart_true_bottom img:hover {
+  cursor: pointer;
+  transform: scale(1.3);
 }
 
 .search_player:hover {
@@ -263,11 +265,7 @@ a {
 }
 .signout_nav:active,
 #nav-logo:active,
-.view_charts:active,
-.search_action img:active,
-.chart_action img:active,
-.search_player:active,
-#exit:active {
+.view_charts:active {
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
 }
 .view_charts {

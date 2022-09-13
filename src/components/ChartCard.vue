@@ -14,13 +14,10 @@
           class="edit_chart_true"
           v-if="parseInt(author.id) === parseInt(currentUser.id) && edit"
         >
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
-            @click="toggleEdit()"
-          />
+          <img src="../../public/images/block.png" @click="toggleEdit()" />
           <img
             @click="updateChart(parseInt(id))"
-            src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
+            src="../../public/images/done.png"
           />
         </div>
       </transition>
@@ -92,7 +89,7 @@
             <img
               id="search_delete"
               @click="deleteSearch"
-              src="https://cdn-icons-png.flaticon.com/512/167/167055.png"
+              src="../../public/images/cancel.png"
             />
           </div>
           <div class="search_results" v-if="search.length > 2">
@@ -121,9 +118,7 @@
                     )
                   "
                 >
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
-                  />
+                  <img src="../../public/images/done.png" />
                 </div>
                 <div
                   class="search_action"
@@ -133,9 +128,7 @@
                     )
                   "
                 >
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
-                  />
+                  <img src="../../public/images/remove.png" />
                 </div>
               </div>
             </transition-group>
@@ -155,7 +148,7 @@
               <div class="chart_action" id="chart_action_view" v-if="edit">
                 <img
                   @click="subPlayer(c)"
-                  src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
+                  src="../../public/images/remove.png"
                 />
               </div>
               <div class="preview_player">
@@ -176,13 +169,10 @@
         class="edit_chart_true_bottom"
         v-if="parseInt(author.id) === parseInt(currentUser.id) && edit"
       >
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
-          @click="toggleEdit()"
-        />
+        <img src="../../public/images/block.png" @click="toggleEdit()" />
         <img
           @click="updateChart(parseInt(id))"
-          src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
+          src="../../public/images/done.png"
         />
       </div>
       <div
