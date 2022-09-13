@@ -170,6 +170,7 @@ a {
   flex-direction: column;
   width: 100vw;
   align-items: center;
+  min-height: 79vh;
 }
 .chart-wrapper {
   /* width: 90vw; */
@@ -185,7 +186,6 @@ a {
 }
 .home {
   text-align: center;
-  min-height: 75vh;
 }
 .home h1 {
   font-size: 80px;
