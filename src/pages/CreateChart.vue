@@ -20,10 +20,7 @@
             :key="p.player_number"
           >
             <div class="chart_action">
-              <img
-                @click="subPlayer(p)"
-                src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
-              />
+              <img @click="subPlayer(p)" src="../../public/images/remove.png" />
             </div>
             <img :src="p.img_url" />
           </div>
@@ -43,10 +40,7 @@
           :key="p.player_number"
         >
           <div class="chart_action">
-            <img
-              @click="subPlayer(p)"
-              src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
-            />
+            <img @click="subPlayer(p)" src="../../public/images/remove.png" />
           </div>
           <img :src="p.img_url" />
         </div>
@@ -97,7 +91,7 @@
             <img
               id="search_delete"
               @click="deleteSearch"
-              src="https://cdn-icons-png.flaticon.com/512/167/167055.png"
+              src="../../public/images/cancel.png"
             />
           </div>
           <div class="search_results" v-if="search.length > 2">
@@ -120,14 +114,10 @@
                   <p>{{ player.player }}</p>
                 </div>
                 <div class="search_action" v-if="!pRender.includes(player)">
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/148/148764.png"
-                  />
+                  <img src="../../public/images/add.png" />
                 </div>
                 <div class="search_action" v-if="pRender.includes(player)">
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/929/929430.png"
-                  />
+                  <img src="../../public/images/remove.png" />
                 </div>
               </div>
             </transition-group>

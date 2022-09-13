@@ -118,7 +118,7 @@
                     )
                   "
                 >
-                  <img src="../../public/images/done.png" />
+                  <img src="../../public/images/add.png" />
                 </div>
                 <div
                   class="search_action"
