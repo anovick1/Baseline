@@ -494,7 +494,9 @@ select {
   text-align: start;
   width: 65vw;
 }
-#exit {
+#exit,
+#confirm,
+#cancel {
   position: fixed;
   height: 3vh;
   top: 9vh;
@@ -503,7 +505,10 @@ select {
   padding: 1vh;
   /* background-color: white; */
 }
-
+#cancel {
+  right: 0;
+  left: 9vw;
+}
 .author_date {
   display: flex;
   width: 100%;
@@ -553,9 +558,9 @@ textarea {
 }
 
 .edit_chart_true img {
-  height: 4vh;
+  height: 3vh;
 }
-.edit_chart_true {
+/* .edit_chart_true {
   z-index: 10;
   position: fixed;
   left: 2vw;
@@ -563,7 +568,7 @@ textarea {
   display: flex;
   width: 10vw;
   justify-content: space-between;
-}
+} */
 
 #title_input_edit {
   font-size: 30px;
@@ -601,14 +606,14 @@ textarea {
   align-items: center;
 }
 .edit_chart_true_bottom img {
-  height: 4vh;
+  height: 3vh;
 }
 .edit_chart_true_bottom {
   display: flex;
   flex-direction: row;
-  width: 35vw;
+  width: 78vw;
   justify-content: space-between;
-  margin: 2vh 0;
+  margin-bottom: -3vh;
 }
 footer {
   display: flex;
@@ -653,6 +658,9 @@ footer p,
   justify-content: space-around;
 }
 @media only screen and (max-width: 600px) {
+  .delete_chart {
+    width: 3vh;
+  }
   .socials {
     width: 65vw;
   }
@@ -768,7 +776,9 @@ footer p,
     position: static;
     margin: 1vh 0 0 0;
     display: flex;
+    flex-direction: row-reverse;
     width: 85vw;
+    height: 5vh;
     justify-content: space-between;
   }
   .search_results {
@@ -784,5 +794,16 @@ footer p,
   }
   .view_charts h3 {
     font-size: 16px;
+  }
+  #exit {
+    top: 8vh;
+    right: 2vw;
+  }
+
+  .edit_chart {
+    top: 1vh;
+  }
+  .edit_chart_true_bottom {
+    margin-top: 2vh;
   }
 }

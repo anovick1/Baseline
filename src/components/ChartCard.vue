@@ -8,17 +8,38 @@
         v-if="loaded && !edit"
       />
     </transition>
+    <transition name="edit">
+      <div
+        class="edit_chart_true"
+        v-if="
+          parseInt(author.id) === parseInt(currentUser.id) && edit && !mobile
+        "
+      >
+        <img
+          @click="updateChart(parseInt(id))"
+          id="confirm"
+          src="../../public/images/done.png"
+        />
+        <img
+          id="cancel"
+          src="../../public/images/block.png"
+          @click="toggleEdit()"
+        />
+      </div>
+    </transition>
     <div class="chart_border" id="full_chart_border">
       <transition name="edit">
         <div
           class="edit_chart_true"
-          v-if="parseInt(author.id) === parseInt(currentUser.id) && edit"
+          v-if="
+            parseInt(author.id) === parseInt(currentUser.id) && edit && mobile
+          "
         >
-          <img src="../../public/images/block.png" @click="toggleEdit()" />
           <img
             @click="updateChart(parseInt(id))"
             src="../../public/images/done.png"
           />
+          <img src="../../public/images/block.png" @click="toggleEdit()" />
         </div>
       </transition>
       <div class="edit_titles">
@@ -167,9 +188,16 @@
       </div>
       <div
         class="edit_chart_true_bottom"
-        v-if="parseInt(author.id) === parseInt(currentUser.id) && edit"
+        v-if="
+          parseInt(author.id) === parseInt(currentUser.id) && edit && mobile
+        "
       >
         <img src="../../public/images/block.png" @click="toggleEdit()" />
+        <div
+          class="delete_chart"
+          v-if="parseInt(author.id) === parseInt(currentUser.id) && mobile"
+          @click="deleteChart(id)"
+        ></div>
         <img
           @click="updateChart(parseInt(id))"
           src="../../public/images/done.png"
@@ -177,7 +205,7 @@
       </div>
       <div
         class="delete_chart"
-        v-if="parseInt(author.id) === parseInt(currentUser.id)"
+        v-if="parseInt(author.id) === parseInt(currentUser.id) && !mobile"
         @click="deleteChart(id)"
       ></div>
     </div>
