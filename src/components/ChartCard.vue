@@ -95,7 +95,7 @@
             placeholder="Write description here"
             maxLength="255"
           ></textarea>
-          <p v-if="edit" id="desc_len">{{ description.length }}/255</p>
+          <p v-if="edit" id="desc_len">{{ description.length }}</p>
         </div>
 
         <div class="view_title"><h2>Players</h2></div>

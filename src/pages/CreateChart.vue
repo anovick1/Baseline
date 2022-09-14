@@ -86,7 +86,7 @@
               placeholder="Write description here"
               maxLength="255"
             ></textarea>
-            <p id="desc_len">{{ description.length }}/255</p>
+            <p id="desc_len">{{ description.length }}</p>
           </div>
           <div class="input_create" id="search">
             <div class="searchbar_delete">
