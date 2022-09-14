@@ -797,7 +797,8 @@ footer p,
   .search_placeholder {
     min-height: 0vh;
   }
-  .view_charts:hover {
+  .view_charts:hover,
+  #nav-logo:hover {
     box-shadow: none;
   }
   .view_charts h3 {

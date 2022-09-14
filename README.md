@@ -78,6 +78,7 @@ npm i
 - CSS
 - HTML
 - Firebase
+- Google Sign In API
 - Heroku
 
 ---
